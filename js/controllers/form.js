@@ -31,9 +31,9 @@
     function addVegie() {
       vm.form.id = Date.now();
 
-      vm.form.location = MapService.Geocoder(vm.form.address);
+      // vm.form.location = MapService.Geocoder(vm.form.address);
 
-      return console.info(vm.form);
+      // return console.info(vm.form);
 
       Firebase.Add(vm.form);
 
