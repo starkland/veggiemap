@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="VeggieMap">
+<head>
+  <meta charset="UTF-8">
+  <title>Veggie Maps</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css">
+
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body ng-class="{ 'offline' : !online }">
+  <section>
+    <div ng-controller="MapCtrl as vm">
+      <aside id="map-canvas" class="map-canvas"></aside>
+    </div>
+
+    <div ng-controller="FormCtrl as vm">
+      <aside class="map-form">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              Veggie Map
+            </p>
+
+            <!-- <a class="card-header-icon">
+              <span class="icon">
+                <i class="fa fa-angle-down"></i>
+              </span>
+            </a> -->
+          </header>
+
+          <div class="card-content">
+            <div
+              class="content"
+              ng-show="!vm.isForm && !vm.isContact"
+              ng-include
+              src="'views/call.html'">
+            </div>
+
+            <div
+              class="content"
+              ng-show="vm.isForm && !vm.isContact"
+              ng-include
+              src="'views/form.html'">
+            </div>
+
+            <div
+              class="content"
+              ng-show="!vm.isForm && vm.isContact"
+              ng-include
+              src="'views/contact.html'">
+            </div>
+          </div>
+
+          <footer class="card-footer">
+            <a class="card-footer-item" ng-click="vm.veggie()">
+              Adicionar
+            </a>
+
+            <a class="card-footer-item" ng-click="vm.contato()">
+              Contato
+            </a>
+          </footer>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Libs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+
+  <!-- Author -->
+  <script src="js/app.js"></script>
+
+  <script src="js/modules/core.js"></script>
+  <script src="js/modules/form.js"></script>
+  <script src="js/modules/map.js"></script>
+
+  <script src="js/controllers/form.js"></script>
+  <script src="js/controllers/map.js"></script>
+
+  <script src="js/services/maps.js"></script>
+  <script src="js/services/network.js"></script>
+  <script src="js/services/firebase.js"></script>
+</body>
+</html>

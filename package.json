@@ -1,0 +1,19 @@
+{
+  "name": "veggiemap",
+  "version": "1.0.0",
+  "description": "Mapa exibindo os lugares veganos.",
+  "main": "app.js",
+  "scripts": {
+    "webpack": "export NODE_ENV=development && webpack --hide-modules",
+    "dev": "export NODE_ENV=development && webpack --hide-modules --watch",
+    "production": "export NODE_ENV=production && webpack --hide-modules"
+  },
+  "author": "Thulio Philipe <thulioph@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
+    "webpack": "^2.2.1"
+  }
+}
