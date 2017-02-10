@@ -2,7 +2,9 @@
   'use strict';
 
   function Firebase($rootScope) {
-    var obj, db;
+    var obj, db, markersArray;
+
+    markersArray = [];
 
     // ====
 
@@ -16,8 +18,10 @@
       };
 
       firebase.initializeApp(config);
+      db = firebase.database();
 
-      db = obj.InitDatabase();
+      obj.Listen();
+      obj.GetLastData('veggies');
     }
 
     function Add(obj) {
@@ -30,27 +34,30 @@
       });
     }
 
-    function InitDatabase() {
-      return firebase.database();
-    }
-
     function Listen() {
-      var veggies = db.ref('veggies/');
-
-      veggies.on('child_added', function(data) {
+      db.ref('veggies/').on('child_added', function(data) {
         if (data) {
           return $rootScope.$emit('veggies_updated', data);
         }
       });
     }
 
+    function GetLastData(database) {
+      return db.ref(database).once('value', function(snapshot) {
+        snapshot.forEach(function(item) {
+          markersArray.push(item.val().location);
+        });
+      });
+    }
+
+
     // ====
 
     obj = {
       Init,
       Add,
-      InitDatabase,
-      Listen
+      Listen,
+      GetLastData
     };
 
     // ====
