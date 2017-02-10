@@ -66,7 +66,7 @@
         title: obj.name,
         data: obj,
         icon: {
-          url: '../../images/' + obj.type + '.svg'
+          url: '/images/' + obj.type + '.svg'
         }
       });
 
