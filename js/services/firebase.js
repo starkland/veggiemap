@@ -28,7 +28,7 @@
       db.ref('veggies/' + obj.id).set({
         name: obj.name,
         address: obj.address,
-        // location: obj.location,
+        location: obj.location,
         type: obj.type,
         created_at : Date.now()
       });

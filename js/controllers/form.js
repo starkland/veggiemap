@@ -12,6 +12,8 @@
     vm.contato = contato;
     vm.addVegie = addVegie;
 
+    vm.searchByAddress = searchByAddress;
+
     vm.form = {
       type: {}
     };
@@ -31,22 +33,26 @@
     function addVegie() {
       vm.form.id = Date.now();
 
-      // vm.form.location = MapService.Geocoder(vm.form.address);
-
-      // return console.info(vm.form);
-
       Firebase.Add(vm.form);
 
       vm.form = {};
     }
 
+    function searchByAddress() {
+      var input, address;
+
+      input = document.getElementById('address');
+      address = vm.form.address;
+
+      MapService.Geocoder(input, address);
+    }
+
     $rootScope.$on('veggies_updated', function(event, obj) {
-      console.warn(obj.val());
+      MapService.AddMarker(obj.val());
+    });
 
-      // obj.lat = '-23.55052';
-      // obj.lng = '-46.633309';
-
-      MapService.AddMarker(obj);
+    $rootScope.$on('place', function(event, data) {
+      vm.form.location = data;
     });
 
     // ====

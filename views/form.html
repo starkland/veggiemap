@@ -28,6 +28,8 @@
           class="input"
           type="text"
           ng-model="vm.form.address"
+          ng-model-options="{ debounce: 200 }"
+          ng-change="vm.searchByAddress()"
           placeholder="Endereço do Veggie">
       </p>
     </div>

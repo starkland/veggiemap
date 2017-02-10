@@ -1,8 +1,8 @@
 (function(){
   'use strict';
 
-  function MapService() {
-    var obj, map, infowindow, geocoder, marker;
+  function MapService($rootScope) {
+    var obj, map, infowindow, geocoder, bounds, marker;
 
     // ====
 
@@ -47,6 +47,7 @@
 
       infowindow = new google.maps.InfoWindow;
       geocoder = new google.maps.Geocoder();
+      bounds = new google.maps.LatLngBounds();
     }
 
     function ErrorLocation(err) {
@@ -56,42 +57,43 @@
     function AddMarker(obj) {
       var latLng;
 
-      latLng = new google.maps.LatLng(obj.lat, obj.lng);
-
-      map.setCenter(latLng);
+      latLng = new google.maps.LatLng(obj.location.lat, obj.location.lng);
 
       marker = new google.maps.Marker({
         position: latLng,
         map: map,
         icon: {
-          url: '../../images/' + obj.val().type + '.svg'
+          url: '../../images/' + obj.type + '.svg'
         }
       });
 
-      infowindow.setContent(obj.address);
+      infowindow.setContent(obj.location.formatted_address);
       infowindow.open(map, marker);
+
+      bounds.extend(latLng);
+      map.fitBounds(bounds);
+      map.setCenter(bounds.getCenter());
     }
 
-    function Geocoder(address) {
-      // address
-      geocoder.geocode({'address': address}, function(results, status) {
-        if (status === google.maps.GeocoderStatus.OK) {
-          if (results[1]) {
-            console.log(results[1]);
-            // obj.AddMarker(results[1]);
-            // map.setZoom(11);
-            // marker = new google.maps.Marker({
-            //   position: latlng,
-            //   map: map
-            // });
-            // infowindow.setContent(results[1].formatted_address);
-            // infowindow.open(map, marker);
-          } else {
-            alert('Sem resultados..');
-          }
-        } else {
-          alert('Geocoder falhou por conta de: ' + status);
-        }
+    function Geocoder(input, address) {
+      var autocomplete;
+
+      autocomplete = new google.maps.places.Autocomplete((input), {
+        types: ['geocode']
+      });
+
+      autocomplete.addListener('place_changed', function() {
+        var place, placeObj;
+
+        place = autocomplete.getPlace();
+
+        placeObj = {
+          lat: place.geometry.location.lat(),
+          lng: place.geometry.location.lng(),
+          formatted_address: place.formatted_address
+        };
+
+        $rootScope.$emit('place', placeObj);
       });
     }
 
@@ -132,7 +134,7 @@
     return obj;
   }
 
-  // MapService.$inject = [''];
+  MapService.$inject = ['$rootScope'];
 
   angular
     .module('Core')
