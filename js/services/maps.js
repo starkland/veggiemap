@@ -68,7 +68,7 @@
         }
       });
 
-      infowindow.setContent(obj.val().address);
+      infowindow.setContent(obj.address);
       infowindow.open(map, marker);
     }
 

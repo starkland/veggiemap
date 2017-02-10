@@ -41,11 +41,10 @@
     }
 
     $rootScope.$on('veggies_updated', function(event, obj) {
-      // console.warn(obj.key);
-      // console.warn(obj.val());
+      console.warn(obj.val());
 
-      obj.lat = '-23.55052';
-      obj.lng = '-46.633309';
+      // obj.lat = '-23.55052';
+      // obj.lng = '-46.633309';
 
       MapService.AddMarker(obj);
     });
@@ -53,7 +52,6 @@
     // ====
 
     Firebase.Init();
-    Firebase.Listen();
   }
 
   FormCtrl.$inject = [
