@@ -62,17 +62,27 @@
       marker = new google.maps.Marker({
         position: latLng,
         map: map,
+        clickable: true,
+        title: obj.name,
+        data: obj,
         icon: {
           url: '../../images/' + obj.type + '.svg'
         }
       });
 
-      infowindow.setContent(obj.location.formatted_address);
+      infowindow.setContent('<h1>' + obj.name + '</h1><h4>' + obj.location.formatted_address + '</h4>');
       infowindow.open(map, marker);
 
       bounds.extend(latLng);
       map.fitBounds(bounds);
       map.setCenter(bounds.getCenter());
+
+      google.maps.event.addListener(marker, 'click', _clickedMarker);
+    }
+
+    function _clickedMarker(event) {
+      infowindow.setContent('<h1>' + this.data.name + '</h1><h4>' + this.data.location.formatted_address + '</h4>');
+      infowindow.open(map, this);
     }
 
     function Geocoder(input, address) {
