@@ -1,6 +1,19 @@
-var cacheName = 'cache_v1';
+var cacheName = 'caches_v11';
 var filesToCache = [
-  './css/main.css'
+  './',
+  './index.html',
+  './css/main.css',
+  './images/evento.svg',
+  './images/fixo.svg',
+  './js/app.js',
+  './js/modules/core.js',
+  './js/modules/form.js',
+  './js/modules/map.js',
+  './js/controllers/form.js',
+  './js/controllers/map.js',
+  './js/services/maps.js',
+  './js/services/network.js',
+  './js/services/firebase.js'
 ];
 
 // ====
@@ -44,7 +57,12 @@ function fetchServiceWorker(event) {
       if (response) {
         return response;
       } else {
-        return fetch(event.request)
+        return fetch(event.request).then(function(response) {
+          return caches.open(cacheName).then(function(cache) {
+            cache.put(event.request, response.clone());
+            return response;
+          })
+        });
       }
     })
   );
