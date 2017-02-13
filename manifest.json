@@ -1,0 +1,28 @@
+{
+  "short_name": "veggiemap",
+  "name": "Veggie Map",
+  "description": "Mapa exibindo os lugares veganos.",
+  "icons": [
+      {
+          "src": "./images/icons/android-chrome-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+      },
+      {
+          "src": "./images/icons/android-chrome-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png"
+      }
+  ],
+  "start_url": "./index.html?utm=homescreen",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#F00",
+  "background_color": "#F00",
+  "author": {
+    "name": "Thulio Philipe",
+    "website": "http://thulioph.com",
+    "github": "https://github.com/thulioph",
+    "source-repo": "https://github.com/starkland/veggiemap"
+  }
+}

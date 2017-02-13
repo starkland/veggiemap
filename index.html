@@ -2,7 +2,26 @@
 <html lang="en" ng-app="VeggieMap">
 <head>
   <meta charset="UTF-8">
+
   <title>Veggie Maps</title>
+
+  <meta http-equiv=X-UA-Compatible content="IE=edge">
+  <meta name=description content="This web application will work in offline, has a splash screen add to home screen etc,.">
+  <meta name=viewport content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#0288d1">
+  <meta name="msapplication-TileColor" content="#0288d1">
+  <meta name="msapplication-TileImage" content="./images/icons/mstile-150x150.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Veggie Maps">
+  <meta name="application-name" content="Veggie Maps">
+
+  <link rel="apple-touch-icon" href="./images/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="./images/icons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="./images/icons/favicon-16x16.png" sizes="16x16">
+
+  <link rel="manifest" href="./manifest.json">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css">
@@ -74,7 +93,7 @@
     data-app-id="62f3b344ee">
   </script>
 
-  <script async
+  <script
     src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js">
   </script>
 
@@ -82,11 +101,29 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTzF9n1tvwjW8lZ9kY6umD8tGnuKxbsB4&libraries=places">
   </script>
 
-  <script async
+  <script
     src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js">
   </script>
 
   <!-- Author -->
+  <script>
+    function HandleSuccess() {
+      navigator.serviceWorker.register('./sw.js')
+        .then(function(registration) {
+          console.warn('service worker registrado com sucesso!');
+        })
+        .catch(function(err) {
+          console.error('falha ao registrar o service worker:', err);
+        });
+    }
+
+    function HandleError() {
+      console.error('Seu browser não suporta Serviceworker.');
+    }
+
+    'serviceWorker' in navigator ? HandleSuccess() : HandleError();
+  </script>
+
   <script src="js/app.js"></script>
 
   <script src="js/modules/core.js"></script>
