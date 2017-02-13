@@ -1,5 +1,9 @@
 /* Main */
 
+body.offline {
+  background-color: #E5E5E5;
+}
+
 html,
 body,
 .container {
