@@ -1,5 +1,5 @@
 export default {
   'NEW_VEGGIE' (state, payload) {
-    state.user = payload
+    state.form = payload
   }
 }

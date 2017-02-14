@@ -1,5 +1,6 @@
 <script>
   import Firebase from '../assets/js/Firebase';
+  import { mapState, mapActions } from 'vuex';
 
   export default {
    name: 'vgForm',
@@ -13,8 +14,19 @@
 
    methods: {
     onSubmitForm() {
-      console.warn(this.$data);
-    }
+      const payload = {
+        type: 'loja',
+        veggie: {
+          name: 'Um nome',
+          address: 'Rua ernesto de paula santos',
+          location: [-1234, -5678]
+        }
+      }
+
+      this.newVeggie(payload);
+    },
+
+    ...mapActions(['newVeggie'])
    },
 
    data() {
@@ -27,7 +39,13 @@
         }
       }
     }
-   }
+   },
+
+   // computed: {
+   //  ...mapState({
+   //    form: state => console.log(state.form)
+   //  })
+   // }
   }
 </script>
 

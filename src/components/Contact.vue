@@ -1,10 +1,6 @@
 <script>
   export default {
-   name: 'vgContact',
-
-   mounted() {},
-
-   methods: {}
+   name: 'vgContact'
   }
 </script>
 

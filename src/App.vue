@@ -6,17 +6,11 @@
   export default {
    name: 'vgApp',
 
-   mounted() {},
-
-   methods: {},
-
    components: {
     vgForm,
     vgContact,
     vgMap
-   },
-
-   computed: {}
+   }
   }
 </script>
 
