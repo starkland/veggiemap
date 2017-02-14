@@ -41,16 +41,17 @@
     }
    },
 
-   // computed: {
-   //  ...mapState({
-   //    form: state => console.log(state.form)
-   //  })
-   // }
+   computed: {
+    ...mapState({
+      formData: state => state.form
+    })
+   }
   }
 </script>
 
 <template>
   <div>
+    <h1>form -> {{formData}}</h1>
     <form @submit.prevent="onSubmitForm">
       <div class="control is-horizontal">
         <div class="control-label">
