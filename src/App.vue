@@ -18,6 +18,11 @@
   }
 </script>
 
-<template></template>
+<template>
+  <div>
+    <vg-form></vg-form>
+    <vg-contact></vg-contact>
+  </div>
+</template>
 
 <style></style>
