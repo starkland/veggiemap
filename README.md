@@ -5,15 +5,16 @@
 
 - [Apresentação](#apresentação)
 - [Setup](#setup)
+- [Stack](stack)
 - [Contribuindo](#contribuindo)
 - [License](#license)
 
 
 ## Apresentação
 
-Uma progressive web app (PWA) com
+O veggie map veio para facilitar pessoas que consomem alimentos veganos, um mapa que permite qualquer um cadastrar pontos que oferecem algo vegano.
 
-Este projeto foi desenvolvido utilizando [Nodejs](https://nodejs.org), [Express](https://expressjs.com) e [MongoDB](https://www.mongodb.com), atualmente encontra-se hospedado no [Heroku](https://www.heroku.com/) e utiliza do [mLab](https://www.mlab.com/) como cloud database.
+Seja um food truck, supermercado ou qualquer estabalecimento.
 
 
 ## Setup
@@ -21,27 +22,36 @@ Este projeto foi desenvolvido utilizando [Nodejs](https://nodejs.org), [Express]
 Instale todas as dependências do projeto através do comando:
 
 ```
-$ npm install --save
+$ npm install
 ```
 
-Para iniciar o servidor node, execute o comando:
+Você precisar ter instalado o `http-server` para rodar o servidor local:
 
 ```
-$ npm run server
+$ npm install -g http-server
+```
+
+```
+$ http-server
 ```
 
 > O servidor irá rodar em `http://localhost:3000`
 
 
+## Stack
+
 Este projeto utiliza:
 
-- [Github pages]()
-- [Firebase]()
-- [Travis CI]()
+- [Github pages](https://pages.github.com/)
+- [Firebase](https://firebase.google.com/)
+- [Travis CI](https://travis-ci.org/)
+- [PWA](https://developers.google.com/web/progressive-web-apps/)
+- [Google Maps API](https://developers.google.com/maps/documentation/javascript/)
+- [Bulma](http://bulma.io/)
 
 ## Contribuindo
 
-[Abra uma issue](https://github.com/starkland/pizza-api/issues/new) para reportar algum problema ou melhoria, e na sequência submeta um pull request.
+[Abra uma issue](https://github.com/starkland/veggiemap/issues/new) para reportar algum problema ou melhoria, e na sequência submeta um pull request.
 
 > Submetendo um pull request.
 
