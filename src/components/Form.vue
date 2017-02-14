@@ -6,13 +6,21 @@
 
    methods: {
     onSubmitForm() {
-      console.log('dale');
+      console.warn(this.form);
     }
    },
 
-   components: {},
-
-   computed: {}
+   data() {
+    return {
+      form: {
+        type: '',
+        veggie: {
+          name: '',
+          address: ''
+        }
+      }
+    }
+   }
   }
 </script>
 
@@ -30,6 +38,7 @@
               id="name"
               class="input"
               type="text"
+              v-model="form.veggie.name"
               placeholder="Nome do Veggie">
           </p>
         </div>
@@ -46,6 +55,7 @@
               id="address"
               class="input"
               type="text"
+              v-model="form.veggie.address"
               placeholder="Endereço do Veggie">
           </p>
         </div>
@@ -56,6 +66,7 @@
           <input
             type="radio"
             name="type"
+            v-model="form.type"
             value="evento">
 
             Evento
@@ -65,6 +76,7 @@
           <input
             type="radio"
             name="type"
+            v-model="form.type"
             value="fixo">
 
             Fixo

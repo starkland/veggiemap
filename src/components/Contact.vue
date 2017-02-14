@@ -4,11 +4,7 @@
 
    mounted() {},
 
-   methods: {},
-
-   components: {},
-
-   computed: {}
+   methods: {}
   }
 </script>
 

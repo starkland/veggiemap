@@ -1,7 +1,7 @@
 export default {
   form: {
     type: '',
-    marker: {
+    veggie: {
       name: '',
       address: ''
     }
