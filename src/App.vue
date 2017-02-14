@@ -1,6 +1,7 @@
 <script>
   import vgForm from './components/Form.vue';
   import vgContact from './components/Contact.vue';
+  import vgMap from './components/Map.vue';
 
   export default {
    name: 'vgApp',
@@ -11,7 +12,8 @@
 
    components: {
     vgForm,
-    vgContact
+    vgContact,
+    vgMap
    },
 
    computed: {}
@@ -20,8 +22,7 @@
 
 <template>
   <div>
-
-    <aside class="card">
+    <aside class="card card-wrapper">
       <header class="card-header">
         <p class="card-header-title">
           Veggie Map
@@ -40,7 +41,16 @@
         <a class="card-footer-item">Contato</a>
       </footer>
     </aside>
+
+    <vg-map></vg-map>
   </div>
 </template>
 
-<style></style>
+<style>
+  .card-wrapper {
+    position: absolute;
+    z-index: 10;
+    bottom: 2%;
+    right: 2%;
+  }
+</style>

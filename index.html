@@ -2,15 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
   <title>Veggie Map</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css">
+
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
+  </style>
 </head>
 <body>
-  <section class="container">
-    <div id="app"></div>
-  </section>
+  <section id="app"></section>
 
   <!-- Libs -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTzF9n1tvwjW8lZ9kY6umD8tGnuKxbsB4&libraries=places"></script>
