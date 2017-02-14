@@ -1,12 +1,19 @@
 <script>
+  import Firebase from '../assets/js/Firebase';
+
   export default {
    name: 'vgForm',
 
-   mounted() {},
+   mounted() {
+    let firebase = new Firebase();
+
+    firebase.listen();
+    firebase.sync();
+   },
 
    methods: {
     onSubmitForm() {
-      console.warn(this.form);
+      console.warn(this.$data);
     }
    },
 

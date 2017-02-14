@@ -22,7 +22,7 @@
 
 <template>
   <div>
-    <aside class="card card-wrapper">
+  <aside class="card card-wrapper">
       <header class="card-header">
         <p class="card-header-title">
           Veggie Map

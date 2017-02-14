@@ -3,7 +3,8 @@ export default {
     type: '',
     veggie: {
       name: '',
-      address: ''
+      address: '',
+      location: []
     }
   }
 };
