@@ -26,3 +26,49 @@ body,
   right: 2%;
   z-index: 4;
 }
+
+/* Form */
+
+.input-type {
+  width: 60px;
+  height: 60px;
+  border: none;
+  outline: none;
+  position: relative;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.input-type:after {
+  content: attr(value);
+  position: absolute;
+  color: #000000;
+  font-size: 10px;
+  bottom: -15px;
+  text-align: center;
+  width: 100%;
+  left: 0;
+}
+
+.input-type.event {
+  background-image: url('../images/evento.svg');
+}
+
+.input-type.fixed {
+  background-image: url('../images/fixo.svg');
+}
+
+.input-type:checked {
+  background-color: #00d1b2;
+  background-size: 90%;
+}
+
+button.is-primary {
+  margin-top: 20px;
+}
