@@ -17,24 +17,24 @@
 <template>
   <div>
   <aside class="card card-wrapper">
-      <header class="card-header">
-        <p class="card-header-title">
-          Veggie Map
-        </p>
-      </header>
+    <header class="card-header">
+      <p class="card-header-title">
+        Veggie Map
+      </p>
+    </header>
 
-      <div class="card-content">
-        <div class="content">
-          <vg-form></vg-form>
-          <vg-contact></vg-contact>
-        </div>
+    <div class="card-content">
+      <div class="content">
+        <vg-form></vg-form>
+        <vg-contact></vg-contact>
       </div>
+    </div>
 
-      <footer class="card-footer">
-        <a class="card-footer-item">Adicionar</a>
-        <a class="card-footer-item">Contato</a>
-      </footer>
-    </aside>
+    <footer class="card-footer">
+      <a class="card-footer-item">Adicionar</a>
+      <a class="card-footer-item">Contato</a>
+    </footer>
+  </aside>
 
     <vg-map></vg-map>
   </div>

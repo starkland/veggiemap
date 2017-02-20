@@ -27,8 +27,7 @@ class Firebase {
   }
 
   snapshot(data) {
-    return data.forEach((item) => item.val())
-    // return this.veggies.push(data.val());
+    return this.veggies.push(data.val());
   }
 }
 

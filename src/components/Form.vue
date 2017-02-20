@@ -9,7 +9,7 @@
 
    mounted() {
     this.firebase = new Firebase();
-    this.veggies = this.firebase.listen();
+    this.firebase.listen();
    },
 
    methods: {
@@ -21,6 +21,8 @@
 
       this.newVeggie(this.form);
       this.firebase.add(this.form);
+
+      this.veggies_array = this.firebase.veggies;
     },
 
     ...mapActions(['newVeggie'])
@@ -28,6 +30,7 @@
 
    data() {
     return {
+      veggies_array: [],
       form: {
         type: '',
         veggie: {
@@ -48,7 +51,7 @@
 
 <template>
   <div>
-    <h1>form -> {{formData}}</h1>
+    <h1>veggies_array -> {{veggies_array}}</h1>
     <form @submit.prevent="onSubmitForm">
       <div class="control is-horizontal">
         <div class="control-label">
