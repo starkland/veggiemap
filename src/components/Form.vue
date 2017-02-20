@@ -8,22 +8,19 @@
    name: 'vgForm',
 
    mounted() {
-    let firebase = new Firebase();
-    this.veggies = firebase.listen();
+    this.firebase = new Firebase();
+    this.veggies = this.firebase.listen();
    },
 
    methods: {
     onSubmitForm() {
-      let gmaps = new GMaps(this.form.address);
-      gmaps.geocode();
+      // let gmaps = new GMaps(this.form.address);
+      // gmaps.geocode();
 
-      // retorna os resultados pesquisados
-      return console.warn(gmaps.results);
+      this.form.veggie.location = [-123, 321];
 
-      // this.form.location = gmaps.results;
-      // console.warn(this.form);
-      // this.newVeggie(this.form);
-      this.form = {};
+      this.newVeggie(this.form);
+      this.firebase.add(this.form);
     },
 
     ...mapActions(['newVeggie'])

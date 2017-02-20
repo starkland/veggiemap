@@ -16,23 +16,19 @@ class Firebase {
   }
 
   add(obj) {
-    let setObj = {
-      name: obj.name,
-      address: obj.address,
-      location: obj.location,
-      type: obj.type,
-      created_at : Date.now()
-    };
+    obj.created_at = new Date().getTime();
+    obj.id = new Date().getTime() + 1;
 
-    return this.db.ref('veggies/' + obj.id).set(setObj);
+    return this.db.ref(`veggies/${obj.id}`).set(obj);
   }
 
   listen() {
-    this.db.ref('veggies/').on('child_added', (snapshot) => this.snapshot(snapshot));
+    this.db.ref('veggies').on('child_added', (snapshot) => this.snapshot(snapshot));
   }
 
   snapshot(data) {
-    return this.veggies.push(data.val());
+    return data.forEach((item) => item.val())
+    // return this.veggies.push(data.val());
   }
 }
 
