@@ -11,6 +11,8 @@ class Firebase {
     firebase.initializeApp(this.config);
 
     this.db = firebase.database();
+
+    this.veggies = [];
   }
 
   add(obj) {
@@ -26,15 +28,11 @@ class Firebase {
   }
 
   listen() {
-    this.db.ref('veggies/').on('child_added', (data) => console.warn(data));
-  }
-
-  sync() {
-    this.db.ref('veggies/').once('value', (snapshot) => this.snapshot(snapshot));
+    this.db.ref('veggies/').on('child_added', (snapshot) => this.snapshot(snapshot));
   }
 
   snapshot(data) {
-    return data.forEach((item) => console.info(item.val()));
+    return this.veggies.push(data.val());
   }
 }
 

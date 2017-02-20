@@ -16,6 +16,6 @@
     height: 100%;
     position: absolute;
     z-index: 2;
-    background-color: pink;
+    /*background-color: pink;*/
   }
 </style>

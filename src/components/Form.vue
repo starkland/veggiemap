@@ -8,22 +8,13 @@
    mounted() {
     let firebase = new Firebase();
 
-    firebase.listen();
-    firebase.sync();
+    this.veggies = firebase.listen();
    },
 
    methods: {
     onSubmitForm() {
-      const payload = {
-        type: 'loja',
-        veggie: {
-          name: 'Um nome',
-          address: 'Rua ernesto de paula santos',
-          location: [-1234, -5678]
-        }
-      }
-
-      this.newVeggie(payload);
+      this.form.location = [-123, 456];
+      this.newVeggie(this.form);
     },
 
     ...mapActions(['newVeggie'])
