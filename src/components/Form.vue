@@ -1,5 +1,7 @@
 <script>
   import Firebase from '../assets/js/Firebase';
+  import GMaps from '../assets/js/GoogleMaps';
+
   import { mapState, mapActions } from 'vuex';
 
   export default {
@@ -7,14 +9,20 @@
 
    mounted() {
     let firebase = new Firebase();
-
     this.veggies = firebase.listen();
    },
 
    methods: {
     onSubmitForm() {
-      this.form.location = [-123, 456];
-      this.newVeggie(this.form);
+      let gmaps = new GMaps(this.form.address);
+      gmaps.geocode();
+
+      // retorna os resultados pesquisados
+      return console.warn(gmaps.results);
+
+      // this.form.location = gmaps.results;
+      // console.warn(this.form);
+      // this.newVeggie(this.form);
       this.form = {};
     },
 
