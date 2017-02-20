@@ -15,6 +15,7 @@
     onSubmitForm() {
       this.form.location = [-123, 456];
       this.newVeggie(this.form);
+      this.form = {};
     },
 
     ...mapActions(['newVeggie'])
