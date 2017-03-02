@@ -26,6 +26,7 @@
     "webpack-dev-server": "^2.2.0"
   },
   "dependencies": {
-    "vue": "^2.1.0"
+    "vue": "^2.1.0",
+    "vue-google-autocomplete": "^1.0.3"
   }
 }

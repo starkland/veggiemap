@@ -1,29 +1,31 @@
 <script>
+  import VueGoogleAutocomplete from 'vue-google-autocomplete'
+
   import Firebase from '../assets/js/Firebase';
-  import GMaps from '../assets/js/GoogleMaps';
 
   export default {
    name: 'vgForm',
 
+   components: { VueGoogleAutocomplete },
+
    beforeCreate() {
-    if (!firebase) {
-      this.firebase = new Firebase();
-      this.firebase.listen();
-    }
+    this.firebase = new Firebase();
    },
 
    methods: {
     onSubmitForm() {
-      // let gmaps = new GMaps(this.form.address);
-      // gmaps.geocode();
-
-      this.form.veggie.location = [-123, 321];
-
       this.firebase.addVeggie(this.form);
 
-      // listagem com todos os veggies adicionados
-      // assim que é adicionado, insere +1 ao array
       this.veggies_array = this.firebase.veggies;
+    },
+
+    getAddressData(addressData) {
+      let { route, locality, latitude, longitude, country } = addressData;
+
+      this.form.veggie.address = `${route}, ${locality} - ${country}`;
+
+      this.form.veggie.location[0] = latitude;
+      this.form.veggie.location[1] = longitude;
     }
    },
 
@@ -41,16 +43,15 @@
     }
    },
 
-   computed: {
+   computed() {
     // obtém os dados do firebase e exibe os marcadores no mapa
+    this.firebase.listen();
    }
   }
 </script>
 
 <template>
   <div>
-    {{veggies_array}}
-
     <form @submit.prevent="onSubmitForm">
       <div class="control is-horizontal">
         <div class="control-label">
@@ -76,12 +77,12 @@
 
         <div class="control is-grouped">
           <p class="control is-expanded">
-            <input
-              id="address"
+            <vue-google-autocomplete
+              id="map"
               class="input"
-              type="text"
-              v-model="form.veggie.address"
-              placeholder="Endereço do Veggie">
+              placeholder="Endereço do Veggie"
+              v-on:placeChanged="getAddressData">
+            </vue-google-autocomplete>
           </p>
         </div>
       </div>
