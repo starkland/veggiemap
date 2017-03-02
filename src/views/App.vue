@@ -1,6 +1,6 @@
 <script>
   import vgHeader from '../components/Header.vue';
-  import vgForm from '../components/Form.vue';
+  import vgCard from '../components/Card.vue'
   import vgMap from '../components/Map.vue';
 
   export default {
@@ -8,7 +8,7 @@
 
    components: {
     vgHeader,
-    vgForm,
+    vgCard,
     vgMap
    }
   }
@@ -17,35 +17,9 @@
 <template>
   <div>
     <vg-header></vg-header>
-
-    <aside class="card card-wrapper">
-      <header class="card-header">
-        <p class="card-header-title">
-          Veggie Map
-        </p>
-      </header>
-
-      <div class="card-content">
-        <div class="content">
-          <vg-form></vg-form>
-        </div>
-      </div>
-
-      <footer class="card-footer">
-        <a class="card-footer-item">Adicionar</a>
-        <a class="card-footer-item">Contato</a>
-      </footer>
-    </aside>
-
     <vg-map></vg-map>
+    <vg-card></vg-card>
   </div>
 </template>
 
-<style>
-  .card-wrapper {
-    position: absolute;
-    z-index: 10;
-    bottom: 2%;
-    right: 2%;
-  }
-</style>
+<style lang="scss"></style>

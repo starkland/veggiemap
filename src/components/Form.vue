@@ -46,7 +46,6 @@
 
 <template>
   <div>
-    <h1>veggies_array -> {{veggies_array}}</h1>
     <form @submit.prevent="onSubmitForm">
       <div class="control is-horizontal">
         <div class="control-label">
