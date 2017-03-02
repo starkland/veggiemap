@@ -2,8 +2,6 @@
   import Firebase from '../assets/js/Firebase';
   import GMaps from '../assets/js/GoogleMaps';
 
-  import { mapState, mapActions } from 'vuex';
-
   export default {
    name: 'vgForm',
 
@@ -19,13 +17,11 @@
 
       this.form.veggie.location = [-123, 321];
 
-      this.newVeggie(this.form);
-      this.firebase.add(this.form);
+      // this.newVeggie(this.form);
+      // this.firebase.add(this.form);
 
-      this.veggies_array = this.firebase.veggies;
-    },
-
-    ...mapActions(['newVeggie'])
+      // this.veggies_array = this.firebase.veggies;
+    }
    },
 
    data() {
@@ -35,16 +31,15 @@
         type: '',
         veggie: {
           name: '',
-          address: ''
+          address: '',
+          location: []
         }
       }
     }
    },
 
    computed: {
-    ...mapState({
-      formData: state => state.form
-    })
+    // obtém os dados do firebase e exibe os marcadores no mapa
    }
   }
 </script>
