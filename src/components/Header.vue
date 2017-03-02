@@ -48,7 +48,8 @@
       <router-link
         class="nav-item"
         title="Home"
-        to="/">
+        to="/"
+        exact>
 
         Home
       </router-link>
@@ -64,4 +65,13 @@
   </nav>
 </template>
 
-<style></style>
+<style lang="scss">
+  $white: #FFFFFF;
+  $green: #00D1B2;
+
+  .router-link-active {
+    background-color: $green;
+    border-color: transparent;
+    color: $white !important;
+  }
+</style>
