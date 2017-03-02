@@ -1,7 +1,31 @@
 import Vue from 'vue';
-import App from './App.vue';
+import VueRouter from 'vue-router';
+import VueResource from 'vue-resource';
+
+import vgApp from './App.vue';
+import vgContact from './Contact.vue';
+
+Vue.use(VueRouter);
+Vue.use(VueResource);
+
+const routes = [
+  {
+    path: '/',
+    component: vgApp
+  },
+  {
+    path: '/contato',
+    component: vgContact
+  }
+];
+
+const router = new VueRouter({
+  routes,
+  mode: 'history' // removes the # from URL
+});
 
 new Vue({
   el: '#app',
-  render: h => h(App)
+  router,
+  components: { vgApp }
 });

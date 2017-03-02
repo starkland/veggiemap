@@ -1,7 +1,6 @@
 <script>
   import vgHeader from './components/Header.vue';
   import vgForm from './components/Form.vue';
-  import vgContact from './components/Contact.vue';
   import vgMap from './components/Map.vue';
 
   export default {
@@ -10,7 +9,6 @@
    components: {
     vgHeader,
     vgForm,
-    vgContact,
     vgMap
    }
   }
@@ -30,7 +28,6 @@
       <div class="card-content">
         <div class="content">
           <vg-form></vg-form>
-          <vg-contact></vg-contact>
         </div>
       </div>
 

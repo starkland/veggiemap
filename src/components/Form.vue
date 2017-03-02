@@ -6,8 +6,8 @@
    name: 'vgForm',
 
    mounted() {
-    this.firebase = new Firebase();
-    this.firebase.listen();
+    // this.firebase = new Firebase();
+    // this.firebase.listen();
    },
 
    methods: {
