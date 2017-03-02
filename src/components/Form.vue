@@ -5,9 +5,11 @@
   export default {
    name: 'vgForm',
 
-   mounted() {
-    // this.firebase = new Firebase();
-    // this.firebase.listen();
+   beforeCreate() {
+    if (!firebase) {
+      this.firebase = new Firebase();
+      this.firebase.listen();
+    }
    },
 
    methods: {
@@ -17,10 +19,11 @@
 
       this.form.veggie.location = [-123, 321];
 
-      // this.newVeggie(this.form);
-      // this.firebase.add(this.form);
+      this.firebase.addVeggie(this.form);
 
-      // this.veggies_array = this.firebase.veggies;
+      // listagem com todos os veggies adicionados
+      // assim que é adicionado, insere +1 ao array
+      this.veggies_array = this.firebase.veggies;
     }
    },
 
@@ -46,6 +49,8 @@
 
 <template>
   <div>
+    {{veggies_array}}
+
     <form @submit.prevent="onSubmitForm">
       <div class="control is-horizontal">
         <div class="control-label">
@@ -110,4 +115,4 @@
   </div>
 </template>
 
-<style></style>
+<style lang="scss"></style>

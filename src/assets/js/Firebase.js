@@ -15,7 +15,7 @@ class Firebase {
     this.veggies = [];
   }
 
-  add(obj) {
+  addVeggie(obj) {
     obj.created_at = new Date().getTime();
     obj.id = new Date().getTime() + 1;
 
