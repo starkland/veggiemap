@@ -1,5 +1,5 @@
 <script>
-  import vgHeader from './components/Header.vue';
+  import vgHeader from '../components/Header.vue';
 
   export default {
    name: 'vgContact',

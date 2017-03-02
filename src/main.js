@@ -2,8 +2,8 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
 
-import vgApp from './App.vue';
-import vgContact from './Contact.vue';
+import vgApp from './views/App.vue';
+import vgContact from './views/Contact.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);

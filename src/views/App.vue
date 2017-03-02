@@ -1,7 +1,7 @@
 <script>
-  import vgHeader from './components/Header.vue';
-  import vgForm from './components/Form.vue';
-  import vgMap from './components/Map.vue';
+  import vgHeader from '../components/Header.vue';
+  import vgForm from '../components/Form.vue';
+  import vgMap from '../components/Map.vue';
 
   export default {
    name: 'vgApp',
