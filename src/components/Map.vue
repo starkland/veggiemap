@@ -3,16 +3,31 @@
     name: 'vgMap',
 
     mounted() {
-      this.map = L.map('map-container').setView([51.505, -0.09], 13);
-
-      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+      let tiles = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'VeggieMap',
         maxZoom: 13,
         id: 'mapbox.streets',
         accessToken: 'pk.eyJ1IjoidGh1bGlvcGgiLCJhIjoiY2l6dGYzbzh3MDBxdDJxb2RwM3Q1dThrYSJ9.Z1gPJ1HHyF4extvmILwDOQ'
-      }).addTo(this.map);
+      });
 
-      this.map.scrollWheelZoom.disable();
+      let latlng = L.latLng(50.5, 30.51);
+
+      // Marker clusters
+      this.markersLayer = L.markerClusterGroup({
+        maxClusterRadius: 120,
+        spiderfyOnMaxZoom: false,
+        showCoverageOnHover: false,
+        zoomToBoundsOnClick: true
+      });
+
+      this.map = L.map('map-container', {
+        center: latlng,
+        zoom: 15,
+        scrollWheelZoom: false,
+        layers: [tiles, this.markersLayer]
+      });
+
+      // this.map.addLayer(this.markersLayer);
     },
 
     data() {
@@ -23,8 +38,7 @@
 
     methods: {
       updateVeggie(data) {
-        this.veggies_array = data.veggies_array;
-        this.addNewMarker(this.veggies_array);
+        this.addNewMarker(data.veggies_array);
       },
 
       updateVeggies(data) {
@@ -39,13 +53,18 @@
       },
 
       addNewMarker(markerArray) {
+        console.warn(markerArray);
+        this.map.removeLayer(this.markersLayer);
+
         markerArray.forEach((item) => {
-          L
-            .marker([item.veggie.location[0], item.veggie.location[1]])
-            .addTo(this.map)
-            .bindPopup(`<h4>${item.veggie.name}</h4>
-                <small>${item.veggie.address}</small>`)
-            .openPopup();
+          if (item && item.veggie) {
+            this.markersLayer.addLayer(L
+              .marker([item.veggie.location[0], item.veggie.location[1]])
+              .addTo(this.map)
+              .bindPopup(`<h4>${item.veggie.name}</h4>
+                  <small>${item.veggie.address}</small>`)
+              .openPopup());
+          }
         });
       }
     },
