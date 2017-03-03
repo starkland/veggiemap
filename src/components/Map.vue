@@ -2,6 +2,19 @@
   export default {
     name: 'vgMap',
 
+    mounted() {
+      this.map = L.map('map-container').setView([51.505, -0.09], 13);
+
+      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'VeggieMap',
+        maxZoom: 13,
+        id: 'mapbox.streets',
+        accessToken: 'pk.eyJ1IjoidGh1bGlvcGgiLCJhIjoiY2l6dGYzbzh3MDBxdDJxb2RwM3Q1dThrYSJ9.Z1gPJ1HHyF4extvmILwDOQ'
+      }).addTo(this.map);
+
+      this.map.scrollWheelZoom.disable();
+    },
+
     data() {
       return {
         veggies_array: []
@@ -9,12 +22,31 @@
     },
 
     methods: {
-      updateVeggie(veggie) {
-        this.veggies_array.push(veggie);
+      updateVeggie(data) {
+        let { veggie } = Object.values(data.veggies)[0];
+
+        L
+          .marker([veggie.location[0], veggie.location[1]])
+          .addTo(this.map)
+          .bindPopup(`<h4>${veggie.name}</h4>
+              <small>${veggie.address}</small>`)
+          .openPopup();
+
+        // this.veggies_array.push(data.veggies);
       },
 
-      updateVeggies(veggie) {
-        this.veggies_array.push(veggie);
+      updateVeggies(data) {
+        let { veggie } = Object.values(data.veggies)[0];
+
+        L
+          .marker([veggie.location[0], veggie.location[1]])
+          .addTo(this.map)
+          .bindPopup(`<h4>${veggie.name}</h4>
+              <small>${veggie.address}</small>`)
+          .openPopup();
+
+        // this.veggies_array.push(data.veggies);
+        // console.warn(this.veggies_array[0]);
       }
     },
 
@@ -32,7 +64,7 @@
 
 <template>
   <div class="map-container">
-    <h1>Aqui vem o mapa., {{veggies_array}}</h1>
+    <div id="map-container"></div>
   </div>
 </template>
 
@@ -43,5 +75,9 @@
     position: absolute;
     z-index: 1;
     background-color: pink;
+  }
+
+  #map-container {
+    height: 100%;
   }
 </style>
