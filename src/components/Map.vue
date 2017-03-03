@@ -56,14 +56,19 @@
 
         markerArray.forEach((item) => {
           if (item && item.veggie) {
-            // add the lat/lng of each marker to array
+            // adiciona a lat/lng de cada marcador ao array
             this.arrayOfLatLngs.push([item.veggie.location[0], item.veggie.location[1]]);
 
-            // add markers on map
+            // adiciona os marcadores ao mapa
             let title = `<h4>${item.veggie.name}</h4> <small>${item.veggie.address}</small>`;
 
             let marker = L.marker(new L.LatLng(item.veggie.location[0], item.veggie.location[1]), {
-              title: title
+              title: title,
+              icon: L.AwesomeMarkers.icon({
+                icon: 'star',
+                markerColor: 'red',
+                prefix: 'fa'
+              })
             });
 
             marker.bindPopup(title);
