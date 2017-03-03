@@ -4,7 +4,6 @@
 
     methods: {
       toggleNavbar() {
-        console.warn('clickquei1', this.navActive);
         this.navActive = !this.navActive;
       }
     },
