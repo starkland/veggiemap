@@ -1,7 +1,6 @@
 <script>
   import VueGoogleAutocomplete from 'vue-google-autocomplete'
-
-  import Firebase from '../assets/js/Firebase';
+  import Firebase from '../assets/js/Firebase.js';
 
   export default {
    name: 'vgForm',
@@ -9,15 +8,17 @@
    components: { VueGoogleAutocomplete },
 
    mounted() {
-    console.warn('Is mounted.')
-    this.firebase = new Firebase().listen();
+    this.firebase = new Firebase();
+    this.firebase.listen();
    },
 
    methods: {
     onSubmitForm() {
       this.firebase.addVeggie(this.form);
 
-      this.veggies_array = this.firebase.veggies;
+      window.eventHub.$emit('new_veggie', {
+        veggies_array: this.firebase.veggies
+      });
     },
 
     getAddressData(addressData) {
@@ -42,10 +43,6 @@
         }
       }
     }
-   },
-
-   computed() {
-    // obtém os dados do firebase e exibe os marcadores no mapa
    }
   }
 </script>

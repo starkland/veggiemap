@@ -1,12 +1,32 @@
 <script>
   export default {
-    name: 'vgMap'
+    name: 'vgMap',
+
+    data() {
+      return {
+        veggies_array: []
+      }
+    },
+
+    methods: {
+      updateVeggie(veggie) {
+        this.veggies_array.push(veggie);
+      }
+    },
+
+    created() {
+      window.eventHub.$on('new_veggie', this.updateVeggie);
+    },
+
+    beforeDestroy: function () {
+      window.eventHub.$off('new-veggie', this.updateVeggie);
+    }
   }
 </script>
 
 <template>
   <div class="map-container">
-    <h1>Aqui vem o mapa.</h1>
+    <h1>Aqui vem o mapa., {{veggies_array}}</h1>
   </div>
 </template>
 
