@@ -64,11 +64,7 @@
 
             let marker = L.marker(new L.LatLng(item.veggie.location[0], item.veggie.location[1]), {
               title: title,
-              icon: L.AwesomeMarkers.icon({
-                icon: 'star',
-                markerColor: 'red',
-                prefix: 'fa'
-              })
+              icon: this.buildIcon(item.type)
             });
 
             marker.bindPopup(title);
@@ -81,6 +77,27 @@
         this.map.fitBounds(bounds);
 
         this.map.addLayer(this.markersLayer);
+      },
+
+      buildIcon(type) {
+        switch(type) {
+          case 'evento':
+            return L.AwesomeMarkers.icon({
+              icon: 'star',
+              markerColor: 'green',
+              prefix: 'fa'
+            });
+          break;
+
+          case 'fixo':
+            return L.AwesomeMarkers.icon({
+              icon: 'hand-o-up',
+              markerColor: 'black',
+              prefix: 'fa'
+            });
+          break;
+        }
+
       }
     },
 
