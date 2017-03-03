@@ -24,8 +24,22 @@
     methods: {
       updateVeggie(data) {
         this.veggies_array = data.veggies_array;
+        this.addNewMarker(this.veggies_array);
+      },
 
-        this.veggies_array.forEach((item) => {
+      updateVeggies(data) {
+        if (data && data.veggies !== null) {
+
+          for (let item in data.veggies) {
+            this.veggies_array.push(data.veggies[item]);
+          }
+
+          this.addNewMarker(this.veggies_array);
+        }
+      },
+
+      addNewMarker(markerArray) {
+        markerArray.forEach((item) => {
           L
             .marker([item.veggie.location[0], item.veggie.location[1]])
             .addTo(this.map)
@@ -33,19 +47,6 @@
                 <small>${item.veggie.address}</small>`)
             .openPopup();
         });
-      },
-
-      updateVeggies(data) {
-        if (data && data.veggies !== null) {
-          let { veggie } = Object.values(data.veggies)[0];
-
-          L
-            .marker([veggie.location[0], veggie.location[1]])
-            .addTo(this.map)
-            .bindPopup(`<h4>${veggie.name}</h4>
-                <small>${veggie.address}</small>`)
-            .openPopup();
-        }
       }
     },
 
