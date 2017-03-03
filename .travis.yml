@@ -1,3 +1,9 @@
 language: node_js
 node_js:
-- '6'
+  - '6'
+after_success:
+  - coveralls
+script:
+  - npm run build
+  - npm run test
+  - http-server
