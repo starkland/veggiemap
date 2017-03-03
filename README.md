@@ -16,6 +16,8 @@ Este projeto utiliza de algumas novas tecnologias e ferramentas, são elas:
 - [Leaflet](http://leafletjs.com)
 - [Firebase](https://firebase.google.com)
 - [Bulma](http://bulma.io)
+- [Karma](http://karma-runner.github.io)
+- [Jasmine](https://jasmine.github.io)
 
 ## Setup
 
@@ -35,6 +37,12 @@ Realize o build da aplicação:
 
 ```bash
 $ npm run build
+```
+
+Execute os testes:
+
+```bash
+$ npm test
 ```
 
 ## Contribuindo
