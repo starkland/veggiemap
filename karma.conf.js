@@ -80,7 +80,9 @@ module.exports = function(config) {
     plugins: [
         require("karma-phantomjs-launcher"),
         require("karma-webpack"),
-        require("karma-jasmine")
+        require("karma-jasmine"),
+        require("karma-coverage"),
+        require("karma-coveralls")
     ]
   });
 };
