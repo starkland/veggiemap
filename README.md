@@ -17,6 +17,26 @@ Este projeto utiliza de algumas novas tecnologias e ferramentas, são elas:
 - [Firebase](https://firebase.google.com)
 - [Bulma](http://bulma.io)
 
+## Setup
+
+Instale todas as dependências do projeto:
+
+```bash
+$ npm install
+```
+
+Inicie o ambiente de desenvolvimento:
+
+```bash
+$ npm run dev
+```
+
+Realize o build da aplicação:
+
+```bash
+$ npm run build
+```
+
 ## Contribuindo
 
 [Abra uma Issue](https://github.com/starkland/veggiemap/issues/new) para reportar algum problema ou melhoria, e na sequência submeta um pull request.
