@@ -71,6 +71,7 @@
           }
         });
 
+        // centraliza o mapa seguindo os marcadores
         let bounds = new L.LatLngBounds(this.arrayOfLatLngs);
         this.map.fitBounds(bounds);
 
