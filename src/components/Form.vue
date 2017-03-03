@@ -8,15 +8,14 @@
    components: { VueGoogleAutocomplete },
 
    mounted() {
-    this.firebase = new Firebase();
-    this.firebase.listen();
+    this.firebase = window.vgFirebase;
    },
 
    methods: {
     onSubmitForm() {
       this.firebase.addVeggie(this.form);
 
-      window.eventHub.$emit('new_veggie', {
+      window.vgEventHub.$emit('new_veggie', {
         veggies_array: this.firebase.veggies
       });
     },
@@ -33,7 +32,6 @@
 
    data() {
     return {
-      veggies_array: [],
       form: {
         type: '',
         veggie: {

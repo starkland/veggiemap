@@ -15,11 +15,11 @@
     },
 
     created() {
-      window.eventHub.$on('new_veggie', this.updateVeggie);
+      window.vgEventHub.$on('new_veggie', this.updateVeggie);
     },
 
-    beforeDestroy: function () {
-      window.eventHub.$off('new-veggie', this.updateVeggie);
+    beforeDestroy() {
+      window.vgEventHub.$off('new_veggie');
     }
   }
 </script>
