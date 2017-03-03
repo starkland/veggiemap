@@ -9,13 +9,14 @@
 
    mounted() {
     this.firebase = window.vgFirebase;
+    this.vgEventHub = window.vgEventHub;
    },
 
    methods: {
     onSubmitForm() {
       this.firebase.addVeggie(this.form);
 
-      window.vgEventHub.$emit('new_veggie', {
+      this.vgEventHub.$emit('new_veggie', {
         veggies_array: this.firebase.veggies
       });
     },
