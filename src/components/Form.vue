@@ -8,8 +8,9 @@
 
    components: { VueGoogleAutocomplete },
 
-   beforeCreate() {
-    this.firebase = new Firebase();
+   mounted() {
+    console.warn('Is mounted.')
+    this.firebase = new Firebase().listen();
    },
 
    methods: {
@@ -45,7 +46,6 @@
 
    computed() {
     // obtém os dados do firebase e exibe os marcadores no mapa
-    this.firebase.listen();
    }
   }
 </script>

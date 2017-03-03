@@ -1,6 +1,19 @@
 <script>
   export default {
-    name: 'Header'
+    name: 'Header',
+
+    methods: {
+      toggleNavbar() {
+        console.warn('clickquei1', this.navActive);
+        this.navActive = !this.navActive;
+      }
+    },
+
+    data() {
+      return {
+        navActive: false
+      }
+    }
   }
 </script>
 
@@ -36,7 +49,11 @@
 
     <!-- This "nav-toggle" hamburger menu is only visible on mobile -->
     <!-- You need JavaScript to toggle the "is-active" class on "nav-menu" -->
-    <span class="nav-toggle">
+    <span
+      class="nav-toggle"
+      @click="toggleNavbar"
+      :class="{ 'is-active' : this.navActive }">
+
       <span></span>
       <span></span>
       <span></span>
@@ -44,7 +61,10 @@
 
     <!-- This "nav-menu" is hidden on mobile -->
     <!-- Add the modifier "is-active" to display it on mobile -->
-    <div class="nav-right nav-menu">
+    <div
+      class="nav-right nav-menu"
+      :class="{ 'is-active' : this.navActive }">
+
       <router-link
         class="nav-item"
         title="Home"
