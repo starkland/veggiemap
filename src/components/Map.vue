@@ -11,15 +11,21 @@
     methods: {
       updateVeggie(veggie) {
         this.veggies_array.push(veggie);
+      },
+
+      updateVeggies(veggie) {
+        this.veggies_array.push(veggie);
       }
     },
 
     created() {
       window.vgEventHub.$on('new_veggie', this.updateVeggie);
+      window.vgEventHub.$on('update_veggies', this.updateVeggies);
     },
 
     beforeDestroy() {
       window.vgEventHub.$off('new_veggie');
+      window.vgEventHub.$off('update_veggies');
     }
   }
 </script>

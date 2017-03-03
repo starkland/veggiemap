@@ -13,6 +13,8 @@ class Firebase {
     this.db = firebase.database();
 
     this.veggies = [];
+
+    this.vgEventHub = window.vgEventHub;
   }
 
   addVeggie(obj) {
@@ -24,6 +26,16 @@ class Firebase {
 
   listen() {
     this.db.ref('veggies').on('child_added', (snapshot) => this.snapshot(snapshot));
+  }
+
+  update() {
+    this.db.ref('veggies').once('value', (snapshot) => {
+      this.snapshot(snapshot);
+
+      this.vgEventHub.$emit('update_veggies', {
+        veggies: snapshot.val()
+      });
+    });
   }
 
   snapshot(data) {
