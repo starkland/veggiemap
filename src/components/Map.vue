@@ -26,13 +26,12 @@
         scrollWheelZoom: false,
         layers: [tiles, this.markersLayer]
       });
-
-      // this.map.addLayer(this.markersLayer);
     },
 
     data() {
       return {
-        veggies_array: []
+        veggies_array: [],
+        arrayOfLatLngs: []
       }
     },
 
@@ -53,11 +52,14 @@
       },
 
       addNewMarker(markerArray) {
-        console.warn(markerArray);
         this.map.removeLayer(this.markersLayer);
 
         markerArray.forEach((item) => {
           if (item && item.veggie) {
+            // add the lat/lng of each marker to array
+            this.arrayOfLatLngs.push([item.veggie.location[0], item.veggie.location[1]]);
+
+            // add markers on map
             this.markersLayer.addLayer(L
               .marker([item.veggie.location[0], item.veggie.location[1]])
               .addTo(this.map)
@@ -66,6 +68,9 @@
               .openPopup());
           }
         });
+
+        let bounds = new L.LatLngBounds(this.arrayOfLatLngs);
+        this.map.fitBounds(bounds);
       }
     },
 
