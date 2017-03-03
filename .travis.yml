@@ -4,6 +4,6 @@ node_js:
 after_success:
   - coveralls
 script:
-  - npm run build
   - npm run test
+  - npm run build
   - http-server
