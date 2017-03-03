@@ -5,7 +5,7 @@
     mounted() {
       let tiles = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'VeggieMap',
-        maxZoom: 13,
+        maxZoom: 20,
         id: 'mapbox.streets',
         accessToken: 'pk.eyJ1IjoidGh1bGlvcGgiLCJhIjoiY2l6dGYzbzh3MDBxdDJxb2RwM3Q1dThrYSJ9.Z1gPJ1HHyF4extvmILwDOQ'
       });
@@ -24,7 +24,7 @@
         center: latlng,
         zoom: 15,
         scrollWheelZoom: false,
-        layers: [tiles, this.markersLayer]
+        layers: [tiles]
       });
     },
 
@@ -60,17 +60,21 @@
             this.arrayOfLatLngs.push([item.veggie.location[0], item.veggie.location[1]]);
 
             // add markers on map
-            this.markersLayer.addLayer(L
-              .marker([item.veggie.location[0], item.veggie.location[1]])
-              .addTo(this.map)
-              .bindPopup(`<h4>${item.veggie.name}</h4>
-                  <small>${item.veggie.address}</small>`)
-              .openPopup());
+            let title = `<h4>${item.veggie.name}</h4> <small>${item.veggie.address}</small>`;
+
+            let marker = L.marker(new L.LatLng(item.veggie.location[0], item.veggie.location[1]), {
+              title: title
+            });
+
+            marker.bindPopup(title);
+            this.markersLayer.addLayer(marker);
           }
         });
 
         let bounds = new L.LatLngBounds(this.arrayOfLatLngs);
         this.map.fitBounds(bounds);
+
+        this.map.addLayer(this.markersLayer);
       }
     },
 
