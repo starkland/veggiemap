@@ -1,57 +1,52 @@
 <script>
-  import Firebase from '../assets/js/Firebase';
-  import GMaps from '../assets/js/GoogleMaps';
-
-  import { mapState, mapActions } from 'vuex';
+  import VueGoogleAutocomplete from 'vue-google-autocomplete'
+  import Firebase from '../assets/js/Firebase.js';
 
   export default {
    name: 'vgForm',
 
+   components: { VueGoogleAutocomplete },
+
    mounted() {
-    this.firebase = new Firebase();
-    this.firebase.listen();
+    this.firebase = window.vgFirebase;
    },
 
    methods: {
     onSubmitForm() {
-      // let gmaps = new GMaps(this.form.address);
-      // gmaps.geocode();
+      this.firebase.addVeggie(this.form);
 
-      this.form.veggie.location = [-123, 321];
-
-      this.newVeggie(this.form);
-      this.firebase.add(this.form);
-
-      this.veggies_array = this.firebase.veggies;
+      window.vgEventHub.$emit('new_veggie', {
+        veggies_array: this.firebase.veggies
+      });
     },
 
-    ...mapActions(['newVeggie'])
+    getAddressData(addressData) {
+      let { route, locality, latitude, longitude, country } = addressData;
+
+      this.form.veggie.address = `${route}, ${locality} - ${country}`;
+
+      this.form.veggie.location[0] = latitude;
+      this.form.veggie.location[1] = longitude;
+    }
    },
 
    data() {
     return {
-      veggies_array: [],
       form: {
         type: '',
         veggie: {
           name: '',
-          address: ''
+          address: '',
+          location: []
         }
       }
     }
-   },
-
-   computed: {
-    ...mapState({
-      formData: state => state.form
-    })
    }
   }
 </script>
 
 <template>
   <div>
-    <h1>veggies_array -> {{veggies_array}}</h1>
     <form @submit.prevent="onSubmitForm">
       <div class="control is-horizontal">
         <div class="control-label">
@@ -77,12 +72,12 @@
 
         <div class="control is-grouped">
           <p class="control is-expanded">
-            <input
-              id="address"
+            <vue-google-autocomplete
+              id="map"
               class="input"
-              type="text"
-              v-model="form.veggie.address"
-              placeholder="Endereço do Veggie">
+              placeholder="Endereço do Veggie"
+              v-on:placeChanged="getAddressData">
+            </vue-google-autocomplete>
           </p>
         </div>
       </div>
@@ -116,4 +111,4 @@
   </div>
 </template>
 
-<style></style>
+<style lang="scss"></style>
