@@ -39,7 +39,9 @@ class Firebase {
   }
 
   snapshot(data) {
-    return this.veggies.push(data.val());
+    if (data.val()) {
+      return this.veggies.push(data.val());
+    }
   }
 }
 
