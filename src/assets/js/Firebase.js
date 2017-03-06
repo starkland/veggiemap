@@ -29,18 +29,28 @@ class Firebase {
   }
 
   update() {
-    this.db.ref('veggies').once('value', (snapshot) => {
-      this.snapshot(snapshot);
-
-      Events.$emit('update_veggies', {
-        veggies: snapshot.val()
-      });
-    });
+    this.db.ref('veggies').on('value', (snapshot) => this.snapshot(snapshot));
   }
 
   snapshot(data) {
     if (data.val()) {
-      return this.veggies.push(data.val());
+      if (Object.keys(data.val()).length > 0 && Object.keys(data.val())[0] !== 'created_at') {
+        let obj = data.val();
+
+        this.veggies = [];
+
+        for (let item in obj) {
+          this.veggies.push(obj[item]);
+        }
+      }
+    }
+
+    this.dispatchEvent(this.veggies);
+  }
+
+  dispatchEvent(data) {
+    if (data.length > 0) {
+      Events.$emit('update_veggies', { veggies: data });
     }
   }
 }

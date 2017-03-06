@@ -1,6 +1,5 @@
 <script>
   import VueGoogleAutocomplete from 'vue-google-autocomplete'
-  import Events from '../events/all';
 
   export default {
    name: 'vgForm',
@@ -15,10 +14,6 @@
     onSubmitForm() {
       if (this.form.type != '' && this.form.veggie.address != '' && this.form.veggie.name != '') {
         this.firebase.addVeggie(this.form);
-
-        Events.$emit('new_veggie', {
-          veggies_array: this.firebase.veggies
-        });
 
         this.clearFields();
       } else {
