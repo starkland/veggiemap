@@ -1,3 +1,5 @@
+import Events from '../../events/all';
+
 class Firebase {
   constructor() {
     this.config = {
@@ -13,8 +15,6 @@ class Firebase {
     this.db = firebase.database();
 
     this.veggies = [];
-
-    this.vgEventHub = window.vgEventHub;
   }
 
   addVeggie(obj) {
@@ -32,7 +32,7 @@ class Firebase {
     this.db.ref('veggies').once('value', (snapshot) => {
       this.snapshot(snapshot);
 
-      this.vgEventHub.$emit('update_veggies', {
+      Events.$emit('update_veggies', {
         veggies: snapshot.val()
       });
     });

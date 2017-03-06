@@ -1,15 +1,10 @@
 <script>
-  import Vue from 'vue';
-
   import Firebase from '../assets/js/Firebase.js';
   import Location from '../assets/js/Location.js';
 
   import vgHeader from '../components/Header.vue';
   import vgCard from '../components/Card.vue'
   import vgMap from '../components/Map.vue';
-
-  let eventHub = new Vue();
-  window.vgEventHub = eventHub;
 
   let firebase = new Firebase();
   firebase.listen();
