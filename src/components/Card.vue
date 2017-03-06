@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <div class="card-footer">
+    <!-- <div class="card-footer">
       <a @click="all" class="card-footer-item">
         ver todos
       </a>
@@ -46,7 +46,7 @@
       <a @click="byType('fixos')" class="card-footer-item">
         apenas fixos
       </a>
-    </div>
+    </div> -->
   </aside>
 </template>
 
