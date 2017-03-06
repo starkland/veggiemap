@@ -25,7 +25,7 @@
     </div>
 
     <div class="nav-center">
-      <a
+      <!-- <a
         class="nav-item"
         href="https://github.com/starkland/veggiemap"
         target="_blank">
@@ -33,7 +33,7 @@
         <span class="icon">
           <i class="fa fa-github"></i>
         </span>
-      </a>
+      </a> -->
 
       <a
         class="nav-item"
