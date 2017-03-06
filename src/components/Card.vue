@@ -3,8 +3,19 @@
 
   export default {
     name: 'vgCard',
+
     components: {
       vgForm
+    },
+
+    methods: {
+      all() {
+        window.vgMap.setZoom(3);
+      },
+
+      byType(type) {
+        console.warn(type);
+      }
     }
   }
 </script>
@@ -21,6 +32,20 @@
       <div class="content">
         <vg-form></vg-form>
       </div>
+    </div>
+
+    <div class="card-footer">
+      <a @click="all" class="card-footer-item">
+        ver todos
+      </a>
+
+      <a @click="byType('eventos')" class="card-footer-item">
+        apenas eventos
+      </a>
+
+      <a @click="byType('fixos')" class="card-footer-item">
+        apenas fixos
+      </a>
     </div>
   </aside>
 </template>

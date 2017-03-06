@@ -104,6 +104,8 @@
           layers: [this.tiles]
         });
 
+        window.vgMap = this.map;
+
         this.mapLoaded = true;
 
         window.vgFirebase.update();
@@ -131,10 +133,12 @@
 
 <template>
   <div class="map-container" :class="{ 'is-loaded': mapLoaded }">
+    <!-- Loading -->
     <div v-if="!mapLoaded">
       <div class="button is-loading loading-container"></div>
     </div>
 
+    <!-- Map -->
     <div id="map-container"></div>
   </div>
 </template>
@@ -175,5 +179,16 @@
     }
 
     transition: visibility, .25s, linear, 0s;
+  }
+
+  .map-controls {
+    position: absolute;
+    z-index: 2000;
+    background: red;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 0;
   }
 </style>
