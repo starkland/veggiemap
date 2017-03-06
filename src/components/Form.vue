@@ -14,16 +14,20 @@
 
    methods: {
     onSubmitForm() {
-      this.firebase.addVeggie(this.form);
+      if (this.form.type != '' && this.form.veggie.address != '' && this.form.veggie.name != '') {
+        this.firebase.addVeggie(this.form);
 
-      this.vgEventHub.$emit('new_veggie', {
-        veggies_array: this.firebase.veggies
-      });
+        this.vgEventHub.$emit('new_veggie', {
+          veggies_array: this.firebase.veggies
+        });
 
-      this.clearForm();
+        this.clearFields();
+      } else {
+        return this.message = 'Para adicionar um novo veggie, nenhum campo pode está vazio!';
+      }
     },
 
-    clearForm() {
+    clearFields() {
       this.form = {
         type: '',
         veggie: {
@@ -32,6 +36,8 @@
           location: []
         }
       }
+
+      this.message = '';
     },
 
     getAddressData(addressData) {
@@ -53,7 +59,8 @@
           address: '',
           location: []
         }
-      }
+      },
+      message: ''
     }
    }
   }
@@ -122,7 +129,14 @@
       <div class="control">
         <button type="submit" class="button is-primary">Pronto</button>
       </div>
+
+      <div class="control" v-if="message">
+        <div class="notification is-info">
+          <p>{{message}}</p>
+        </div>
+      </div>
     </form>
+
   </div>
 </template>
 
