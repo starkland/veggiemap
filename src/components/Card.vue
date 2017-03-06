@@ -32,4 +32,8 @@
     bottom: 2%;
     right: 2%;
   }
+
+  .card {
+    min-width: 50%;
+  }
 </style>
