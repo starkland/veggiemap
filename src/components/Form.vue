@@ -1,6 +1,6 @@
 <script>
   import VueGoogleAutocomplete from 'vue-google-autocomplete'
-  import Firebase from '../assets/js/Firebase.js';
+  import Events from '../events/all';
 
   export default {
    name: 'vgForm',
@@ -9,7 +9,6 @@
 
    mounted() {
     this.firebase = window.vgFirebase;
-    this.vgEventHub = window.vgEventHub;
    },
 
    methods: {
@@ -17,7 +16,7 @@
       if (this.form.type != '' && this.form.veggie.address != '' && this.form.veggie.name != '') {
         this.firebase.addVeggie(this.form);
 
-        this.vgEventHub.$emit('new_veggie', {
+        Events.$emit('new_veggie', {
           veggies_array: this.firebase.veggies
         });
 

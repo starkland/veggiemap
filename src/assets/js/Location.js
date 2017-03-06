@@ -1,3 +1,5 @@
+import Events from '../../events/all';
+
 class Location {
   constructor() {
     this.latLng = [];
@@ -21,7 +23,7 @@ class Location {
   }
 
   dispatch() {
-    window.vgEventHub.$emit('location_ok', {
+    Events.$emit('location_ok', {
       position: this.position()
     });
   }

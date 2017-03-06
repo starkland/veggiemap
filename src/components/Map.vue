@@ -1,4 +1,6 @@
 <script>
+  import Events from '../events/all';
+
   export default {
     name: 'vgMap',
 
@@ -115,18 +117,15 @@
     },
 
     created() {
-      this.vgEventHub = window.vgEventHub;
-
-      this.vgEventHub.$on('location_ok', this.displayMap);
-
-      this.vgEventHub.$on('new_veggie', this.updateVeggie);
-      this.vgEventHub.$on('update_veggies', this.updateVeggies);
+      Events.$on('location_ok', this.displayMap);
+      Events.$on('new_veggie', this.updateVeggie);
+      Events.$on('update_veggies', this.updateVeggies);
     },
 
     beforeDestroy() {
-      this.vgEventHub.$off('new_veggie');
-      this.vgEventHub.$off('update_veggies');
-      this.vgEventHub.$off('location_ok');
+      Events.$off('new_veggie');
+      Events.$off('update_veggies');
+      Events.$off('location_ok');
     }
   }
 </script>
