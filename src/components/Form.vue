@@ -1,6 +1,5 @@
 <script>
   import VueGoogleAutocomplete from 'vue-google-autocomplete'
-  import Firebase from '../assets/js/Firebase.js';
 
   export default {
    name: 'vgForm',
