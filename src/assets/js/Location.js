@@ -1,7 +1,6 @@
 class Location {
   constructor() {
     this.latLng = [];
-    // this.geolocation = navigator.geolocation;
   }
 
   currentPosition() {

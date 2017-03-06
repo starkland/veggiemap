@@ -106,6 +106,8 @@
 
         this.mapLoaded = true;
 
+        window.vgFirebase.update();
+
         this.$Progress.finish();
       }
     },
@@ -113,10 +115,10 @@
     created() {
       this.vgEventHub = window.vgEventHub;
 
+      this.vgEventHub.$on('location_ok', this.displayMap);
+
       this.vgEventHub.$on('new_veggie', this.updateVeggie);
       this.vgEventHub.$on('update_veggies', this.updateVeggies);
-
-      this.vgEventHub.$on('location_ok', this.displayMap);
     },
 
     beforeDestroy() {

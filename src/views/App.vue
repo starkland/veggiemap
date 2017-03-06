@@ -22,10 +22,6 @@
   export default {
    name: 'vgApp',
 
-   created() {
-    window.vgFirebase.update();
-   },
-
    components: {
     vgHeader,
     vgCard,
