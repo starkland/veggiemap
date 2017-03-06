@@ -2,6 +2,7 @@
   import Vue from 'vue';
 
   import Firebase from '../assets/js/Firebase.js';
+  import Location from '../assets/js/Location.js';
 
   import vgHeader from '../components/Header.vue';
   import vgCard from '../components/Card.vue'
@@ -13,6 +14,10 @@
   let firebase = new Firebase();
   firebase.listen();
   window.vgFirebase = firebase;
+
+  let location = new Location();
+  location.currentPosition();
+  window.vgLocation = location;
 
   export default {
    name: 'vgApp',

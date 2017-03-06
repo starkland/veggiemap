@@ -3,14 +3,12 @@
     name: 'vgMap',
 
     mounted() {
-      let tiles = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+      this.tiles = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'VeggieMap',
         maxZoom: 20,
         id: 'mapbox.streets',
         accessToken: 'pk.eyJ1IjoidGh1bGlvcGgiLCJhIjoiY2l6dGYzbzh3MDBxdDJxb2RwM3Q1dThrYSJ9.Z1gPJ1HHyF4extvmILwDOQ'
       });
-
-      let latlng = L.latLng(50.5, 30.51);
 
       // Marker clusters
       this.markersLayer = L.markerClusterGroup({
@@ -18,13 +16,6 @@
         spiderfyOnMaxZoom: false,
         showCoverageOnHover: false,
         zoomToBoundsOnClick: true
-      });
-
-      this.map = L.map('map-container', {
-        center: latlng,
-        zoom: 15,
-        scrollWheelZoom: false,
-        layers: [tiles]
       });
     },
 
@@ -97,6 +88,18 @@
             });
           break;
         }
+      },
+
+      displayMap(obj) {
+        const position = obj.position;
+        const latlng = L.latLng(position[0], position[1]);
+
+        this.map = L.map('map-container', {
+          center: latlng,
+          zoom: 15,
+          scrollWheelZoom: false,
+          layers: [this.tiles]
+        });
       }
     },
 
@@ -105,11 +108,14 @@
 
       this.vgEventHub.$on('new_veggie', this.updateVeggie);
       this.vgEventHub.$on('update_veggies', this.updateVeggies);
+
+      this.vgEventHub.$on('location_ok', this.displayMap);
     },
 
     beforeDestroy() {
       this.vgEventHub.$off('new_veggie');
       this.vgEventHub.$off('update_veggies');
+      // this.vgEventHub.$off('location_ok');
     }
   }
 </script>
