@@ -3,6 +3,8 @@
     name: 'vgMap',
 
     mounted() {
+      this.$Progress.start();
+
       this.tiles = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'VeggieMap',
         maxZoom: 20,
@@ -22,7 +24,8 @@
     data() {
       return {
         veggies_array: [],
-        arrayOfLatLngs: []
+        arrayOfLatLngs: [],
+        mapLoaded: null
       }
     },
 
@@ -100,6 +103,10 @@
           scrollWheelZoom: false,
           layers: [this.tiles]
         });
+
+        this.mapLoaded = true;
+
+        this.$Progress.finish();
       }
     },
 
@@ -115,27 +122,56 @@
     beforeDestroy() {
       this.vgEventHub.$off('new_veggie');
       this.vgEventHub.$off('update_veggies');
-      // this.vgEventHub.$off('location_ok');
+      this.vgEventHub.$off('location_ok');
     }
   }
 </script>
 
 <template>
-  <div class="map-container">
+  <div class="map-container" :class="{ 'is-loaded': mapLoaded }">
+    <div v-if="!mapLoaded">
+      <div class="button is-loading loading-container"></div>
+    </div>
+
     <div id="map-container"></div>
   </div>
 </template>
 
-<style>
+<style lang="scss">
+  $green: #00D1B2;
+
   .map-container {
     width: 100%;
     height: 100%;
     position: absolute;
     z-index: 1;
-    background-color: pink;
+
+    &.is-loaded {
+      ~ .card-wrapper {
+        z-index: 10;
+      }
+    }
   }
 
   #map-container {
     height: 100%;
+  }
+
+  .loading-container {
+    width: 100%;
+    height: 100%;
+    background-color: $green;
+    display: block;
+    position: absolute;
+
+    &::after {
+      width: 10rem !important;
+      height: 10rem !important;
+      margin-left: -18px;
+      margin-top: -18px;
+      top: 40%;
+    }
+
+    transition: visibility, .25s, linear, 0s;
   }
 </style>

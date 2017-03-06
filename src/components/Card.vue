@@ -28,7 +28,7 @@
 <style lang="scss">
   .card-wrapper {
     position: absolute;
-    z-index: 10;
+    z-index: 0;
     bottom: 2%;
     right: 2%;
   }
