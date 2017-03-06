@@ -19,6 +19,19 @@
       this.vgEventHub.$emit('new_veggie', {
         veggies_array: this.firebase.veggies
       });
+
+      this.clearForm();
+    },
+
+    clearForm() {
+      this.form = {
+        type: '',
+        veggie: {
+          name: '',
+          address: '',
+          location: []
+        }
+      }
     },
 
     getAddressData(addressData) {
@@ -77,6 +90,7 @@
               id="map"
               class="input"
               placeholder="Endereço do Veggie"
+              v-model="form.veggie.address"
               v-on:placeChanged="getAddressData">
             </vue-google-autocomplete>
           </p>
