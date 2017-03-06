@@ -132,7 +132,7 @@
 </script>
 
 <template>
-  <div class="map-container" :class="{ 'is-loaded': mapLoaded }">
+  <div class="map-wrapper" :class="{ 'is-loaded': mapLoaded }">
     <!-- Loading -->
     <div v-if="!mapLoaded">
       <div class="button is-loading loading-container"></div>
@@ -146,9 +146,9 @@
 <style lang="scss">
   $green: #00D1B2;
 
-  .map-container {
+  .map-wrapper {
     width: 100%;
-    height: 100%;
+    height: calc(100% - 50px);
     position: absolute;
     z-index: 1;
 
