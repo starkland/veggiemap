@@ -12,6 +12,9 @@ import router from './router/index';
 // Events
 import Events from './events/all';
 
+// Assets
+import Firebase from './assets/js/Firebase';
+
 // ====
 
 Vue.use(VueResource);
@@ -21,6 +24,10 @@ Vue.use(VueProgressBar, {
   failedColor: 'red',
   height: '2px'
 });
+
+let firebase = new Firebase();
+    firebase.listen();
+window.vgFirebase = firebase;
 
 // ====
 
