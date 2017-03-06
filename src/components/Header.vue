@@ -20,7 +20,7 @@
   <nav class="nav">
     <div class="nav-left">
       <a class="nav-item">
-        veggiemap logo
+        Veggie Map
       </a>
     </div>
 
@@ -64,22 +64,33 @@
       class="nav-right nav-menu"
       :class="{ 'is-active' : this.navActive }">
 
-      <router-link
+      <li class="nav-item">
+        <a href="https://github.com/starkland/veggiemap" target="_blank" class="button is-primary">
+          <span class="icon">
+            <i class="fa fa-github"></i>
+          </span>
+
+          <span>Github</span>
+        </a>
+      </li>
+
+
+      <!-- <router-link
         class="nav-item"
         title="Home"
         to="/"
         exact>
 
         Home
-      </router-link>
+      </router-link> -->
 
-      <router-link
+      <!-- <router-link
         class="nav-item"
         title="Contato"
         to="/contato">
 
         Contato
-      </router-link>
+      </router-link> -->
     </div>
   </nav>
 </template>
