@@ -55,7 +55,16 @@
 
       // signInWithRedirect
       firebase.auth().signInWithPopup(provider).then((result) => {
-        console.warn(result);
+        console.warn('Facebook:', result);
+      }).catch(err => console.log(error))
+    },
+
+    google() {
+       const provider = new firebase.auth.GoogleAuthProvider();
+
+      // signInWithRedirect
+      firebase.auth().signInWithPopup(provider).then((result) => {
+        console.warn('Google:', result);
       }).catch(err => console.log(error))
     }
    }
@@ -70,6 +79,10 @@
 
     <button @click="facebook" class="button">
       Facebook
+    </button>
+
+    <button @click="google" class="button">
+      Google
     </button>
     <!-- <vg-header></vg-header> -->
     <!-- <vg-map></vg-map> -->
