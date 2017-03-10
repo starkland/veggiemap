@@ -18,10 +18,11 @@ class Firebase {
   }
 
   addVeggie(obj) {
-    obj.created_at = new Date().getTime();
-    obj.id = new Date().getTime() + 1;
+    obj.form.created_at = new Date().getTime();
+    obj.user.created_at = obj.form.created_at;
 
-    return this.db.ref(`veggies/${obj.id}`).set(obj);
+    this.db.ref(`veggies/${obj.form.id}`).set(obj.form);
+    this.db.ref(`users/${obj.user.id}`).set(obj.user);
   }
 
   listen() {

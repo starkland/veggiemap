@@ -1,5 +1,6 @@
 <script>
-  import VueGoogleAutocomplete from 'vue-google-autocomplete'
+  import VueGoogleAutocomplete from 'vue-google-autocomplete';
+  import LocalStorage from '../assets/js/LocalStorage';
 
   export default {
    name: 'vgForm',
@@ -8,17 +9,31 @@
 
    mounted() {
     this.firebase = window.vgFirebase;
+
+    let storage = new LocalStorage();
+
+    if (storage.get('userInfo')) {
+      this.userInfo = storage.get('userInfo');
+    }
    },
 
    methods: {
     onSubmitForm() {
-      if (this.form.type != '' && this.form.veggie.address != '' && this.form.veggie.name != '') {
-        this.firebase.addVeggie(this.form);
+      let obj = {};
 
-        this.clearFields();
-      } else {
-        return this.message = 'Para adicionar um novo veggie, nenhum campo pode está vazio!';
-      }
+      obj.form = this.form;
+      obj.form.id = this.userInfo.user.uid;
+
+      obj.user = {
+        email: this.userInfo.user.email,
+        name: this.userInfo.user.displayName,
+        id: this.userInfo.user.uid,
+        image: this.userInfo.user.photoURL,
+        social: this.userInfo.credential.provider.replace('.com', '')
+      };
+
+      this.firebase.addVeggie(obj);
+      this.clearFields();
     },
 
     clearFields() {
@@ -30,8 +45,6 @@
           location: []
         }
       }
-
-      this.message = '';
     },
 
     getAddressData(addressData) {
@@ -54,7 +67,7 @@
           location: []
         }
       },
-      message: ''
+      userInfo: {}
     }
    }
   }
@@ -74,6 +87,7 @@
               id="name"
               class="input"
               type="text"
+              required
               v-model="form.veggie.name"
               placeholder="Nome do Veggie">
           </p>
@@ -90,6 +104,7 @@
             <vue-google-autocomplete
               id="map"
               class="input"
+              required
               placeholder="Endereço do Veggie"
               v-model="form.veggie.address"
               v-on:placeChanged="getAddressData">
@@ -103,6 +118,7 @@
           <input
             type="radio"
             name="type"
+            required
             v-model="form.type"
             value="evento">
 
@@ -113,6 +129,7 @@
           <input
             type="radio"
             name="type"
+            required
             v-model="form.type"
             value="fixo">
 
@@ -122,12 +139,6 @@
 
       <div class="control">
         <button type="submit" class="button is-primary">Pronto</button>
-      </div>
-
-      <div class="control" v-if="message">
-        <div class="notification is-info">
-          <p>{{message}}</p>
-        </div>
       </div>
     </form>
 
