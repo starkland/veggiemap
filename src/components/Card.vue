@@ -25,6 +25,7 @@
 
       Event.$on('user_logged', this.loggedUser);
       Event.$on('user_logout', this.logoutUser);
+
       Event.$on('auth_error', this.authError);
     },
 
@@ -40,7 +41,9 @@
       },
 
       logout() {
-        this.$Progress.start();
+        this.logged = false;
+        this.storage.clear('userInfo');
+
         this.app.logout();
       },
 
@@ -51,20 +54,26 @@
         this.$Progress.finish();
       },
 
-      logoutUser() {
-        this.logged = false;
-        this.storage.clear('userInfo');
-        this.$Progress.finish();
-      },
-
       authError(obj) {
         let { code, message } = obj;
         let text = '';
 
-        if (code === 'auth/popup-closed-by-user') {
-          text = `A janela foi fechada e o login não foi realizado.`
-        } else {
-          console.warn(code);
+        switch(code) {
+          case 'auth/popup-closed-by-user':
+            text = `A janela foi fechada e o login não foi realizado.`
+          break;
+
+          case 'auth/popup-blocked':
+            text = `Seu navegador está bloqueando o pop-up.`
+          break;
+
+          case 'auth/operation-not-allowed':
+            text = `Esta operação não é permitida.`
+          break;
+
+          default:
+            console.warn(code)
+          break;
         }
 
         this.alert.error({
