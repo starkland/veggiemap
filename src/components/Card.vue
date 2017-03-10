@@ -9,10 +9,6 @@
     },
 
     methods: {
-      all() {
-        window.vgMap.setZoom(3);
-      },
-
       byType(type) {
         console.warn(type);
       }
@@ -34,19 +30,15 @@
       </div>
     </div>
 
-    <!-- <div class="card-footer">
-      <a @click="all" class="card-footer-item">
-        ver todos
-      </a>
-
-      <a @click="byType('eventos')" class="card-footer-item">
+    <div class="card-footer">
+      <!-- <a @click="byType('eventos')" class="card-footer-item">
         apenas eventos
-      </a>
+      </a> -->
 
-      <a @click="byType('fixos')" class="card-footer-item">
+      <!-- <a @click="byType('fixos')" class="card-footer-item">
         apenas fixos
-      </a>
-    </div> -->
+      </a> -->
+    </div>
   </aside>
 </template>
 
