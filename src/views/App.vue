@@ -13,6 +13,24 @@
   export default {
    name: 'vgApp',
 
+   beforeCreated() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.user = user
+        // this.$bindAsArray('items', db.ref(`items/${user.uid}`))
+      }
+
+      this.loading = false
+    })
+   },
+
+   data() {
+    return {
+      user: null,
+      loading: true
+    }
+   },
+
    mounted() {
     this.alert = new Alert();
    },
@@ -30,6 +48,15 @@
         text: 'Aqui vem a mensagem',
         btnText: 'Cool'
       })
+    },
+
+    facebook() {
+      const provider = new firebase.auth.FacebookAuthProvider();
+
+      // signInWithRedirect
+      firebase.auth().signInWithPopup(provider).then((result) => {
+        console.warn(result);
+      }).catch(err => console.log(error))
     }
    }
   }
@@ -37,7 +64,13 @@
 
 <template>
   <div>
-    <button @click="dale" class="button">Dale</button>
+    <button @click="dale" class="button">
+      Dale
+    </button>
+
+    <button @click="facebook" class="button">
+      Facebook
+    </button>
     <!-- <vg-header></vg-header> -->
     <!-- <vg-map></vg-map> -->
     <!-- <vg-card></vg-card> -->
