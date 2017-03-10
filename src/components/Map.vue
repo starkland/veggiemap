@@ -32,23 +32,15 @@
     },
 
     methods: {
-      updateVeggie(data) {
-        this.addNewMarker(data.veggies_array);
-      },
-
       updateVeggies(data) {
         if (data && data.veggies !== null) {
-
-          for (let item in data.veggies) {
-            this.veggies_array.push(data.veggies[item]);
-          }
-
+          this.veggies_array = data.veggies;
           this.addNewMarker(this.veggies_array);
         }
       },
 
       addNewMarker(markerArray) {
-        this.map.removeLayer(this.markersLayer);
+        this.arrayOfLatLngs = [];
 
         markerArray.forEach((item) => {
           if (item && item.veggie) {
@@ -56,23 +48,24 @@
             this.arrayOfLatLngs.push([item.veggie.location[0], item.veggie.location[1]]);
 
             // adiciona os marcadores ao mapa
-            let title = `<h4>${item.veggie.name}</h4> <small>${item.veggie.address}</small>`;
-
-            let marker = L.marker(new L.LatLng(item.veggie.location[0], item.veggie.location[1]), {
-              title: title,
-              icon: this.buildIcon(item.type)
-            });
-
-            marker.bindPopup(title);
-            this.markersLayer.addLayer(marker);
+            this.buildMarker(item);
           }
         });
 
-        // centraliza o mapa seguindo os marcadores
-        let bounds = new L.LatLngBounds(this.arrayOfLatLngs);
-        this.map.fitBounds(bounds);
+        this.updateMap();
+      },
 
-        this.map.addLayer(this.markersLayer);
+      buildMarker(obj) {
+        let title = `<h4>${obj.veggie.name}</h4> <small>${obj.veggie.address}</small>`;
+
+        let marker = L.marker(new L.LatLng(obj.veggie.location[0], obj.veggie.location[1]), {
+          title: title,
+          icon: this.buildIcon(obj.type)
+        });
+
+        marker.bindPopup(title);
+
+        this.markersLayer.addLayer(marker);
       },
 
       buildIcon(type) {
@@ -93,6 +86,14 @@
             });
           break;
         }
+      },
+
+      updateMap() {
+        // centraliza o mapa de acordo com os marcadores
+        let bounds = new L.LatLngBounds(this.arrayOfLatLngs);
+        this.map.fitBounds(bounds);
+
+        this.map.addLayer(this.markersLayer);
       },
 
       displayMap(obj) {
@@ -118,14 +119,12 @@
 
     created() {
       Events.$on('location_ok', this.displayMap);
-      Events.$on('new_veggie', this.updateVeggie);
       Events.$on('update_veggies', this.updateVeggies);
     },
 
     beforeDestroy() {
-      Events.$off('new_veggie');
-      Events.$off('update_veggies');
       Events.$off('location_ok');
+      Events.$off('update_veggies');
     }
   }
 </script>
