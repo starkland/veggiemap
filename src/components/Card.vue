@@ -1,6 +1,7 @@
 <script>
   import vgForm from '../components/Form.vue';
   import Event from '../events/all';
+  import LocalStorage from '../assets/js/LocalStorage';
 
   export default {
     name: 'vgCard',
@@ -17,6 +18,8 @@
 
     mounted() {
       this.app = this.$parent;
+      this.storage = new LocalStorage();
+
       Event.$on('user_logged', this.loggedUser);
       Event.$on('user_logout', this.logoutUser);
     },
@@ -30,7 +33,13 @@
         this.app.google();
       },
 
+      logout() {
+        this.app.logout();
+      },
+
       loggedUser(obj) {
+        this.storage.set('userInfo', obj);
+
         let { credential, user } = obj;
 
         console.info(credential);
@@ -40,13 +49,9 @@
       },
 
       logoutUser() {
-        // remove do localStorage
         this.logged = false;
+        this.storage.clear();
         console.warn('Saiu..');
-      },
-
-      logout() {
-        this.app.logout();
       }
     },
 
