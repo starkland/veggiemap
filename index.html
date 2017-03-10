@@ -36,6 +36,9 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
   <link rel="stylesheet" href="src/assets/css/leaflet.awesome-markers.css">
 
+  <!-- Sweet Alert -->
+  <link rel="stylesheet" href="./src/assets/css/sweetalert.css">
+
   <!-- Font awesome / CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
@@ -64,12 +67,35 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTzF9n1tvwjW8lZ9kY6umD8tGnuKxbsB4&libraries=places"></script>
 
   <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.10/firebase.js"></script>
 
   <!-- Leaflet -->
   <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
   <script src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
-  <script src="src/assets/js/leaflet.awesome-markers.js"></script>
+  <script src="src/assets/js/libs/leaflet.awesome-markers.js"></script>
+
+  <!-- Sweet Alert -->
+  <script src="./src/assets/js/libs/sweetalert.min.js"></script>
+
+  <!-- Facebook -->
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '1069806473124136',
+        xfbml      : true,
+        version    : 'v2.8'
+      });
+      FB.AppEvents.logPageView();
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
 
   <!-- Author -->
   <script src="./dist/bundle.js"></script>

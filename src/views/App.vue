@@ -1,5 +1,6 @@
 <script>
   import Location from '../assets/js/Location';
+  import Auth from '../assets/js/Auth';
 
   import vgHeader from '../components/Header.vue';
   import vgCard from '../components/Card.vue'
@@ -12,10 +13,36 @@
   export default {
    name: 'vgApp',
 
+   data() {
+    return {
+      user: null,
+      loading: false,
+      logged: null
+    }
+   },
+
+   mounted() {
+    this.auth = new Auth();
+   },
+
    components: {
     vgHeader,
     vgCard,
     vgMap
+   },
+
+   methods: {
+    facebook() {
+      this.auth.facebook();
+    },
+
+    google() {
+      this.auth.google();
+    },
+
+    logout() {
+      this.auth.logout();
+    }
    }
   }
 </script>

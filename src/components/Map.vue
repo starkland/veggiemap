@@ -114,6 +114,10 @@
         window.vgFirebase.update();
 
         this.$Progress.finish();
+      },
+
+      zoomOut() {
+        this.map.setZoom(3);
       }
     },
 
@@ -135,6 +139,14 @@
     <div v-if="!mapLoaded">
       <div class="button is-loading loading-container"></div>
     </div>
+
+    <button
+      v-if="mapLoaded"
+      @click="zoomOut"
+      title="Clique para ver todos os marcadores."
+      class="button is-medium btn-zoom is-info">
+        <i class="fa fa-search-minus"></i>
+    </button>
 
     <!-- Map -->
     <div id="map-container"></div>
@@ -188,5 +200,15 @@
     height: 20px;
     top: 0;
     left: 0;
+  }
+
+  .btn-zoom {
+    position: absolute;
+    z-index: 1000;
+    bottom: 3%;
+    left: 2%;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
   }
 </style>

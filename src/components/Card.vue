@@ -1,5 +1,8 @@
 <script>
   import vgForm from '../components/Form.vue';
+  import Event from '../events/all';
+  import LocalStorage from '../assets/js/LocalStorage';
+  import Alert from '../assets/js/Alert';
 
   export default {
     name: 'vgCard',
@@ -8,14 +11,76 @@
       vgForm
     },
 
+    data() {
+      return {
+        logged: false
+      }
+    },
+
+    mounted() {
+      this.app = this.$parent;
+
+      this.alert = new Alert();
+      this.storage = new LocalStorage();
+
+      Event.$on('user_logged', this.loggedUser);
+      Event.$on('user_logout', this.logoutUser);
+      Event.$on('auth_error', this.authError);
+    },
+
     methods: {
-      all() {
-        window.vgMap.setZoom(3);
+      facebook() {
+        this.$Progress.start();
+        this.app.facebook();
       },
 
-      byType(type) {
-        console.warn(type);
+      google() {
+        this.$Progress.start();
+        this.app.google();
+      },
+
+      logout() {
+        this.$Progress.start();
+        this.app.logout();
+      },
+
+      loggedUser(obj) {
+        this.storage.set('userInfo', obj);
+        this.logged = true;
+
+        this.$Progress.finish();
+      },
+
+      logoutUser() {
+        this.logged = false;
+        this.storage.clear('userInfo');
+        this.$Progress.finish();
+      },
+
+      authError(obj) {
+        let { code, message } = obj;
+        let text = '';
+
+        if (code === 'auth/popup-closed-by-user') {
+          text = `A janela foi fechada e o login não foi realizado.`
+        } else {
+          console.warn(code);
+        }
+
+        this.alert.error({
+          title: 'Ops!',
+          text,
+          btnText: 'ok'
+        });
+
+        this.$Progress.finish();
       }
+    },
+
+    beforeDestroy() {
+      Event.$off('user_logged');
+      Event.$off('user_logout');
+      Event.$off('auth_error');
     }
   }
 </script>
@@ -30,23 +95,41 @@
 
     <div class="card-content">
       <div class="content">
-        <vg-form></vg-form>
+        <div v-if="logged">
+          <vg-form></vg-form>
+        </div>
+
+        <div v-if="!logged">
+          <p>Para adicionar um novo veggie, é necessário que você <br> realize o login no <b>Facebook</b> ou <b>Google</b>.</p>
+        </div>
       </div>
     </div>
 
-    <!-- <div class="card-footer">
-      <a @click="all" class="card-footer-item">
-        ver todos
+    <div class="card-footer">
+      <a
+        v-if="!logged"
+        @click="facebook"
+        title="Login com Facebook"
+        class="card-footer-item">
+        Facebook
       </a>
 
-      <a @click="byType('eventos')" class="card-footer-item">
-        apenas eventos
+      <a
+        v-if="!logged"
+        @click="google"
+        title="Login com Google"
+        class="card-footer-item">
+        Google
       </a>
 
-      <a @click="byType('fixos')" class="card-footer-item">
-        apenas fixos
+      <a
+        v-if="logged"
+        @click="logout"
+        title="Sair."
+        class="card-footer-item is-danger">
+        Sair
       </a>
-    </div> -->
+    </div>
   </aside>
 </template>
 
