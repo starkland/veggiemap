@@ -2,6 +2,7 @@
   import vgForm from '../components/Form.vue';
   import Event from '../events/all';
   import LocalStorage from '../assets/js/LocalStorage';
+  import Alert from '../assets/js/Alert';
 
   export default {
     name: 'vgCard',
@@ -18,46 +19,68 @@
 
     mounted() {
       this.app = this.$parent;
+
+      this.alert = new Alert();
       this.storage = new LocalStorage();
 
       Event.$on('user_logged', this.loggedUser);
       Event.$on('user_logout', this.logoutUser);
+      Event.$on('auth_error', this.authError);
     },
 
     methods: {
       facebook() {
+        this.$Progress.start();
         this.app.facebook();
       },
 
       google() {
+        this.$Progress.start();
         this.app.google();
       },
 
       logout() {
+        this.$Progress.start();
         this.app.logout();
       },
 
       loggedUser(obj) {
         this.storage.set('userInfo', obj);
-
-        let { credential, user } = obj;
-
-        console.info(credential);
-        console.warn(user);
-
         this.logged = true;
+
+        this.$Progress.finish();
       },
 
       logoutUser() {
         this.logged = false;
-        this.storage.clear();
-        console.warn('Saiu..');
+        this.storage.clear('userInfo');
+        this.$Progress.finish();
+      },
+
+      authError(obj) {
+        let { code, message } = obj;
+        let text = '';
+
+        if (code === 'auth/popup-closed-by-user') {
+          text = `A janela foi fechada e o login não foi realizado.`
+        } else {
+          console.warn(code);
+        }
+
+        this.alert.error({
+          title: 'Ops!',
+          text,
+          btnText: 'ok'
+        });
+
+        this.$Progress.finish();
       }
     },
 
     beforeDestroy() {
       Event.$off('user_logged');
       Event.$off('user_logout');
+      Event.$off('auth_error');
     }
   }
 </script>

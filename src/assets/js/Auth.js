@@ -12,13 +12,13 @@ class Auth {
   facebookLogin() {
     firebase.auth().signInWithPopup(this.fb_provider).then((result) => {
       this.sendEvent(result);
-    }).catch(err => console.warn(err));
+    }).catch(err => this.handleError(err));
   }
 
   googleLogin() {
     firebase.auth().signInWithPopup(this.gl_provider).then((result) => {
       this.sendEvent(result);
-    }).catch(err => console.warn(err));
+    }).catch(err => this.handleError(err));
   }
 
   logout() {
@@ -27,15 +27,16 @@ class Auth {
     }).catch(err => console.warn(err));
   }
 
-  sendEvent(obj) {
+  sendEvent(obj, type) {
     if (obj === null) {
       Events.$emit('user_logout');
     }
 
-    Events.$emit('user_logged', {
-      credential: obj.credential,
-      user: obj.user
-    });
+    Events.$emit('user_logged', obj);
+  }
+
+  handleError(err) {
+    Events.$emit('auth_error', err);
   }
 }
 
