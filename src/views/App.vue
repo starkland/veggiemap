@@ -73,10 +73,6 @@
 
 <template>
   <div>
-    <!-- <button @click="dale" class="button">Dale</button> -->
-    <!-- <button @click="facebook" class="button">Facebook</button> -->
-    <!-- <button @click="google" class="button">Google</button> -->
-
     <vg-header></vg-header>
     <vg-map></vg-map>
     <vg-card></vg-card>

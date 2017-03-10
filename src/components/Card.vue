@@ -8,9 +8,21 @@
       vgForm
     },
 
+    data() {
+      return {
+        logged: false
+      }
+    },
+
     methods: {
-      byType(type) {
-        console.warn(type);
+      facebook() {
+        console.warn('facebook');
+        this.logged = true;
+      },
+
+      google() {
+        console.warn('google');
+        this.logged = true;
       }
     }
   }
@@ -26,18 +38,30 @@
 
     <div class="card-content">
       <div class="content">
-        <vg-form></vg-form>
+        <div v-if="logged">
+          <vg-form></vg-form>
+        </div>
+
+        <div v-if="!logged">
+          <p>Para adicionar um novo veggie, é necessário que você <br> realize o login no <b>Facebook</b> ou <b>Google</b>.</p>
+        </div>
       </div>
     </div>
 
     <div class="card-footer">
-      <!-- <a @click="byType('eventos')" class="card-footer-item">
-        apenas eventos
-      </a> -->
+      <a
+        @click="facebook"
+        title="Login com Facebook"
+        class="card-footer-item">
+        Facebook
+      </a>
 
-      <!-- <a @click="byType('fixos')" class="card-footer-item">
-        apenas fixos
-      </a> -->
+      <a
+        @click="google"
+        title="Login com Google"
+        class="card-footer-item">
+        Google
+      </a>
     </div>
   </aside>
 </template>
