@@ -1,5 +1,6 @@
 <script>
   import Location from '../assets/js/Location';
+  import Alert from '../assets/js/Alert';
 
   import vgHeader from '../components/Header.vue';
   import vgCard from '../components/Card.vue'
@@ -12,19 +13,34 @@
   export default {
    name: 'vgApp',
 
+   mounted() {
+    this.alert = new Alert();
+   },
+
    components: {
     vgHeader,
     vgCard,
     vgMap
+   },
+
+   methods: {
+    dale() {
+      this.alert.success({
+        title: 'DALE',
+        text: 'Aqui vem a mensagem',
+        btnText: 'Cool'
+      })
+    }
    }
   }
 </script>
 
 <template>
   <div>
-    <vg-header></vg-header>
-    <vg-map></vg-map>
-    <vg-card></vg-card>
+    <button @click="dale" class="button">Dale</button>
+    <!-- <vg-header></vg-header> -->
+    <!-- <vg-map></vg-map> -->
+    <!-- <vg-card></vg-card> -->
   </div>
 </template>
 
