@@ -1,6 +1,7 @@
 <script>
   import Location from '../assets/js/Location';
   import Alert from '../assets/js/Alert';
+  import Auth from '../assets/js/Auth';
 
   import vgHeader from '../components/Header.vue';
   import vgCard from '../components/Card.vue'
@@ -15,24 +16,28 @@
 
    beforeCreated() {
     firebase.auth().onAuthStateChanged((user) => {
+      console.info(user);
+
       if (user) {
         this.user = user
         // this.$bindAsArray('items', db.ref(`items/${user.uid}`))
       }
 
       this.loading = false
-    })
+    });
    },
 
    data() {
     return {
       user: null,
-      loading: true
+      loading: false,
+      logged: null
     }
    },
 
    mounted() {
     this.alert = new Alert();
+    this.auth = new Auth();
    },
 
    components: {
@@ -51,21 +56,15 @@
     },
 
     facebook() {
-      const provider = new firebase.auth.FacebookAuthProvider();
-
-      // signInWithRedirect
-      firebase.auth().signInWithPopup(provider).then((result) => {
-        console.warn('Facebook:', result);
-      }).catch(err => console.log(error))
+      this.auth.facebook();
     },
 
     google() {
-       const provider = new firebase.auth.GoogleAuthProvider();
+      this.auth.google();
+    },
 
-      // signInWithRedirect
-      firebase.auth().signInWithPopup(provider).then((result) => {
-        console.warn('Google:', result);
-      }).catch(err => console.log(error))
+    logout() {
+      this.auth.logout();
     }
    }
   }

@@ -1,5 +1,6 @@
 <script>
   import vgForm from '../components/Form.vue';
+  import Event from '../events/all';
 
   export default {
     name: 'vgCard',
@@ -14,16 +15,44 @@
       }
     },
 
+    mounted() {
+      this.app = this.$parent;
+      Event.$on('user_logged', this.loggedUser);
+      Event.$on('user_logout', this.logoutUser);
+    },
+
     methods: {
       facebook() {
-        console.warn('facebook');
-        this.logged = true;
+        this.app.facebook();
       },
 
       google() {
-        console.warn('google');
+        this.app.google();
+      },
+
+      loggedUser(obj) {
+        let { credential, user } = obj;
+
+        console.info(credential);
+        console.warn(user);
+
         this.logged = true;
+      },
+
+      logoutUser() {
+        // remove do localStorage
+        this.logged = false;
+        console.warn('Saiu..');
+      },
+
+      logout() {
+        this.app.logout();
       }
+    },
+
+    beforeDestroy() {
+      Event.$off('user_logged');
+      Event.$off('user_logout');
     }
   }
 </script>
@@ -50,6 +79,7 @@
 
     <div class="card-footer">
       <a
+        v-if="!logged"
         @click="facebook"
         title="Login com Facebook"
         class="card-footer-item">
@@ -57,10 +87,19 @@
       </a>
 
       <a
+        v-if="!logged"
         @click="google"
         title="Login com Google"
         class="card-footer-item">
         Google
+      </a>
+
+      <a
+        v-if="logged"
+        @click="logout"
+        title="Sair."
+        class="card-footer-item is-danger">
+        Sair
       </a>
     </div>
   </aside>
