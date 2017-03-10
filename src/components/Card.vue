@@ -63,6 +63,10 @@
             text = `A janela foi fechada e o login não foi realizado.`
           break;
 
+          case 'auth/cancelled-popup-request':
+            text = `A janela foi fechada e o login não foi realizado.`
+          break;
+
           case 'auth/popup-blocked':
             text = `Seu navegador está bloqueando o pop-up.`
           break;
@@ -72,7 +76,7 @@
           break;
 
           default:
-            console.warn(code)
+            console.warn(code);
           break;
         }
 
