@@ -1,9 +1,9 @@
-var cacheName = 'cache_v13';
+var cacheName = 'cache_v14';
 var cacheFiles = [
   './',
   './index.html',
   './sw.js',
-  './dist/bundle.js',
+  './manifest.json',
   './src/assets/css/leaflet.awesome-markers.css',
   './src/assets/css/sweetalert.css',
   './src/assets/images/evento.svg',
@@ -11,7 +11,8 @@ var cacheFiles = [
   './src/assets/images/markers-shadow.png',
   './src/assets/images/markers-shadow@2x.png',
   './src/assets/images/markers-soft.png',
-  './src/assets/images/markers-soft@2x.png'
+  './src/assets/images/markers-soft@2x.png',
+  './dist/bundle.js'
 ];
 
 // ====
