@@ -125,8 +125,6 @@
       },
 
       focusOnUser(obj) {
-        console.info(obj);
-
         const position = obj.position;
         const latlng = L.latLng(position[0], position[1]);
 
@@ -143,19 +141,26 @@
 
         // ====
 
+        // clear map
+        this.map.removeLayer(marker);
+        this.map.removeLayer(circle);
+
+        // adjusts zoom and position
+        this.map.panTo(latlng);
+        this.map.setZoom(15);
+
+        // add to map
         marker.addTo(this.map);
         marker.bindPopup(`Você está aqui!`);
 
+        // add to map
         circle.addTo(this.map);
-
-        this.map.panTo(latlng);
-        this.map.setZoom(15);
 
         this.$Progress.finish();
 
         // ====
 
-        LocalStorage.set('userPos', obj);
+        this.LocalStorage.set('userPos', obj);
       },
 
       zoomOnMe() {
@@ -164,7 +169,7 @@
         let userPos = this.LocalStorage.get('userPos');
 
         if(userPos) {
-          this.focusOnUser({position: userPos});
+          this.focusOnUser({position: userPos.position});
         }
 
         this.Location.currentPosition();
