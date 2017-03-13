@@ -154,6 +154,8 @@
 </template>
 
 <style lang="scss">
+  @import '../assets/css/leaflet.awesome-markers.scss';
+
   $green: #00D1B2;
 
   .map-wrapper {

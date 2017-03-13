@@ -55,4 +55,6 @@
   </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+  @import '../assets/css/sweetalert.scss';
+</style>
