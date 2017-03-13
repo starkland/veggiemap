@@ -3,6 +3,9 @@ language: node_js
 node_js:
 - '6'
 
+before_install: 
+- 'npm i -g nyc'
+
 after_success:
-- './node_modules/.bin/coveralls'
+- 'npm run coveralls'
 
