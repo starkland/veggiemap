@@ -18,8 +18,6 @@ var cacheFiles = [
 
 // Primeiro evento / acontece apenas uma vez
 function Install(event) {
-  console.info('Event: Install');
-
   event.waitUntil(
     caches
     .open(cacheName)
@@ -34,8 +32,6 @@ function Install(event) {
 
 // Deleta o cache mais antigo
 function Activate(event) {
-  console.info('Event: Activate');
-
   event.waitUntil(
     caches
     .keys()
@@ -54,8 +50,6 @@ function Activate(event) {
 
 // Trigger para todos os requests da aplicação
 function Fetch(event) {
-  console.info('Event: Fetch');
-
   event.respondWith(
     caches
     .match(event.request)
