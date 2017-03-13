@@ -126,6 +126,24 @@
         const position = obj.position;
         const latlng = L.latLng(position[0], position[1]);
 
+        const marker = L.marker(new L.LatLng(position[0], position[1]), {
+          title: 'Você está aqui'
+        });
+
+        const circle = L.circle(new L.LatLng(position[0], position[1]), {
+          color: '#00D1B2',
+          fillColor: '#00D1B2',
+          fillOpacity: 0.5,
+          radius: 500
+        });
+
+        // ====
+
+        marker.addTo(this.map);
+        marker.bindPopup(`Você está aqui!`);
+
+        circle.addTo(this.map);
+
         this.map.panTo(latlng);
         this.map.setZoom(15);
 
