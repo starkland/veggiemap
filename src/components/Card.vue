@@ -43,6 +43,7 @@
       logout() {
         this.logged = false;
         this.storage.clear('userInfo');
+        this.storage.clear('userPos');
 
         this.app.logout();
       },

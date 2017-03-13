@@ -1,4 +1,6 @@
 <script>
+  import Location from '../assets/js/Location';
+  import LocalStorage from '../assets/js/LocalStorage';
   import Events from '../events/all';
 
   export default {
@@ -21,6 +23,12 @@
         showCoverageOnHover: false,
         zoomToBoundsOnClick: true
       });
+
+      this.displayMap();
+
+      // Inicia o Location
+      this.Location = new Location();
+      this.LocalStorage = new LocalStorage();
     },
 
     data() {
@@ -96,12 +104,8 @@
         this.map.addLayer(this.markersLayer);
       },
 
-      displayMap(obj) {
-        const position = obj.position;
-        const latlng = L.latLng(position[0], position[1]);
-
+      displayMap() {
         this.map = L.map('map-container', {
-          center: latlng,
           zoom: 15,
           scrollWheelZoom: false,
           layers: [this.tiles]
@@ -118,17 +122,68 @@
 
       zoomOut() {
         this.map.setZoom(3);
+      },
+
+      focusOnUser(obj) {
+        const position = obj.position;
+        const latlng = L.latLng(position[0], position[1]);
+
+        const marker = L.marker(new L.LatLng(position[0], position[1]), {
+          title: 'Você está aqui'
+        });
+
+        const circle = L.circle(new L.LatLng(position[0], position[1]), {
+          color: '#00D1B2',
+          fillColor: '#00D1B2',
+          fillOpacity: 0.5,
+          radius: 500
+        });
+
+        // ====
+
+        // clear map
+        this.map.removeLayer(marker);
+        this.map.removeLayer(circle);
+
+        // adjusts zoom and position
+        this.map.panTo(latlng);
+        this.map.setZoom(15);
+
+        // add to map
+        marker.addTo(this.map);
+        marker.bindPopup(`Você está aqui!`);
+
+        // add to map
+        circle.addTo(this.map);
+
+        this.$Progress.finish();
+
+        // ====
+
+        this.LocalStorage.set('userPos', obj);
+      },
+
+      zoomOnMe() {
+        this.$Progress.start();
+
+        let userPos = this.LocalStorage.get('userPos');
+
+        if(userPos) {
+          this.focusOnUser({position: userPos.position});
+        }
+
+        this.Location.currentPosition();
       }
     },
 
     created() {
-      Events.$on('location_ok', this.displayMap);
       Events.$on('update_veggies', this.updateVeggies);
+      Events.$on('location_ok', this.focusOnUser);
     },
 
     beforeDestroy() {
-      Events.$off('location_ok');
       Events.$off('update_veggies');
+      Events.$off('location_ok');
     }
   }
 </script>
@@ -140,13 +195,21 @@
       <div class="button is-loading loading-container"></div>
     </div>
 
-    <button
-      v-if="mapLoaded"
-      @click="zoomOut"
-      title="Clique para ver todos os marcadores."
-      class="button is-medium btn-zoom is-info">
-        <i class="fa fa-search-minus"></i>
-    </button>
+    <aside class="map-controls" v-if="mapLoaded">
+      <button
+        @click="zoomOut"
+        title="Clique para ver todos os marcadores."
+        class="button is-medium btn-zoom is-info">
+          <i class="fa fa-search-minus"></i>
+      </button>
+
+      <button
+        @click="zoomOnMe"
+        title="Clique para alterar o zoom próximo a você."
+        class="button is-medium btn-zoom is-warning">
+          <i class="fa fa-location-arrow"></i>
+      </button>
+    </aside>
 
     <!-- Map -->
     <div id="map-container"></div>
@@ -154,6 +217,8 @@
 </template>
 
 <style lang="scss">
+  @import '../assets/css/leaflet.awesome-markers.scss';
+
   $green: #00D1B2;
 
   .map-wrapper {
@@ -194,19 +259,12 @@
   .map-controls {
     position: absolute;
     z-index: 2000;
-    background: red;
     display: inline-block;
-    width: 20px;
-    height: 20px;
-    top: 0;
-    left: 0;
+    bottom: 3%;
+    left: 2%;
   }
 
   .btn-zoom {
-    position: absolute;
-    z-index: 1000;
-    bottom: 3%;
-    left: 2%;
     border-radius: 100%;
     width: 50px;
     height: 50px;

@@ -38,6 +38,7 @@
       <a
         class="nav-item"
         href="https://twitter.com/intent/tweet?text=Veggiemap%20on%20Github%20http://github.com/starkland/veggiemap"
+        rel="noopener"
         target="_blank">
 
         <span class="icon">
@@ -65,7 +66,7 @@
       :class="{ 'is-active' : this.navActive }">
 
       <li class="nav-item">
-        <a href="https://github.com/starkland/veggiemap" target="_blank" class="button is-primary">
+        <a href="https://github.com/starkland/veggiemap" target="_blank" rel="noopener" class="button is-primary">
           <span class="icon">
             <i class="fa fa-github"></i>
           </span>

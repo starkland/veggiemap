@@ -1,14 +1,9 @@
 <script>
-  import Location from '../assets/js/Location';
   import Auth from '../assets/js/Auth';
 
   import vgHeader from '../components/Header.vue';
   import vgCard from '../components/Card.vue'
   import vgMap from '../components/Map.vue';
-
-  let location = new Location();
-  location.currentPosition();
-  window.vgLocation = location;
 
   export default {
    name: 'vgApp',
@@ -55,4 +50,6 @@
   </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+  @import '../assets/css/sweetalert.scss';
+</style>

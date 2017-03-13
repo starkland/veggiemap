@@ -1,0 +1,23 @@
+{
+  "short_name": "veggiemap",
+  "name": "Veggie Map",
+  "description": "Find your favorite veggie!",
+  "icons": [
+    {
+      "src": "./src/assets/images/launcher-icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html?launcher=true",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#00D1B2",
+  "background_color": "#00D1B2",
+  "author": {
+    "name": "Thulio Philipe",
+    "website": "http://thulioph.com",
+    "github": "https://github.com/thulioph",
+    "source-repo": "https://github.com/starkland/veggiemap"
+  }
+}
