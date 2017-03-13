@@ -23,9 +23,7 @@ class Location {
   }
 
   dispatch() {
-    Events.$emit('location_ok', {
-      position: this.position()
-    });
+    Events.$emit('location_ok', this.position());
   }
 
   position() {

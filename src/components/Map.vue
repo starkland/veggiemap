@@ -122,8 +122,7 @@
         this.map.setZoom(3);
       },
 
-      focusOnUser(obj) {
-        const position = obj.position;
+      focusOnUser(position) {
         const latlng = L.latLng(position[0], position[1]);
 
         const marker = L.marker(new L.LatLng(position[0], position[1]), {
@@ -152,6 +151,13 @@
 
       zoomOnMe() {
         this.$Progress.start();
+
+        let position = this.Location.position();
+
+        if(position.length > 0) {
+          this.focusOnUser(position);
+        }
+
         this.Location.currentPosition();
       }
     },
