@@ -5,7 +5,7 @@ class LocalStorage {
     return JSON.parse(localStorage.getItem(key));
   }
 
-  set(key, value, session) {
+  set(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
   }
 

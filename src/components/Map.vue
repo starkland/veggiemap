@@ -1,5 +1,6 @@
 <script>
   import Location from '../assets/js/Location';
+  import LocalStorage from '../assets/js/LocalStorage';
   import Events from '../events/all';
 
   export default {
@@ -27,6 +28,7 @@
 
       // Inicia o Location
       this.Location = new Location();
+      this.LocalStorage = new LocalStorage();
     },
 
     data() {
@@ -122,7 +124,10 @@
         this.map.setZoom(3);
       },
 
-      focusOnUser(position) {
+      focusOnUser(obj) {
+        console.info(obj);
+
+        const position = obj.position;
         const latlng = L.latLng(position[0], position[1]);
 
         const marker = L.marker(new L.LatLng(position[0], position[1]), {
@@ -147,15 +152,19 @@
         this.map.setZoom(15);
 
         this.$Progress.finish();
+
+        // ====
+
+        LocalStorage.set('userPos', obj);
       },
 
       zoomOnMe() {
         this.$Progress.start();
 
-        let position = this.Location.position();
+        let userPos = this.LocalStorage.get('userPos');
 
-        if(position.length > 0) {
-          this.focusOnUser(position);
+        if(userPos) {
+          this.focusOnUser({position: userPos});
         }
 
         this.Location.currentPosition();
