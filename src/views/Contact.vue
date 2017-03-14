@@ -15,8 +15,8 @@
     <vg-header></vg-header>
 
     <section>
-      Se você deseja entrar em contato com nossa equipe.
-      <a>#veggiemap</a>
+      Você só pode visualizar esta página se estiver logado.
+      <a>#veggiemap</a>, <a>#vuejs</a>
     </section>
   </div>
 </template>

@@ -23,23 +23,37 @@
 
           this.alert.info(obj);
         }
+      },
+
+      loggedUser() {
+        this.logged = true;
+      },
+
+      logoutUser() {
+        this.logged = false;
       }
     },
 
     mounted() {
       this.alert = new Alert();
+
       Event.$on('network', this.handleNetwork);
+      Event.$on('user_logged', this.loggedUser);
+      Event.$on('user_logout', this.logoutUser);
     },
 
     data() {
       return {
         navActive: false,
-        networkStatus: null
+        networkStatus: null,
+        logged: false
       }
     },
 
     beforeDestroy() {
       Event.$off('network');
+      Event.$off('user_logged');
+      Event.$off('user_logout');
     }
   }
 </script>
@@ -53,30 +67,31 @@
     </div>
 
     <div class="nav-center">
-      <!-- <a
-        class="nav-item"
-        href="https://github.com/starkland/veggiemap"
-        target="_blank">
-
-        <span class="icon">
-          <i class="fa fa-github"></i>
-        </span>
-      </a> -->
-
       <a
         class="nav-item"
         href="https://twitter.com/intent/tweet?text=Veggiemap%20on%20Github%20http://github.com/starkland/veggiemap"
         rel="noopener"
+        title="Doe um Tweet :)"
         target="_blank">
 
         <span class="icon">
           <i class="fa fa-twitter"></i>
         </span>
       </a>
+
+      <a
+        class="nav-item"
+        href="https://github.com/starkland/veggiemap"
+        rel="noopener"
+        title="Veja o projeto no Github!"
+        target="_blank">
+
+        <span class="icon">
+          <i class="fa fa-github"></i>
+        </span>
+      </a>
     </div>
 
-    <!-- This "nav-toggle" hamburger menu is only visible on mobile -->
-    <!-- You need JavaScript to toggle the "is-active" class on "nav-menu" -->
     <span
       class="nav-toggle"
       @click="toggleNavbar"
@@ -87,39 +102,28 @@
       <span></span>
     </span>
 
-    <!-- This "nav-menu" is hidden on mobile -->
-    <!-- Add the modifier "is-active" to display it on mobile -->
     <div
       class="nav-right nav-menu"
+      v-if="logged"
       :class="{ 'is-active' : this.navActive }">
 
-      <li class="nav-item">
-        <a href="https://github.com/starkland/veggiemap" target="_blank" rel="noopener" class="button is-primary">
-          <span class="icon">
-            <i class="fa fa-github"></i>
-          </span>
-
-          <span>Github</span>
-        </a>
-      </li>
-
-
-      <!-- <router-link
+      <router-link
         class="nav-item"
         title="Home"
         to="/"
         exact>
 
         Home
-      </router-link> -->
+      </router-link>
 
-      <!-- <router-link
+      <router-link
         class="nav-item"
         title="Contato"
-        to="/contato">
+        to="/contact"
+        exact>
 
         Contato
-      </router-link> -->
+      </router-link>
     </div>
   </nav>
 </template>

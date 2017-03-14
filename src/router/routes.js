@@ -26,7 +26,7 @@ export default [
   },
 
   {
-    path: '/contato',
+    path: '/contact',
     component: vgContact,
     beforeEnter: (to, from, next) => validateRoute(next)
   }
