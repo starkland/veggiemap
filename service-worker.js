@@ -37,10 +37,7 @@ function Activate(event) {
     caches
     .keys()
     .then(function (keyList) {
-      console.log(keyList);
-
       return Promise.all(keyList.map(function (key) {
-        console.log(key);
         if (key !== cacheName) return caches.delete(key)
       }))
     })
