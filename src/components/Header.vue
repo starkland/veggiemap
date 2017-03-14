@@ -1,6 +1,7 @@
 <script>
   import Event from '../events/all';
   import Alert from '../assets/js/Alert';
+  import LocalStorage from '../assets/js/LocalStorage';
 
   export default {
     name: 'Header',
@@ -36,6 +37,11 @@
 
     mounted() {
       this.alert = new Alert();
+      this.storage = new LocalStorage();
+
+      if(this.storage.get('userInfo')) {
+        this.logged = true;
+      }
 
       Event.$on('network', this.handleNetwork);
       Event.$on('user_logged', this.loggedUser);
