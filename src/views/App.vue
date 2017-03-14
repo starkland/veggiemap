@@ -1,5 +1,6 @@
 <script>
   import Auth from '../assets/js/Auth';
+  import Network from '../assets/js/Network';
 
   import vgHeader from '../components/Header.vue';
   import vgCard from '../components/Card.vue'
@@ -18,6 +19,7 @@
 
    mounted() {
     this.auth = new Auth();
+    this.network = new Network();
    },
 
    components: {

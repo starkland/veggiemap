@@ -1,23 +1,51 @@
 <script>
+  import Event from '../events/all';
+  import Alert from '../assets/js/Alert';
+
   export default {
     name: 'Header',
 
     methods: {
       toggleNavbar() {
         this.navActive = !this.navActive;
+      },
+
+      handleNetwork(obj) {
+        this.networkStatus = obj.status;
+
+        if(obj.status !== 'online') {
+          let obj = {
+            title: 'Atenção!',
+            text: `Você parece está sem internet,
+            verifique sua conexão.`,
+            btnText: 'ok'
+          };
+
+          this.alert.info(obj);
+        }
       }
+    },
+
+    mounted() {
+      this.alert = new Alert();
+      Event.$on('network', this.handleNetwork);
     },
 
     data() {
       return {
-        navActive: false
+        navActive: false,
+        networkStatus: null
       }
+    },
+
+    beforeDestroy() {
+      Event.$off('network');
     }
   }
 </script>
 
 <template>
-  <nav class="nav">
+  <nav class="nav" :class="networkStatus">
     <div class="nav-left">
       <a class="nav-item">
         Veggie Map
