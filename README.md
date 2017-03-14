@@ -18,6 +18,7 @@ Este projeto utiliza de algumas novas tecnologias e ferramentas, são elas:
 - [Bulma](http://bulma.io)
 - [Karma](http://karma-runner.github.io)
 - [Jasmine](https://jasmine.github.io)
+- [PWA](https://developers.google.com/web/progressive-web-apps/)
 
 ## Setup
 
