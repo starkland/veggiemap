@@ -1,5 +1,4 @@
 <script>
-  import Auth from '../assets/js/Auth';
   import Network from '../assets/js/Network';
 
   import vgHeader from '../components/Header.vue';
@@ -17,7 +16,6 @@
    },
 
    mounted() {
-    this.auth = new Auth();
     this.network = new Network();
    },
 
@@ -27,19 +25,7 @@
     vgMap
    },
 
-   methods: {
-    facebook() {
-      this.auth.facebook();
-    },
-
-    google() {
-      this.auth.google();
-    },
-
-    logout() {
-      this.auth.logout();
-    }
-   }
+   methods: {}
   }
 </script>
 

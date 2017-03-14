@@ -6,6 +6,14 @@
   export default {
     name: 'Header',
 
+    data() {
+      return {
+        navActive: false,
+        networkStatus: null,
+        logged: false
+      }
+    },
+
     methods: {
       toggleNavbar() {
         this.navActive = !this.navActive;
@@ -46,14 +54,6 @@
       Event.$on('network', this.handleNetwork);
       Event.$on('user_logged', this.loggedUser);
       Event.$on('user_logout', this.logoutUser);
-    },
-
-    data() {
-      return {
-        navActive: false,
-        networkStatus: null,
-        logged: false
-      }
     },
 
     beforeDestroy() {

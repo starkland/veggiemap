@@ -1,6 +1,8 @@
 <script>
   import vgForm from '../components/Form.vue';
   import Event from '../events/all';
+
+  import Auth from '../assets/js/Auth';
   import LocalStorage from '../assets/js/LocalStorage';
   import Alert from '../assets/js/Alert';
 
@@ -18,40 +20,45 @@
     },
 
     mounted() {
-      this.app = this.$parent;
+      this.auth = new Auth();
 
       this.alert = new Alert();
       this.storage = new LocalStorage();
 
-      if(this.storage.get('userInfo')) {
+      if(this.storage.get('userInfo') !== null) {
         this.logged = true;
       }
 
       Event.$on('user_logged', this.loggedUser);
+      Event.$on('user_logout', this.logoutUser);
       Event.$on('auth_error', this.authError);
     },
 
     methods: {
       facebook() {
         this.$Progress.start();
-        this.app.facebook();
+        this.auth.facebook();
       },
 
       google() {
         this.$Progress.start();
-        this.app.google();
+        this.auth.google();
       },
 
       logoutUser() {
-        this.logged = false;
+        console.warn('Chegou aqui..');
+
         this.storage.clear('userInfo');
         this.storage.clear('userPos');
 
-        this.app.logout();
+        this.logged = false;
+
+        this.$Progress.finish();
       },
 
       loggedUser(obj) {
         this.storage.set('userInfo', obj);
+
         this.logged = true;
 
         this.$Progress.finish();
@@ -90,11 +97,17 @@
         });
 
         this.$Progress.finish();
+      },
+
+      logout() {
+        this.$Progress.start();
+        this.auth.logout();
       }
     },
 
     beforeDestroy() {
       Event.$off('user_logged');
+      Event.$off('user_logout');
       Event.$off('auth_error');
     }
   }
@@ -139,7 +152,7 @@
 
       <a
         v-if="logged"
-        @click="logoutUser"
+        @click="logout"
         title="Sair."
         class="card-footer-item is-danger">
         Sair
