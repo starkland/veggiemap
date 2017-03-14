@@ -12,8 +12,7 @@
    data() {
     return {
       user: null,
-      loading: false,
-      logged: null
+      loading: false
     }
    },
 
