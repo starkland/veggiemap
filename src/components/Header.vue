@@ -119,7 +119,7 @@
       <router-link
         class="nav-item"
         title="Contato"
-        to="/contact"
+        to="/contato"
         exact>
 
         Contato
