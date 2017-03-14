@@ -23,9 +23,11 @@
       this.alert = new Alert();
       this.storage = new LocalStorage();
 
-      Event.$on('user_logged', this.loggedUser);
-      Event.$on('user_logout', this.logoutUser);
+      if(this.storage.get('userInfo')) {
+        this.logged = true;
+      }
 
+      Event.$on('user_logged', this.loggedUser);
       Event.$on('auth_error', this.authError);
     },
 
@@ -40,7 +42,7 @@
         this.app.google();
       },
 
-      logout() {
+      logoutUser() {
         this.logged = false;
         this.storage.clear('userInfo');
         this.storage.clear('userPos');
@@ -93,7 +95,6 @@
 
     beforeDestroy() {
       Event.$off('user_logged');
-      Event.$off('user_logout');
       Event.$off('auth_error');
     }
   }
@@ -138,7 +139,7 @@
 
       <a
         v-if="logged"
-        @click="logout"
+        @click="logoutUser"
         title="Sair."
         class="card-footer-item is-danger">
         Sair
