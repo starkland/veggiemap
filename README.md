@@ -2,7 +2,10 @@
 
 > É vegetariano? então é bem-vindo!
 
-[![Build Status](https://travis-ci.org/starkland/veggiemap.svg?branch=master)](https://travis-ci.org/starkland/veggiemap)[![Coverage Status](https://coveralls.io/repos/github/starkland/veggiemap/badge.svg?branch=master)](https://coveralls.io/github/starkland/veggiemap?branch=master) [![dependencies Status](https://david-dm.org/starkland/veggiemap/status.svg)](https://david-dm.org/starkland/veggiemap) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/94ac2fa0836548739f8cb3f3b25b6cac)](https://www.codacy.com/app/thulioph/veggiemap?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=starkland/veggiemap&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/starkland/veggiemap.svg?branch=master)](https://travis-ci.org/starkland/veggiemap)
+[![Coverage Status](https://coveralls.io/repos/github/starkland/veggiemap/badge.svg?branch=master)](https://coveralls.io/github/starkland/veggiemap?branch=master)
+[![dependencies Status](https://david-dm.org/starkland/veggiemap/status.svg)](https://david-dm.org/starkland/veggiemap)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/94ac2fa0836548739f8cb3f3b25b6cac)](https://www.codacy.com/app/thulioph/veggiemap?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=starkland/veggiemap&amp;utm_campaign=Badge_Grade)
 
 ## Sobre
 

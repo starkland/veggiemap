@@ -1,24 +1,26 @@
-ontributing
-==============================
-We would love for you to contribute to Veggiemap and help us make this even better! Start reading this [document](https://github.com/starkland/veggiemap#contributing) to see it is not difficult as you might have imagined.
+<!--
 
-Code of Conduct
+Contribuindo
 ==============================
-Help us keep Veggiemap open and inclusive. Please read and follow our thoughts on [Code of Conduct](http://confcodeofconduct.com/).
+Ficamos bastante felizes pelo seu interesse em contribuir para o Veggiemap, ajudando a tornar-lo cada vez melhor! Inicie lendo este [documento](https://github.com/starkland/veggiemap/blob/master/.github/contributing.md) para ver que não é tão difícil como você imagina.
 
-License
+Código de Conduta
 ==============================
-By contributing your code, you agree to license your contribution under the [MIT license](https://github.com/starkland/veggiemap#license).
+Nos ajude a manter o Veggiemap aberto e inclusivo. Por favor, leia e siga nossas idéias sobre [Código de Conduta](http://confcodeofconduct.com/).
+
+Licença
+==============================
+Contribuindo com seu código, você está de acordo em licenciar a sua contribuição sobre [MIT](https://github.com/starkland/veggiemap#license).
 
 -->
 
 ### Checklist
-- [ ] `npm start`, `npm dev` and/or `npm test` it worked
-- [ ] tests and/or benchmarks are included
-- [ ] documentation is changed or added
-- [ ] commit message follows commit guidelines
+- [ ] `npm start`, `npm dev` e/ou `npm test` estão funcionando
+- [ ] testes e/ou benchmarks estão inclusos
+- [ ] documentação foi alterada ou adicionada
+- [ ] as mensagens de commit seguem os padrões
 
-Bug fixes and new features should include tests and possibly benchmarks.
+Correções de bugs e novas funcionalidades devem incluir testes e possíveis benchmarks.
 
-### Description of change
-Tell us what changed, created or fixed. (Don't forget to add the link of the issue or a related pull request.)
+### Descrição da alteração
+Conte-nos o que mudou, foi criado ou corrigido. (Não esqueça de adicionar o link da issue ou o pull request relacionado.)

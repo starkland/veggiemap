@@ -1,40 +1,42 @@
-# Contributing
+# Contribuindo
 
-We would love for you to contribute to Veggiemap and help us make this even better! Start reading this document to see it is not difficult as you might have imagined.
+Ficamos bastante felizes pelo seu interesse em contribuir para o Veggiemap, ajudando a tornar-lo cada vez melhor!
 
-
-## Table of Contents
-
-- [Open an Issue](#open-an-issue)
-- [Submit a Pull Request](#submit-a-pull-request)
-- [Style Guide](#style-guide)
-- [Test](#test)
-- [Code of Conduct](#code-of-conduct)
-- [License](#license)
+Inicie lendo este documento para ver que não é tão difícil como você imagina.
 
 
-## Open an Issue
+## Conteúdo
 
-[Open an Issue](https://github.com/starkland/veggiemap/issues/new) to report any problems or improvements. Be sure to include some description to explain the problem.
+- [Abra uma issue](#abra-uma-issue)
+- [Submetendo um pull request](#submetendo-um-pull-request)
+- [Testes](#testes)
+- [Código de Conduta](#codigo-de-conduta)
+- [Licença](#licenca)
 
 
-## Submit a Pull Request
+## Abra uma issue
 
-To submit a new feature, make sure that changes are done to the source code. [Follow our style guide](https://github.com/starkland/veggiemap/blob/master/.github/contributing.md#style-guide) and do not forget the tests with the description.
+[Abra uma Issue](https://github.com/starkland/veggiemap/issues/new) para reportar algum problema ou melhoria.
+Tenha certeza de incluir alguma descrição para explicar o problema.
 
 
-## Style Guide
+## Submetendo um pull request
 
-Coming soon
+Para submeter uma nova funcionalidade, tenha certeza que as mudanças foram feitas corretamentes e não esqueça dos testes com a descrição.
 
-## Test
 
-To run test: `npm test`
+## Testes
 
-## Code of Conduct
+Para rodar os testes, execute o comando:
 
-Help us keep Veggiemap open and inclusive. Please read and follow our thoughts on [Code of Conduct](http://confcodeofconduct.com/).
+```bash
+$ npm test
+```
 
-## License
+## Código de Conduta
 
-By contributing your code, you agree to license your contribution under the [MIT license](https://github.com/starkland/veggiemap#license
+Nos ajude a manter o Veggiemap aberto e inclusivo. Por favor, leia e siga nossas idéias sobre [Código de Conduta](http://confcodeofconduct.com/).
+
+## Licença
+
+Contribuindo com seu código, você está de acordo em licenciar a sua contribuição sobre [MIT](https://github.com/starkland/veggiemap#license)
