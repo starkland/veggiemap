@@ -49,6 +49,7 @@
 
       addNewMarker(markerArray) {
         this.arrayOfLatLngs = [];
+        this.markersLayer.clearLayers();
 
         markerArray.forEach((item) => {
           if (item && item.veggie) {
