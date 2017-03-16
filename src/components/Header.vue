@@ -29,7 +29,7 @@
 <template>
   <nav class="nav" :class="{ 'offline': !connected }">
     <div class="nav-left">
-      <a class="nav-item">
+      <a class="nav-item" href="/">
         Veggie Map
       </a>
     </div>
@@ -73,7 +73,7 @@
     <div
       class="nav-right nav-menu"
       v-if="logged"
-      :class="{ 'is-active' : this.navActive }">
+      :class="{ 'is-active' : navActive }">
 
       <router-link
         class="nav-item"
