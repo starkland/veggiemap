@@ -9,10 +9,17 @@
     mounted() {
       this.$Progress.start();
 
-      this.tiles = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+      // Map layers
+      this.baseMap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'VeggieMap',
-        maxZoom: 20,
         id: 'mapbox.streets',
+        accessToken: 'pk.eyJ1IjoidGh1bGlvcGgiLCJhIjoiY2l6dGYzbzh3MDBxdDJxb2RwM3Q1dThrYSJ9.Z1gPJ1HHyF4extvmILwDOQ'
+      });
+
+      // Offline style
+      this.offlineMap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Offline',
+        id: 'mapbox.light',
         accessToken: 'pk.eyJ1IjoidGh1bGlvcGgiLCJhIjoiY2l6dGYzbzh3MDBxdDJxb2RwM3Q1dThrYSJ9.Z1gPJ1HHyF4extvmILwDOQ'
       });
 
@@ -38,6 +45,10 @@
         mapLoaded: null
       }
     },
+
+    props: [
+      'connected'
+    ],
 
     methods: {
       updateVeggies(data) {
@@ -109,7 +120,7 @@
         this.map = L.map('map-container', {
           zoom: 15,
           scrollWheelZoom: false,
-          layers: [this.tiles]
+          layers: [this.offlineMap, this.baseMap]
         });
 
         window.vgMap = this.map;
@@ -174,17 +185,59 @@
         }
 
         this.Location.currentPosition();
+      },
+
+      handleNetwork(obj) {
+        if (obj.status !== 'online') {
+          this.map.removeLayer(this.baseMap);
+          this.map.addLayer(this.offlineMap);
+
+          this.disableMap();
+        } else {
+          this.map.removeLayer(this.offlineMap);
+          this.map.addLayer(this.baseMap);
+
+          this.enableMap();
+        }
+      },
+
+      disableMap() {
+        this.map.dragging.disable();
+        this.map.touchZoom.disable();
+        this.map.doubleClickZoom.disable();
+        this.map.scrollWheelZoom.disable();
+        this.map.boxZoom.disable();
+        this.map.keyboard.disable();
+
+        if (this.map.tap) {
+          this.map.tap.disable();
+        }
+      },
+
+      enableMap() {
+        this.map.dragging.enable();
+        this.map.touchZoom.enable();
+        this.map.doubleClickZoom.enable();
+        this.map.scrollWheelZoom.enable();
+        this.map.boxZoom.enable();
+        this.map.keyboard.enable();
+
+        if (this.map.tap) {
+          this.map.tap.enable();
+        }
       }
     },
 
     created() {
       Events.$on('update_veggies', this.updateVeggies);
       Events.$on('location_ok', this.focusOnUser);
+      Events.$on('network', this.handleNetwork);
     },
 
     beforeDestroy() {
       Events.$off('update_veggies');
       Events.$off('location_ok');
+      Events.$off('network');
     }
   }
 </script>
@@ -199,6 +252,7 @@
     <aside class="map-controls" v-if="mapLoaded">
       <button
         @click="zoomOut"
+        :disabled="!connected"
         title="Clique para ver todos os marcadores."
         class="button is-medium btn-zoom is-info">
           <i class="fa fa-search-minus"></i>
@@ -206,6 +260,7 @@
 
       <button
         @click="zoomOnMe"
+        :disabled="!connected"
         title="Clique para alterar o zoom próximo a você."
         class="button is-medium btn-zoom is-warning">
           <i class="fa fa-location-arrow"></i>
@@ -213,7 +268,8 @@
     </aside>
 
     <!-- Map -->
-    <div id="map-container"></div>
+    <div id="map-container">
+    </div>
   </div>
 </template>
 

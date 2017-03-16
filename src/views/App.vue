@@ -97,7 +97,8 @@
     <vg-header :logged="logged" :connected="connected">
     </vg-header>
 
-    <vg-map></vg-map>
+    <vg-map :connected="connected">
+    </vg-map>
 
     <vg-card :logged="logged" :connected="connected">
     </vg-card>
