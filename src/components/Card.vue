@@ -21,10 +21,10 @@
       'connected'
     ],
 
-    computed() {
-      this.connected = connected;
-      this.logged = logged;
-    },
+    // computed() {
+    //   this.connected = connected;
+    //   this.logged = logged;
+    // },
 
     mounted() {
       this.auth = new Auth();
@@ -35,11 +35,15 @@
 
     methods: {
       facebook() {
+        if(!this.connected) return;
+
         this.$Progress.start();
         this.auth.facebook();
       },
 
       google() {
+        if(!this.connected) return;
+
         this.$Progress.start();
         this.auth.google();
       },
