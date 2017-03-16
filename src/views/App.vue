@@ -35,6 +35,8 @@
       this.logged = true;
     }
 
+    this.logged = false;
+
     Event.$on('user_logged', this.loggedUser);
     Event.$on('user_logout', this.logoutUser);
 
@@ -42,12 +44,21 @@
    },
 
    methods: {
-    loggedUser() {
+    loggedUser(obj) {
       this.logged = true;
+
+      this.storage.set('userInfo', obj);
+
+      this.$Progress.finish();
     },
 
     logoutUser() {
       this.logged = false;
+
+      this.storage.clear('userInfo');
+      this.storage.clear('userPos');
+
+      this.$Progress.finish();
     },
 
     handleNetwork(obj) {
@@ -82,14 +93,13 @@
 
 <template>
   <div>
-    <vg-header
-      :logged="logged"
-      :connected="connected">
+    <vg-header :logged="logged" :connected="connected">
     </vg-header>
 
     <vg-map></vg-map>
 
-    <vg-card></vg-card>
+    <vg-card :logged="logged" :connected="connected">
+    </vg-card>
   </div>
 </template>
 

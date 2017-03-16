@@ -3,7 +3,6 @@
   import Event from '../events/all';
 
   import Auth from '../assets/js/Auth';
-  import LocalStorage from '../assets/js/LocalStorage';
   import Alert from '../assets/js/Alert';
 
   export default {
@@ -14,23 +13,23 @@
     },
 
     data() {
-      return {
-        logged: false
-      }
+      return {}
+    },
+
+    props: [
+      'logged',
+      'connected'
+    ],
+
+    computed() {
+      this.connected = connected;
+      this.logged = logged;
     },
 
     mounted() {
       this.auth = new Auth();
-
       this.alert = new Alert();
-      this.storage = new LocalStorage();
 
-      if(this.storage.get('userInfo') !== null) {
-        this.logged = true;
-      }
-
-      Event.$on('user_logged', this.loggedUser);
-      Event.$on('user_logout', this.logoutUser);
       Event.$on('auth_error', this.authError);
     },
 
@@ -43,25 +42,6 @@
       google() {
         this.$Progress.start();
         this.auth.google();
-      },
-
-      logoutUser() {
-        console.warn('Chegou aqui..');
-
-        this.storage.clear('userInfo');
-        this.storage.clear('userPos');
-
-        this.logged = false;
-
-        this.$Progress.finish();
-      },
-
-      loggedUser(obj) {
-        this.storage.set('userInfo', obj);
-
-        this.logged = true;
-
-        this.$Progress.finish();
       },
 
       authError(obj) {
@@ -106,8 +86,6 @@
     },
 
     beforeDestroy() {
-      Event.$off('user_logged');
-      Event.$off('user_logout');
       Event.$off('auth_error');
     }
   }
