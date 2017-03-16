@@ -1,71 +1,33 @@
 <script>
-  import Event from '../events/all';
-  import Alert from '../assets/js/Alert';
-  import LocalStorage from '../assets/js/LocalStorage';
-
   export default {
     name: 'Header',
 
     data() {
       return {
-        navActive: false,
-        networkStatus: null,
-        logged: false
+        navActive: false
       }
+    },
+
+    props: [
+      'logged',
+      'connected'
+    ],
+
+    computed() {
+      this.connected = connected;
+      this.logged = logged;
     },
 
     methods: {
       toggleNavbar() {
         this.navActive = !this.navActive;
-      },
-
-      handleNetwork(obj) {
-        this.networkStatus = obj.status;
-
-        if(obj.status !== 'online') {
-          let obj = {
-            title: 'Atenção!',
-            text: `Você parece está sem internet,
-            verifique sua conexão.`,
-            btnText: 'ok'
-          };
-
-          this.alert.info(obj);
-        }
-      },
-
-      loggedUser() {
-        this.logged = true;
-      },
-
-      logoutUser() {
-        this.logged = false;
       }
-    },
-
-    mounted() {
-      this.alert = new Alert();
-      this.storage = new LocalStorage();
-
-      if(this.storage.get('userInfo')) {
-        this.logged = true;
-      }
-
-      Event.$on('network', this.handleNetwork);
-      Event.$on('user_logged', this.loggedUser);
-      Event.$on('user_logout', this.logoutUser);
-    },
-
-    beforeDestroy() {
-      Event.$off('network');
-      Event.$off('user_logged');
-      Event.$off('user_logout');
     }
   }
 </script>
 
 <template>
-  <nav class="nav" :class="networkStatus">
+  <nav class="nav" :class="{ 'offline': !connected }">
     <div class="nav-left">
       <a class="nav-item">
         Veggie Map
@@ -101,7 +63,7 @@
     <span
       class="nav-toggle"
       @click="toggleNavbar"
-      :class="{ 'is-active' : this.navActive }">
+      :class="{ 'is-active' : navActive }">
 
       <span></span>
       <span></span>
