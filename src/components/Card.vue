@@ -76,6 +76,10 @@
             text = `Esta operação não é permitida.`
           break;
 
+          case 'auth/account-exists-with-different-credential':
+            text = `Por favor, refaça o seu login com a outra rede social.`
+          break;
+
           default:
             console.warn(code);
           break;
