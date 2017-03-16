@@ -7,7 +7,7 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "test": "karma start karma.conf.js",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "nyc --instrument=false --source-map=false report --temp-directory=./coverage --reporter=text-lcov | coveralls"
   },
   "author": "Thulio Philipe <thulioph@gmail.com>",
   "license": "MIT",
