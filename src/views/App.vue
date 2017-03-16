@@ -33,9 +33,10 @@
 
     if(this.storage.get('userInfo')) {
       this.logged = true;
+    } else {
+      this.logged = false;
     }
 
-    this.logged = false;
 
     Event.$on('user_logged', this.loggedUser);
     Event.$on('user_logout', this.logoutUser);

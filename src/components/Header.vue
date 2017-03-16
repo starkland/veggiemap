@@ -13,11 +13,6 @@
       'connected'
     ],
 
-    computed() {
-      this.connected = connected;
-      this.logged = logged;
-    },
-
     methods: {
       toggleNavbar() {
         this.navActive = !this.navActive;

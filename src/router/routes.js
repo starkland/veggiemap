@@ -13,7 +13,7 @@ function validateRoute(next) {
     // next(false);
     next({ path: '/' });
   } else {
-    next();
+    next(true);
   }
 }
 
@@ -28,6 +28,8 @@ export default [
   {
     path: '/contato',
     component: vgContact,
-    beforeEnter: (to, from, next) => validateRoute(next)
+    beforeEnter: (to, from, next) => {
+      validateRoute(next)
+    }
   }
 ];
