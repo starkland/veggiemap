@@ -1,6 +1,6 @@
 {
   "name": "veggiemap",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Mapa exibindo os lugares vegetarianos.",
   "scripts": {
     "start": "npm run build && http-server",
