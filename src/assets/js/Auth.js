@@ -10,13 +10,13 @@ class Auth {
   }
 
   facebookLogin() {
-    firebase.auth().signInWithPopup(this.fb_provider).then((result) => {
+    firebase.auth().signInWithRedirect(this.fb_provider).then((result) => {
       this.sendEvent(result);
     }).catch(err => this.handleError(err));
   }
 
   googleLogin() {
-    firebase.auth().signInWithPopup(this.gl_provider).then((result) => {
+    firebase.auth().signInWithRedirect(this.gl_provider).then((result) => {
       this.sendEvent(result);
     }).catch(err => this.handleError(err));
   }
