@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var cacheName = 'cache_v15';
+  var cacheName = 'cache_v2.0';
   var cacheFiles = [
     './',
     './index.html',

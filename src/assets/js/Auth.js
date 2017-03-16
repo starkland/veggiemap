@@ -27,12 +27,12 @@ class Auth {
     }).catch(err => console.warn(err));
   }
 
-  sendEvent(obj, type) {
+  sendEvent(obj) {
     if (obj === null) {
       Events.$emit('user_logout');
+    } else {
+      Events.$emit('user_logged', obj);
     }
-
-    Events.$emit('user_logged', obj);
   }
 
   handleError(err) {

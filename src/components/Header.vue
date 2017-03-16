@@ -1,125 +1,93 @@
 <script>
-  import Event from '../events/all';
-  import Alert from '../assets/js/Alert';
-
   export default {
     name: 'Header',
+
+    data() {
+      return {
+        navActive: false
+      }
+    },
+
+    props: [
+      'logged',
+      'connected'
+    ],
 
     methods: {
       toggleNavbar() {
         this.navActive = !this.navActive;
-      },
-
-      handleNetwork(obj) {
-        this.networkStatus = obj.status;
-
-        if(obj.status !== 'online') {
-          let obj = {
-            title: 'Atenção!',
-            text: `Você parece está sem internet,
-            verifique sua conexão.`,
-            btnText: 'ok'
-          };
-
-          this.alert.info(obj);
-        }
       }
-    },
-
-    mounted() {
-      this.alert = new Alert();
-      Event.$on('network', this.handleNetwork);
-    },
-
-    data() {
-      return {
-        navActive: false,
-        networkStatus: null
-      }
-    },
-
-    beforeDestroy() {
-      Event.$off('network');
     }
   }
 </script>
 
 <template>
-  <nav class="nav" :class="networkStatus">
+  <nav class="nav" :class="{ 'offline': !connected }">
     <div class="nav-left">
-      <a class="nav-item">
+      <a class="nav-item" href="/">
         Veggie Map
       </a>
     </div>
 
     <div class="nav-center">
-      <!-- <a
-        class="nav-item"
-        href="https://github.com/starkland/veggiemap"
-        target="_blank">
-
-        <span class="icon">
-          <i class="fa fa-github"></i>
-        </span>
-      </a> -->
-
       <a
         class="nav-item"
         href="https://twitter.com/intent/tweet?text=Veggiemap%20on%20Github%20http://github.com/starkland/veggiemap"
         rel="noopener"
+        title="Doe um Tweet :)"
         target="_blank">
 
         <span class="icon">
           <i class="fa fa-twitter"></i>
         </span>
       </a>
+
+      <a
+        class="nav-item"
+        href="https://github.com/starkland/veggiemap"
+        rel="noopener"
+        title="Veja o projeto no Github!"
+        target="_blank">
+
+        <span class="icon">
+          <i class="fa fa-github"></i>
+        </span>
+      </a>
     </div>
 
-    <!-- This "nav-toggle" hamburger menu is only visible on mobile -->
-    <!-- You need JavaScript to toggle the "is-active" class on "nav-menu" -->
     <span
+      v-if="logged"
       class="nav-toggle"
       @click="toggleNavbar"
-      :class="{ 'is-active' : this.navActive }">
+      :class="{ 'is-active' : navActive }">
 
       <span></span>
       <span></span>
       <span></span>
     </span>
 
-    <!-- This "nav-menu" is hidden on mobile -->
-    <!-- Add the modifier "is-active" to display it on mobile -->
     <div
       class="nav-right nav-menu"
-      :class="{ 'is-active' : this.navActive }">
+      v-if="logged"
+      :class="{ 'is-active' : navActive }">
 
-      <li class="nav-item">
-        <a href="https://github.com/starkland/veggiemap" target="_blank" rel="noopener" class="button is-primary">
-          <span class="icon">
-            <i class="fa fa-github"></i>
-          </span>
-
-          <span>Github</span>
-        </a>
-      </li>
-
-
-      <!-- <router-link
+      <router-link
         class="nav-item"
         title="Home"
         to="/"
         exact>
 
         Home
-      </router-link> -->
+      </router-link>
 
-      <!-- <router-link
+      <router-link
         class="nav-item"
         title="Contato"
-        to="/contato">
+        to="/contato"
+        exact>
 
         Contato
-      </router-link> -->
+      </router-link>
     </div>
   </nav>
 </template>

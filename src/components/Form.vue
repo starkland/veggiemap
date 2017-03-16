@@ -22,7 +22,7 @@
       let obj = {};
 
       obj.form = this.form;
-      obj.form.id = this.userInfo.user.uid;
+      obj.form.id = this.userInfo.user.uid + '-' + new Date().getTime();
 
       obj.user = {
         email: this.userInfo.user.email,
