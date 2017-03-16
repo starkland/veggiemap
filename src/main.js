@@ -26,7 +26,6 @@ Vue.use(VueProgressBar, {
 });
 
 let firebase = new Firebase();
-    firebase.listen();
 window.vgFirebase = firebase;
 
 // ====

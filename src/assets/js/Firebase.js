@@ -25,10 +25,6 @@ class Firebase {
     this.db.ref(`users/${obj.user.id}`).set(obj.user);
   }
 
-  listen() {
-    this.db.ref('veggies').on('child_added', (snapshot) => this.snapshot(snapshot));
-  }
-
   update() {
     this.db.ref('veggies').on('value', (snapshot) => this.snapshot(snapshot));
   }

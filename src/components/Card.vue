@@ -1,7 +1,8 @@
 <script>
   import vgForm from '../components/Form.vue';
   import Event from '../events/all';
-  import LocalStorage from '../assets/js/LocalStorage';
+
+  import Auth from '../assets/js/Auth';
   import Alert from '../assets/js/Alert';
 
   export default {
@@ -12,47 +13,39 @@
     },
 
     data() {
-      return {
-        logged: false
-      }
+      return {}
     },
 
+    props: [
+      'logged',
+      'connected'
+    ],
+
+    // computed() {
+    //   this.connected = connected;
+    //   this.logged = logged;
+    // },
+
     mounted() {
-      this.app = this.$parent;
-
+      this.auth = new Auth();
       this.alert = new Alert();
-      this.storage = new LocalStorage();
-
-      Event.$on('user_logged', this.loggedUser);
-      Event.$on('user_logout', this.logoutUser);
 
       Event.$on('auth_error', this.authError);
     },
 
     methods: {
       facebook() {
+        if(!this.connected) return;
+
         this.$Progress.start();
-        this.app.facebook();
+        this.auth.facebook();
       },
 
       google() {
+        if(!this.connected) return;
+
         this.$Progress.start();
-        this.app.google();
-      },
-
-      logout() {
-        this.logged = false;
-        this.storage.clear('userInfo');
-        this.storage.clear('userPos');
-
-        this.app.logout();
-      },
-
-      loggedUser(obj) {
-        this.storage.set('userInfo', obj);
-        this.logged = true;
-
-        this.$Progress.finish();
+        this.auth.google();
       },
 
       authError(obj) {
@@ -92,12 +85,15 @@
         });
 
         this.$Progress.finish();
+      },
+
+      logout() {
+        this.$Progress.start();
+        this.auth.logout();
       }
     },
 
     beforeDestroy() {
-      Event.$off('user_logged');
-      Event.$off('user_logout');
       Event.$off('auth_error');
     }
   }
