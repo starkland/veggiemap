@@ -56,6 +56,7 @@
     </div>
 
     <span
+      v-if="logged"
       class="nav-toggle"
       @click="toggleNavbar"
       :class="{ 'is-active' : navActive }">
