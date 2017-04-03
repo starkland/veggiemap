@@ -1,5 +1,6 @@
 <script>
   import vSelect from 'vue-select';
+  import Event from '../events/all';
 
   export default {
     name: 'Header',
@@ -26,8 +27,10 @@
         this.navActive = !this.navActive;
       },
 
-      getLanguage() {
-        console.warn(this)
+      changeLanguage(val) {
+        if (val) {
+          Event.$emit('change_language', val);
+        }
       }
     }
   }
@@ -71,6 +74,7 @@
           <v-select
             placeholder="Translations"
             :value.sync="selected"
+            :on-change="changeLanguage"
             :options="options">
           </v-select>
         </p>

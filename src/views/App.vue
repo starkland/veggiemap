@@ -42,6 +42,8 @@
     Event.$on('user_logout', this.logoutUser);
 
     Event.$on('network', this.handleNetwork);
+
+    Event.$on('change_language', this.handleLanguage);
    },
 
    methods: {
@@ -80,14 +82,18 @@
       };
 
       this.alert.info(obj);
+    },
+
+    handleLanguage(value) {
+      console.warn(value)
     }
    },
 
    beforeDestroy() {
-    Event.$off('user_logged');
-    Event.$off('user_logout');
-
-    Event.$off('network');
+      Event.$off('user_logged');
+      Event.$off('user_logout');
+      Event.$off('network');
+      Event.$off('change_language');
    }
   }
 </script>
