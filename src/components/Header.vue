@@ -1,11 +1,19 @@
 <script>
+  import vSelect from 'vue-select';
+
   export default {
     name: 'Header',
 
     data() {
       return {
-        navActive: false
-      }
+        navActive: false,
+        selected: null,
+        options: ['en','pt']
+      };
+    },
+
+    components: {
+      vSelect
     },
 
     props: [
@@ -16,6 +24,10 @@
     methods: {
       toggleNavbar() {
         this.navActive = !this.navActive;
+      },
+
+      getLanguage() {
+        console.warn(this)
       }
     }
   }
@@ -53,6 +65,16 @@
           <i class="fa fa-github"></i>
         </span>
       </a>
+
+      <div class="field nav-item">
+        <p class="control">
+          <v-select
+            placeholder="Translations"
+            :value.sync="selected"
+            :options="options">
+          </v-select>
+        </p>
+        </div>
     </div>
 
     <span
