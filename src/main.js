@@ -1,5 +1,6 @@
 // Libs
 import Vue from 'vue';
+import VueI18n from 'vue-i18n';
 import VueResource from 'vue-resource';
 import VueProgressBar from 'vue-progressbar';
 
@@ -17,6 +18,7 @@ import Firebase from './assets/js/Firebase';
 
 // ====
 
+Vue.use(VueI18n);
 Vue.use(VueResource);
 
 Vue.use(VueProgressBar, {
