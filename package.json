@@ -6,7 +6,7 @@
     "start": "npm run build && http-server",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "test": "karma start"
+    "test": "karma start karma.conf.js"
   },
   "author": "Thulio Philipe <thulioph@gmail.com>",
   "license": "MIT",
@@ -36,7 +36,7 @@
     "karma": "^1.5.0",
     "karma-jasmine": "^1.1.0",
     "karma-phantomjs-launcher": "^1.0.2",
-    "karma-webpack": "^2.0.1",
+    "karma-webpack": "^2.0.3",
     "phantomjs": "^2.1.7"
   }
 }
