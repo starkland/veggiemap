@@ -25,6 +25,8 @@ Este projeto utiliza de algumas novas tecnologias e ferramentas, são elas:
 
 ## Setup
 
+Este projeto também possui um [container Docker](https://hub.docker.com/r/thulioph/veggiemap/).
+
 Instale todas as dependências do projeto:
 
 ```bash
