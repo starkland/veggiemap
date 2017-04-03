@@ -52,20 +52,27 @@
 
     methods: {
       updateVeggies(data) {
-        if (data && data.veggies !== null) {
-          this.veggies_array = data.veggies;
-          this.addNewMarker(this.veggies_array);
+        const veggies = data.veggies;
+
+        if (veggies && veggies.length > 0) {
+          this.addNewMarker(veggies);
         }
       },
 
       addNewMarker(markerArray) {
+        const array = markerArray;
+
         this.arrayOfLatLngs = [];
         this.markersLayer.clearLayers();
 
-        markerArray.forEach((item) => {
-          if (item && item.veggie) {
+        array.forEach((item) => {
+          const veggie = item.veggie;
+          let keys = Object.keys(veggie);
+
+          // address, location and name
+          if(keys.length === 3) {
             // adiciona a lat/lng de cada marcador ao array
-            this.arrayOfLatLngs.push([item.veggie.location[0], item.veggie.location[1]]);
+            this.arrayOfLatLngs.push([veggie.location[0], veggie.location[1]]);
 
             // adiciona os marcadores ao mapa
             this.buildMarker(item);
