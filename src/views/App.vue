@@ -1,4 +1,6 @@
 <script>
+  import Vue from 'vue';
+
   import LocalStorage from '../assets/js/LocalStorage';
   import Network from '../assets/js/Network';
   import Alert from '../assets/js/Alert';
@@ -42,6 +44,8 @@
     Event.$on('user_logout', this.logoutUser);
 
     Event.$on('network', this.handleNetwork);
+
+    Event.$on('change_language', this.handleLanguage);
    },
 
    methods: {
@@ -80,14 +84,18 @@
       };
 
       this.alert.info(obj);
+    },
+
+    handleLanguage(lang) {
+      Vue.config.lang = lang;
     }
    },
 
    beforeDestroy() {
-    Event.$off('user_logged');
-    Event.$off('user_logout');
-
-    Event.$off('network');
+      Event.$off('user_logged');
+      Event.$off('user_logout');
+      Event.$off('network');
+      Event.$off('change_language');
    }
   }
 </script>

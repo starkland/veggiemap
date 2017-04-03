@@ -78,7 +78,9 @@
     <form @submit.prevent="onSubmitForm">
       <div class="control is-horizontal">
         <div class="control-label">
-          <label for="name" class="label">Nome</label>
+          <label for="name" class="label">
+            {{ $t('form.name.label') }}
+          </label>
         </div>
 
         <div class="control is-grouped">
@@ -88,15 +90,17 @@
               class="input"
               type="text"
               required
-              v-model="form.veggie.name"
-              placeholder="Nome do Veggie">
+              :placeholder="$t('form.name.placeholder')"
+              v-model="form.veggie.name">
           </p>
         </div>
       </div>
 
       <div class="control is-horizontal">
         <div class="control-label">
-          <label for="address" class="label">Endereço</label>
+          <label for="address" class="label">
+            {{ $t('form.address.label') }}
+          </label>
         </div>
 
         <div class="control is-grouped">
@@ -105,7 +109,7 @@
               id="map"
               class="input"
               required
-              placeholder="Endereço do Veggie"
+              :placeholder="$t('form.address.placeholder')"
               v-model="form.veggie.address"
               v-on:placeChanged="getAddressData">
             </vue-google-autocomplete>
@@ -120,9 +124,9 @@
             name="type"
             required
             v-model="form.type"
-            value="evento">
+            :value="$t('form.event.label')">
 
-            Evento
+            {{ $t('form.event.label') }}
         </label>
 
         <label class="radio">
@@ -131,17 +135,18 @@
             name="type"
             required
             v-model="form.type"
-            value="fixo">
+            :value="$t('form.fixed.label')">
 
-            Fixo
+            {{ $t('form.fixed.label') }}
         </label>
       </div>
 
       <div class="control">
-        <button type="submit" class="button is-primary">Pronto</button>
+        <button type="submit" class="button is-primary">
+          {{ $t('form.submit.label') }}
+        </button>
       </div>
     </form>
-
   </div>
 </template>
 
