@@ -127,6 +127,41 @@ class Map {
   zoomOut() {
     return this.Map.setZoom(3);
   }
+
+  focusOnUser(obj) {
+    console.warn(obj);
+
+    const position = obj.position;
+    const latlng = this.leaflet.latLng(position[0], position[1]);
+
+    const marker = this.leaflet.marker(new this.leaflet.LatLng(position[0], position[1]), {
+      title: 'Você está aqui'
+    });
+
+    const circle = this.leaflet.circle(new this.leaflet.LatLng(position[0], position[1]), {
+      color: '#00D1B2',
+      fillColor: '#00D1B2',
+      fillOpacity: 0.5,
+      radius: 500
+    });
+
+    // ====
+
+    // clear map
+    this.Map.removeLayer(marker);
+    this.Map.removeLayer(circle);
+
+    // adjusts zoom and position
+    this.Map.panTo(latlng);
+    this.Map.setZoom(15);
+
+    // add to map
+    marker.addTo(this.Map);
+    marker.bindPopup(`You are here!`);
+
+    // add to map
+    circle.addTo(this.Map);
+  }
 }
 
 export default Map;
