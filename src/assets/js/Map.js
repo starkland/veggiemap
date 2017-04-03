@@ -1,11 +1,12 @@
 class Map {
   constructor(mapContainer) {
-    this.accessToken = 'pk.eyJ1IjoidGh1bGlvcGgiLCJhIjoiY2l6dGYzbzh3MDBxdDJxb2RwM3Q1dThrYSJ9.Z1gPJ1HHyF4extvmILwDOQ';
+    // this.accessToken = 'pk.eyJ1IjoidGh1bGlvcGgiLCJhIjoiY2l6dGYzbzh3MDBxdDJxb2RwM3Q1dThrYSJ9.Z1gPJ1HHyF4extvmILwDOQ';
 
-    this.layerUrl = `https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}`;
+    // this.layerUrl = `https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}`;
 
     this.mapContainer = mapContainer;
     this.baseLayerMap = this.setLayer('base');
+    this.offlineLayerMap = this.setLayer('offline');
 
     this.markersLayer = L.markerClusterGroup({
       maxClusterRadius: 120,
@@ -43,22 +44,27 @@ class Map {
   }
 
   _setBaseLayer() {
+    const layerUrl = `https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}`;
+
     const options = {
       attribution: 'VeggieMap',
       id: 'mapbox.streets',
-      accessToken: this.accessToken
+      accessToken: `pk.eyJ1IjoidGh1bGlvcGgiLCJhIjoiY2l6dGYzbzh3MDBxdDJxb2RwM3Q1dThrYSJ9.Z1gPJ1HHyF4extvmILwDOQ`
     };
 
-    return L.tileLayer(this.layerUrl, options);
+    return L.tileLayer(layerUrl, options);
   }
 
   _setOfflineLayer() {
+    const layerUrl = `https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}`;
+
     const options = {
       attribution: 'Offline',
-      id: 'mapbox.light'
+      id: 'mapbox.light',
+      accessToken: `pk.eyJ1IjoidGh1bGlvcGgiLCJhIjoiY2l6dGYzbzh3MDBxdDJxb2RwM3Q1dThrYSJ9.Z1gPJ1HHyF4extvmILwDOQ`
     };
 
-    this.offlineMap = L.tileLayer(this.layerUrl, options);
+    this.offlineMap = L.tileLayer(layerUrl, options);
   }
 
   addMarker(markerArray) {
@@ -128,10 +134,9 @@ class Map {
     return this.Map.setZoom(3);
   }
 
-  focusOnUser(obj) {
-    console.warn(obj);
+  focusOnUser(position) {
+    console.warn(position);
 
-    const position = obj.position;
     const latlng = this.leaflet.latLng(position[0], position[1]);
 
     const marker = this.leaflet.marker(new this.leaflet.LatLng(position[0], position[1]), {
@@ -161,6 +166,50 @@ class Map {
 
     // add to map
     circle.addTo(this.Map);
+  }
+
+  setMap(value) {
+    switch(value) {
+      case 'offline':
+        this.Map.removeLayer(this.baseLayerMap);
+        this.Map.addLayer(this.offlineLayerMap);
+
+        this.disableMap();
+      break;
+
+      case 'online':
+        this.Map.removeLayer(this.offlineLayerMap);
+        this.Map.addLayer(this.baseLayerMap);
+
+        this.enableMap();
+      break;
+    }
+  }
+
+  disableMap() {
+    this.Map.dragging.disable();
+    this.Map.touchZoom.disable();
+    this.Map.doubleClickZoom.disable();
+    this.Map.scrollWheelZoom.disable();
+    this.Map.boxZoom.disable();
+    this.Map.keyboard.disable();
+
+    if (this.Map.tap) {
+      this.Map.tap.disable();
+    }
+  }
+
+  enableMap() {
+    this.Map.dragging.enable();
+    this.Map.touchZoom.enable();
+    this.Map.doubleClickZoom.enable();
+    this.Map.scrollWheelZoom.enable();
+    this.Map.boxZoom.enable();
+    this.Map.keyboard.enable();
+
+    if (this.Map.tap) {
+      this.Map.tap.enable();
+    }
   }
 }
 
