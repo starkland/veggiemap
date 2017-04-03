@@ -13,8 +13,8 @@
       this.vgmap = new VgMap('map-container');
       this.displayMap();
 
-      this.Location = new Location();
-      this.LocalStorage = new LocalStorage();
+      this.location = new Location();
+      this.storage = new LocalStorage('userPos');
     },
 
     data() {
@@ -55,107 +55,53 @@
         this.vgmap.zoomOut();
       },
 
-      focusOnUser(obj) {
-        const position = obj.position;
-        const latlng = L.latLng(position[0], position[1]);
-
-        const marker = L.marker(new L.LatLng(position[0], position[1]), {
-          title: 'Você está aqui'
-        });
-
-        const circle = L.circle(new L.LatLng(position[0], position[1]), {
-          color: '#00D1B2',
-          fillColor: '#00D1B2',
-          fillOpacity: 0.5,
-          radius: 500
-        });
-
-        // ====
-
-        // clear map
-        this.map.removeLayer(marker);
-        this.map.removeLayer(circle);
-
-        // adjusts zoom and position
-        this.map.panTo(latlng);
-        this.map.setZoom(15);
-
-        // add to map
-        marker.addTo(this.map);
-        marker.bindPopup(`Você está aqui!`);
-
-        // add to map
-        circle.addTo(this.map);
-
-        this.$Progress.finish();
-
-        // ====
-
-        this.LocalStorage.set('userPos', obj);
-      },
-
       zoomOnMe() {
         this.$Progress.start();
 
-        let userPos = this.LocalStorage.get('userPos');
+        let userPos = this.storage.get();
 
-        if(userPos) {
-          this.focusOnUser({position: userPos.position});
+        if (userPos && userPos !== undefined) {
+          this.vgmap.focusOnUser(userPos.position);
+
+          this.storage.set(userPos);
+
+          this.$Progress.finish();
         }
-
-        this.Location.currentPosition();
       },
 
       handleNetwork(obj) {
         if (obj.status !== 'online') {
-          this.map.removeLayer(this.baseMap);
-          this.map.addLayer(this.offlineMap);
+          this.vgmap.setMap('offline');
 
-          this.disableMap();
+          // this.map.removeLayer(this.baseMap);
+          // this.map.addLayer(this.offlineMap);
+
+          // this.disableMap();
         } else {
-          this.map.removeLayer(this.offlineMap);
-          this.map.addLayer(this.baseMap);
+          this.vgmap.setMap('online');
+          // this.map.removeLayer(this.offlineMap);
+          // this.map.addLayer(this.baseMap);
 
-          this.enableMap();
+          // this.enableMap();
         }
       },
 
-      disableMap() {
-        this.map.dragging.disable();
-        this.map.touchZoom.disable();
-        this.map.doubleClickZoom.disable();
-        this.map.scrollWheelZoom.disable();
-        this.map.boxZoom.disable();
-        this.map.keyboard.disable();
+      // disableMap() {
+      //   this.vgmap.disableMap();
+      // },
 
-        if (this.map.tap) {
-          this.map.tap.disable();
-        }
-      },
-
-      enableMap() {
-        this.map.dragging.enable();
-        this.map.touchZoom.enable();
-        this.map.doubleClickZoom.enable();
-        this.map.scrollWheelZoom.enable();
-        this.map.boxZoom.enable();
-        this.map.keyboard.enable();
-
-        if (this.map.tap) {
-          this.map.tap.enable();
-        }
-      }
+      // enableMap() {
+      //   this.vgmap.enableMap();
+      // }
     },
 
     created() {
       Events.$on('update_veggies', this.updateVeggies);
-      Events.$on('location_ok', this.focusOnUser);
       Events.$on('network', this.handleNetwork);
     },
 
     beforeDestroy() {
       Events.$off('update_veggies');
-      Events.$off('location_ok');
       Events.$off('network');
     }
   }
