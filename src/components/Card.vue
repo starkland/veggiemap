@@ -141,7 +141,8 @@
         @click="logout"
         :title="$t('card.footer.logout')"
         class="card-footer-item is-danger">
-        Sair
+
+        {{ $t('card.footer.logout') }}
       </a>
     </div>
   </aside>

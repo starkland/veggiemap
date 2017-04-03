@@ -9,6 +9,30 @@ const entry = {
       }
     },
 
+    form: {
+      name: {
+        label: 'Name',
+        placeholder: 'The veggie name'
+      },
+
+      address: {
+        label: 'Address',
+        placeholder: 'The veggie address'
+      },
+
+      event: {
+        label: 'Event'
+      },
+
+      fixed: {
+        label: 'Fixed'
+      },
+
+      submit: {
+        label: 'Add'
+      }
+    },
+
     card: {
       header: {
         title: 'Add Veggie'
@@ -21,7 +45,7 @@ const entry = {
       footer: {
         facebook: 'Login with Facebook.',
         google: 'Login with Google.',
-        logout: 'Logout.',
+        logout: 'Logout',
       }
     }
   },
@@ -33,6 +57,30 @@ const entry = {
         github: 'Veja este projeto no Github!',
         home: 'Início',
         contact: 'Contato'
+      }
+    },
+
+    form: {
+      name: {
+        label: 'Nome',
+        placeholder: 'O nome do Veggie'
+      },
+
+      address: {
+        label: 'Endereço',
+        placeholder: 'O endereço do Veggie'
+      },
+
+      event: {
+        label: 'Evento'
+      },
+
+      fixed: {
+        label: 'Fixo'
+      },
+
+      submit: {
+        label: 'Pronto'
       }
     },
 
@@ -48,7 +96,7 @@ const entry = {
       footer: {
         facebook: 'Login com Facebook.',
         google: 'Login com Google.',
-        logout: 'Sair.',
+        logout: 'Sair',
       }
     }
   }
