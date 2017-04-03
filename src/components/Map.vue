@@ -10,7 +10,7 @@
     mounted() {
       this.$Progress.start();
 
-      this.VgMap = new VgMap('map-container');
+      this.vgmap = new VgMap('map-container');
       this.displayMap();
 
       this.Location = new Location();
@@ -37,12 +37,12 @@
         const veggies = data.veggies;
 
         if (veggies && veggies.length > 0) {
-          this.VgMap.addMarker(veggies);
+          this.vgmap.addMarker(veggies);
         }
       },
 
       displayMap() {
-        this.VgMap.display();
+        this.vgmap.display();
 
         this.mapLoaded = true;
 
@@ -52,7 +52,7 @@
       },
 
       zoomOut() {
-        this.map.setZoom(3);
+        this.vgmap.zoomOut();
       },
 
       focusOnUser(obj) {

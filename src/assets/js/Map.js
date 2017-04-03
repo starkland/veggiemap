@@ -123,6 +123,10 @@ class Map {
     this.Map.fitBounds(bounds);
     this.Map.addLayer(this.markersLayer);
   }
+
+  zoomOut() {
+    return this.Map.setZoom(3);
+  }
 }
 
 export default Map;
