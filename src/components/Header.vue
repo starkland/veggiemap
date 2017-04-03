@@ -49,7 +49,7 @@
         class="nav-item"
         href="https://twitter.com/intent/tweet?text=Veggiemap%20on%20Github%20http://github.com/starkland/veggiemap"
         rel="noopener"
-        title="Doe um Tweet :)"
+        :title="$t('header.nav.tweet')"
         target="_blank">
 
         <span class="icon">
@@ -61,7 +61,7 @@
         class="nav-item"
         href="https://github.com/starkland/veggiemap"
         rel="noopener"
-        title="Veja o projeto no Github!"
+        :title="$t('header.nav.github')"
         target="_blank">
 
         <span class="icon">
@@ -99,20 +99,20 @@
 
       <router-link
         class="nav-item"
-        title="Home"
+        :title="$t('header.nav.home')"
         to="/"
         exact>
 
-        Home
+        {{ $t('header.nav.home') }}
       </router-link>
 
       <router-link
         class="nav-item"
-        title="Contato"
+        :title="$t('header.nav.contact')"
         to="/contato"
         exact>
 
-        Contato
+        {{ $t('header.nav.contact') }}
       </router-link>
     </div>
   </nav>
