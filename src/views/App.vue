@@ -1,4 +1,6 @@
 <script>
+  import Vue from 'vue';
+
   import LocalStorage from '../assets/js/LocalStorage';
   import Network from '../assets/js/Network';
   import Alert from '../assets/js/Alert';
@@ -84,8 +86,8 @@
       this.alert.info(obj);
     },
 
-    handleLanguage(value) {
-      console.warn(value)
+    handleLanguage(lang) {
+      Vue.config.lang = lang;
     }
    },
 

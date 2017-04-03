@@ -16,6 +16,9 @@ import Events from './events/all';
 // Assets
 import Firebase from './assets/js/Firebase';
 
+// Translations
+import Translations from './translations/index';
+
 // ====
 
 Vue.use(VueI18n);
@@ -29,6 +32,10 @@ Vue.use(VueProgressBar, {
 
 let firebase = new Firebase();
 window.vgFirebase = firebase;
+
+Object.keys(Translations).forEach((lang) => {
+  Vue.locale(lang, Translations[lang])
+});
 
 // ====
 

@@ -103,7 +103,7 @@
   <aside class="card card-wrapper">
     <header class="card-header">
       <p class="card-header-title">
-        Adicionar Veggie
+        {{ $t('card.header.title') }}
       </p>
     </header>
 
