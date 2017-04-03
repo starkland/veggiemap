@@ -103,7 +103,7 @@
   <aside class="card card-wrapper">
     <header class="card-header">
       <p class="card-header-title">
-        Adicionar Veggie
+        {{ $t('card.header.title') }}
       </p>
     </header>
 
@@ -114,7 +114,7 @@
         </div>
 
         <div v-if="!logged">
-          <p>Para adicionar um novo veggie, é necessário que você <br> realize o login no <b>Facebook</b> ou <b>Google</b>.</p>
+          <p>{{ $t('card.content.cta') }}</p>
         </div>
       </div>
     </div>
@@ -123,7 +123,7 @@
       <a
         v-if="!logged"
         @click="facebook"
-        title="Login com Facebook"
+        :title="$t('card.footer.facebook')"
         class="card-footer-item">
         Facebook
       </a>
@@ -131,7 +131,7 @@
       <a
         v-if="!logged"
         @click="google"
-        title="Login com Google"
+        :title="$t('card.footer.google')"
         class="card-footer-item">
         Google
       </a>
@@ -139,9 +139,10 @@
       <a
         v-if="logged"
         @click="logout"
-        title="Sair."
+        :title="$t('card.footer.logout')"
         class="card-footer-item is-danger">
-        Sair
+
+        {{ $t('card.footer.logout') }}
       </a>
     </div>
   </aside>
@@ -157,5 +158,6 @@
 
   .card {
     min-width: 50%;
+    max-width: 70%;
   }
 </style>

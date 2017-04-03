@@ -1,11 +1,20 @@
 <script>
+  import vSelect from 'vue-select';
+  import Event from '../events/all';
+
   export default {
     name: 'Header',
 
     data() {
       return {
-        navActive: false
-      }
+        navActive: false,
+        selected: null,
+        options: ['en','pt']
+      };
+    },
+
+    components: {
+      vSelect
     },
 
     props: [
@@ -16,6 +25,12 @@
     methods: {
       toggleNavbar() {
         this.navActive = !this.navActive;
+      },
+
+      changeLanguage(val) {
+        if (val) {
+          Event.$emit('change_language', val);
+        }
       }
     }
   }
@@ -34,7 +49,7 @@
         class="nav-item"
         href="https://twitter.com/intent/tweet?text=Veggiemap%20on%20Github%20http://github.com/starkland/veggiemap"
         rel="noopener"
-        title="Doe um Tweet :)"
+        :title="$t('header.nav.tweet')"
         target="_blank">
 
         <span class="icon">
@@ -46,13 +61,24 @@
         class="nav-item"
         href="https://github.com/starkland/veggiemap"
         rel="noopener"
-        title="Veja o projeto no Github!"
+        :title="$t('header.nav.github')"
         target="_blank">
 
         <span class="icon">
           <i class="fa fa-github"></i>
         </span>
       </a>
+
+      <div class="field nav-item">
+        <p class="control">
+          <v-select
+            placeholder="Translations"
+            :value.sync="selected"
+            :on-change="changeLanguage"
+            :options="options">
+          </v-select>
+        </p>
+        </div>
     </div>
 
     <span
@@ -73,20 +99,20 @@
 
       <router-link
         class="nav-item"
-        title="Home"
+        :title="$t('header.nav.home')"
         to="/"
         exact>
 
-        Home
+        {{ $t('header.nav.home') }}
       </router-link>
 
       <router-link
         class="nav-item"
-        title="Contato"
+        :title="$t('header.nav.contact')"
         to="/contato"
         exact>
 
-        Contato
+        {{ $t('header.nav.contact') }}
       </router-link>
     </div>
   </nav>
