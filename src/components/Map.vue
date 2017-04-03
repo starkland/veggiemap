@@ -2,6 +2,7 @@
   import Location from '../assets/js/Location';
   import LocalStorage from '../assets/js/LocalStorage';
   import Events from '../events/all';
+  import VgMap from '../assets/js/Map';
 
   export default {
     name: 'vgMap',
@@ -9,31 +10,9 @@
     mounted() {
       this.$Progress.start();
 
-      // Map layers
-      this.baseMap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-        attribution: 'VeggieMap',
-        id: 'mapbox.streets',
-        accessToken: 'pk.eyJ1IjoidGh1bGlvcGgiLCJhIjoiY2l6dGYzbzh3MDBxdDJxb2RwM3Q1dThrYSJ9.Z1gPJ1HHyF4extvmILwDOQ'
-      });
-
-      // Offline style
-      this.offlineMap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-        attribution: 'Offline',
-        id: 'mapbox.light',
-        accessToken: 'pk.eyJ1IjoidGh1bGlvcGgiLCJhIjoiY2l6dGYzbzh3MDBxdDJxb2RwM3Q1dThrYSJ9.Z1gPJ1HHyF4extvmILwDOQ'
-      });
-
-      // Marker clusters
-      this.markersLayer = L.markerClusterGroup({
-        maxClusterRadius: 120,
-        spiderfyOnMaxZoom: false,
-        showCoverageOnHover: false,
-        zoomToBoundsOnClick: true
-      });
-
+      this.VgMap = new VgMap('map-container');
       this.displayMap();
 
-      // Inicia o Location
       this.Location = new Location();
       this.LocalStorage = new LocalStorage();
     },
@@ -46,91 +25,24 @@
       }
     },
 
-    props: [
-      'connected'
-    ],
+    props: {
+      connected: {
+        type: Boolean,
+        require: true
+      },
+    },
 
     methods: {
       updateVeggies(data) {
         const veggies = data.veggies;
 
         if (veggies && veggies.length > 0) {
-          this.addNewMarker(veggies);
+          this.VgMap.addMarker(veggies);
         }
-      },
-
-      addNewMarker(markerArray) {
-        const array = markerArray;
-
-        this.arrayOfLatLngs = [];
-        this.markersLayer.clearLayers();
-
-        array.forEach((item) => {
-          const veggie = item.veggie;
-          let keys = Object.keys(veggie);
-
-          // address, location and name
-          if(keys.length === 3) {
-            // adiciona a lat/lng de cada marcador ao array
-            this.arrayOfLatLngs.push([veggie.location[0], veggie.location[1]]);
-
-            // adiciona os marcadores ao mapa
-            this.buildMarker(item);
-          }
-        });
-
-        this.updateMap();
-      },
-
-      buildMarker(obj) {
-        let title = `<h4>${obj.veggie.name}</h4> <small>${obj.veggie.address}</small>`;
-
-        let marker = L.marker(new L.LatLng(obj.veggie.location[0], obj.veggie.location[1]), {
-          title: title,
-          icon: this.buildIcon(obj.type)
-        });
-
-        marker.bindPopup(title);
-
-        this.markersLayer.addLayer(marker);
-      },
-
-      buildIcon(type) {
-        switch(type) {
-          case 'evento':
-            return L.AwesomeMarkers.icon({
-              icon: 'star',
-              markerColor: 'green',
-              prefix: 'fa'
-            });
-          break;
-
-          case 'fixo':
-            return L.AwesomeMarkers.icon({
-              icon: 'hand-o-up',
-              markerColor: 'black',
-              prefix: 'fa'
-            });
-          break;
-        }
-      },
-
-      updateMap() {
-        // centraliza o mapa de acordo com os marcadores
-        let bounds = new L.LatLngBounds(this.arrayOfLatLngs);
-        this.map.fitBounds(bounds);
-
-        this.map.addLayer(this.markersLayer);
       },
 
       displayMap() {
-        this.map = L.map('map-container', {
-          zoom: 15,
-          scrollWheelZoom: false,
-          layers: [this.offlineMap, this.baseMap]
-        });
-
-        window.vgMap = this.map;
+        this.VgMap.display();
 
         this.mapLoaded = true;
 
