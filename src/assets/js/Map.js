@@ -65,6 +65,8 @@ class Map {
     };
 
     this.offlineMap = L.tileLayer(layerUrl, options);
+
+    return this.offlineMap;
   }
 
   addMarker(markerArray) {
