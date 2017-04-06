@@ -1,8 +1,15 @@
 <script>
+  import Api from '../assets/js/Api';
   import Chart from '../assets/js/Chart';
 
   export default {
     name: 'vgChart',
+
+    mounted() {
+      this.api = new Api();
+
+      this.api.getVeggies();
+    },
 
     data() {
       return {
