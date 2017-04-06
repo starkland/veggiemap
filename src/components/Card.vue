@@ -16,19 +16,20 @@
       return {}
     },
 
-    props: [
-      'logged',
-      'connected'
-    ],
+    props: {
+      logged: {
+        type: Boolean,
+        require: true
+      },
 
-    // computed() {
-    //   this.connected = connected;
-    //   this.logged = logged;
-    // },
+      connected: {
+        type: Boolean,
+        require: true
+      },
+    },
 
     mounted() {
       this.auth = new Auth();
-      this.alert = new Alert();
 
       Event.$on('auth_error', this.authError);
     },
@@ -78,11 +79,13 @@
           break;
         }
 
-        this.alert.error({
+        this.alert = new Alert({
           title: 'Ops!',
           text,
           btnText: 'ok'
         });
+
+        this.alert.error();
 
         this.$Progress.finish();
       },

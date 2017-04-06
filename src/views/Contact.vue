@@ -22,7 +22,6 @@
 
    mounted() {
     this.network = new Network();
-    this.alert = new Alert();
     this.storage = new LocalStorage();
 
     if(this.storage.get('userInfo')) {
@@ -56,14 +55,14 @@
     },
 
     displayAlert() {
-      let obj = {
+      this.alert = new Alert({
         title: 'Atenção!',
         text: `Você parece está sem internet,
         verifique sua conexão.`,
         btnText: 'ok'
-      };
+      });
 
-      this.alert.info(obj);
+      this.alert.info();
     },
 
     beforeDestroy() {
