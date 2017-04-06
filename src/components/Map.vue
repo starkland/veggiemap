@@ -72,27 +72,10 @@
       handleNetwork(obj) {
         if (obj.status !== 'online') {
           this.vgmap.setMap('offline');
-
-          // this.map.removeLayer(this.baseMap);
-          // this.map.addLayer(this.offlineMap);
-
-          // this.disableMap();
         } else {
           this.vgmap.setMap('online');
-          // this.map.removeLayer(this.offlineMap);
-          // this.map.addLayer(this.baseMap);
-
-          // this.enableMap();
         }
-      },
-
-      // disableMap() {
-      //   this.vgmap.disableMap();
-      // },
-
-      // enableMap() {
-      //   this.vgmap.enableMap();
-      // }
+      }
     },
 
     created() {
