@@ -30,7 +30,6 @@
 
    mounted() {
     this.network = new Network();
-    this.alert = new Alert();
     this.storage = new LocalStorage();
 
     if(this.storage.get('userInfo')) {
@@ -38,7 +37,6 @@
     } else {
       this.logged = false;
     }
-
 
     Event.$on('user_logged', this.loggedUser);
     Event.$on('user_logout', this.logoutUser);
@@ -76,14 +74,14 @@
     },
 
     displayAlert() {
-      let obj = {
-        title: 'Atenção!',
+      this.alert = new Alert({
+        title: 'Atençãoooo!',
         text: `Você parece está sem internet,
         verifique sua conexão.`,
         btnText: 'ok'
-      };
+      });
 
-      this.alert.info(obj);
+      this.alert.info();
     },
 
     handleLanguage(lang) {

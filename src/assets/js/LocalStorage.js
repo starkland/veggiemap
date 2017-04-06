@@ -1,16 +1,18 @@
 class LocalStorage {
-  constructor() {}
-
-  get(key) {
-    return JSON.parse(localStorage.getItem(key));
+  constructor(key) {
+    this.key = key;
   }
 
-  set(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
+  get() {
+    JSON.parse(localStorage.getItem(this.key));
   }
 
-  clear(key) {
-    localStorage.removeItem(key);
+  set(value) {
+    localStorage.setItem(this.key, JSON.stringify(value));
+  }
+
+  clear() {
+    localStorage.removeItem(this.key);
   }
 }
 

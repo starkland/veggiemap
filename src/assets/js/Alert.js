@@ -1,38 +1,36 @@
 class Alert {
-  constructor() {
+  constructor(obj) {
     this.alert = window.swal;
+
+    this.title = obj.title;
+    this.text = obj.text;
+    this.btnText = obj.btnText;
   }
 
-  success(obj) {
-    let { title, text, btnText } = obj;
-
+  success() {
     return this.alert({
-      title: title,
-      text: text,
+      title: this.title,
+      text: this.text,
       type: "success",
-      confirmButtonText: btnText
+      confirmButtonText: this.btnText
     })
   }
 
-  error(obj) {
-    let { title, text, btnText } = obj;
-
+  error() {
     return this.alert({
-      title: title,
-      text: text,
+      title: this.title,
+      text: this.text,
       type: "error",
-      confirmButtonText: btnText
+      confirmButtonText: this.btnText
     })
   }
 
-  info(obj) {
-    let { title, text, btnText } = obj;
-
+  info() {
     return this.alert({
-      title: title,
-      text: text,
+      title: this.title,
+      text: this.text,
       type: "info",
-      confirmButtonText: btnText
+      confirmButtonText: this.btnText
     })
   }
 }
