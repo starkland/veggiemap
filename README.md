@@ -22,6 +22,8 @@ Este projeto utiliza de algumas novas tecnologias e ferramentas, são elas:
 - [Karma](http://karma-runner.github.io)
 - [Jasmine](https://jasmine.github.io)
 - [PWA](https://developers.google.com/web/progressive-web-apps/)
+- [Chart.js](http://vue-chartjs.org)
+- [Babel](http://babeljs.io/)
 
 ## Setup
 
