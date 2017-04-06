@@ -1,10 +1,9 @@
 class Map {
   constructor(mapContainer) {
-    // this.accessToken = 'pk.eyJ1IjoidGh1bGlvcGgiLCJhIjoiY2l6dGYzbzh3MDBxdDJxb2RwM3Q1dThrYSJ9.Z1gPJ1HHyF4extvmILwDOQ';
-
-    // this.layerUrl = `https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}`;
+    this.layerUrl = `https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidGh1bGlvcGgiLCJhIjoiY2l6dGYzbzh3MDBxdDJxb2RwM3Q1dThrYSJ9.Z1gPJ1HHyF4extvmILwDOQ`;
 
     this.mapContainer = mapContainer;
+
     this.baseLayerMap = this.setLayer('base');
     this.offlineLayerMap = this.setLayer('offline');
 
@@ -25,7 +24,7 @@ class Map {
     const mapOptions = {
       zoom: 15,
       scrollWheelZoom: false,
-      layers: this.baseLayerMap
+      layers: [this.offlineLayerMap, this.baseLayerMap]
     };
 
     return this.Map = new this.leaflet.map(this.mapContainer, mapOptions);
@@ -44,29 +43,17 @@ class Map {
   }
 
   _setBaseLayer() {
-    const layerUrl = `https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}`;
-
-    const options = {
+    return L.tileLayer(this.layerUrl, {
       attribution: 'VeggieMap',
-      id: 'mapbox.streets',
-      accessToken: `pk.eyJ1IjoidGh1bGlvcGgiLCJhIjoiY2l6dGYzbzh3MDBxdDJxb2RwM3Q1dThrYSJ9.Z1gPJ1HHyF4extvmILwDOQ`
-    };
-
-    return L.tileLayer(layerUrl, options);
+      id: 'mapbox.streets'
+    });
   }
 
   _setOfflineLayer() {
-    const layerUrl = `https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}`;
-
-    const options = {
-      attribution: 'Offline',
-      id: 'mapbox.light',
-      accessToken: `pk.eyJ1IjoidGh1bGlvcGgiLCJhIjoiY2l6dGYzbzh3MDBxdDJxb2RwM3Q1dThrYSJ9.Z1gPJ1HHyF4extvmILwDOQ`
-    };
-
-    this.offlineMap = L.tileLayer(layerUrl, options);
-
-    return this.offlineMap;
+    return L.tileLayer(this.layerUrl, {
+      attribution: 'VeggieMap - Offline',
+      id: 'mapbox.light'
+    });
   }
 
   addMarker(markerArray) {
@@ -81,10 +68,7 @@ class Map {
 
       // address, location and name
       if(keys.length === 3) {
-        // adiciona a lat/lng de cada marcador ao array
         this.arrayOfLatLngs.push([veggie.location[0], veggie.location[1]]);
-
-        // adiciona os marcadores ao mapa
         this.buildMarker(item);
       }
     });
