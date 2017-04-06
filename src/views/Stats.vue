@@ -83,43 +83,78 @@
       :connected="connected">
     </vg-header>
 
-    <stats-chart
-      :data="datacollection"
-      :options="options"
-      :width="400"
-      :height="200">
-    </stats-chart>
+  <div class="card pie">
+    <div class="card-image">
+      <div class="image is-4by3">
+        <stats-pie
+          :data="datacollection"
+          :options="options"
+          :width="200"
+          :height="200">
+        </stats-pie>
+      </div>
+    </div>
 
-    <stats-line
-      :data="datacollection"
-      :options="options"
-      :width="400"
-      :height="200">
-    </stats-line>
+    <div class="card-content">
+      <div class="media">
+        <div class="media-left">
+          <figure class="image is-48x48">
+            <img src="http://bulma.io/images/placeholders/96x96.png" alt="Image">
+          </figure>
+        </div>
+        <div class="media-content">
+          <p class="title is-4">John Smith</p>
+          <p class="subtitle is-6">@johnsmith</p>
+        </div>
+      </div>
 
-    <stats-doughnut
-      :data="datacollection"
-      :options="options"
-      :width="400"
-      :height="200">
-    </stats-doughnut>
+      <div class="content">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+        <a>#css</a> <a>#responsive</a>
+        <br>
+        <small>11:09 PM - 1 Jan 2016</small>
+      </div>
+    </div>
+  </div>
 
-    <stats-pie
+    <!-- <stats-line
       :data="datacollection"
       :options="options"
       :width="400"
       :height="200">
-    </stats-pie>
+    </stats-line> -->
 
-    <stats-bubble
+    <!-- <stats-doughnut
       :data="datacollection"
       :options="options"
       :width="400"
       :height="200">
-    </stats-bubble>
+    </stats-doughnut> -->
+
+    <!-- <stats-chart
+      :data="datacollection"
+      :options="options"
+      :width="400"
+      :height="200">
+    </stats-chart> -->
+
+    <!-- <stats-bubble
+      :data="datacollection"
+      :options="options"
+      :width="400"
+      :height="200">
+    </stats-bubble> -->
   </div>
 </template>
 
-<style scoped>
-  /**/
+<style scoped lang="scss">
+  .is-4by3 {
+    padding: 10px 0;
+    background-color: #DEDEDE;
+  }
+
+  .card {
+    &.pie { max-width: 20%; }
+  }
 </style>
