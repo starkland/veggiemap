@@ -25,19 +25,51 @@
     },
 
     components: {
-      Chart
+      StatsChart: Chart.bar,
+      StatsLine: Chart.line,
+      StatsDoughnut: Chart.doughnut,
+      StatsPie: Chart.pie,
+      StatsBubble: Chart.bubble
     }
   }
 </script>
 
 <template>
   <div>
-    <chart
+    <stats-chart
       :data="datacollection"
       :options="options"
       :width="400"
       :height="200">
-    </chart>
+    </stats-chart>
+
+    <stats-line
+      :data="datacollection"
+      :options="options"
+      :width="400"
+      :height="200">
+    </stats-line>
+
+    <stats-doughnut
+      :data="datacollection"
+      :options="options"
+      :width="400"
+      :height="200">
+    </stats-doughnut>
+
+    <stats-pie
+      :data="datacollection"
+      :options="options"
+      :width="400"
+      :height="200">
+    </stats-pie>
+
+    <stats-bubble
+      :data="datacollection"
+      :options="options"
+      :width="400"
+      :height="200">
+    </stats-bubble>
   </div>
 </template>
 

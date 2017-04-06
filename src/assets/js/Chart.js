@@ -1,17 +1,21 @@
-import Vue from 'vue';
+import VueCharts from 'vue-chartjs';
 
-import VueCharts from 'vue-chartjs'
-import { Bar, Line } from 'vue-chartjs'
+// ====
 
-export default Line.extend({
-  props: {
-    data: {
-      require: true
-    },
-    options: {
-      require: true
-    }
+let props = {
+  data: {
+    type: Object,
+    require: true
   },
+
+  options: {
+    type: Object,
+    require: true
+  }
+};
+
+const bar = VueCharts.Bar.extend({
+  props: props,
 
   mounted () {
     this.renderChart(this.data, {
@@ -20,3 +24,57 @@ export default Line.extend({
     });
   }
 });
+
+const line = VueCharts.Line.extend({
+  props: props,
+
+  mounted () {
+    this.renderChart(this.data, {
+      responsive: true,
+      maintainAspectRatio: false
+    });
+  }
+});
+
+const doughnut = VueCharts.Doughnut.extend({
+  props: props,
+
+  mounted () {
+    this.renderChart(this.data, {
+      responsive: true,
+      maintainAspectRatio: false
+    });
+  }
+});
+
+const pie = VueCharts.Pie.extend({
+  props: props,
+
+  mounted () {
+    this.renderChart(this.data, {
+      responsive: true,
+      maintainAspectRatio: false
+    });
+  }
+});
+
+const bubble = VueCharts.Bubble.extend({
+  props: props,
+
+  mounted () {
+    this.renderChart(this.data, {
+      responsive: true,
+      maintainAspectRatio: false
+    });
+  }
+});
+
+// ====
+
+export default {
+  bar,
+  line,
+  doughnut,
+  pie,
+  bubble
+};
