@@ -14,7 +14,7 @@ class Api {
         Events.$emit('get_veggies', response.body);
       })
       .catch((err) => {
-        Events.$emit('error', err);
+        Events.$emit('api_error', err);
       });
   }
 
@@ -25,7 +25,7 @@ class Api {
         Events.$emit('get_users', response.body);
       })
       .catch((err) => {
-        Events.$emit('error', err);
+        Events.$emit('api_error', err);
       });
   }
 }

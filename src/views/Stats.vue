@@ -2,6 +2,9 @@
   import Api from '../assets/js/Api';
   import Chart from '../assets/js/Chart';
 
+  import Alert from '../assets/js/Alert';
+  import Event from '../events/all';
+
   export default {
     name: 'vgChart',
 
@@ -9,6 +12,9 @@
       this.api = new Api();
 
       this.api.getVeggies();
+
+      Event.$on('get_veggies', this.handleGetVeggies);
+      Event.$on('api_error', this.handleError);
     },
 
     data() {
@@ -37,6 +43,29 @@
       StatsDoughnut: Chart.doughnut,
       StatsPie: Chart.pie,
       StatsBubble: Chart.bubble
+    },
+
+    methods: {
+      handleGetVeggies(obj) {
+        console.warn('A requisição me retornou isso:', obj);
+      },
+
+      handleError(obj) {
+        console.warn('Error: ', obj);
+
+        this.alert = new Alert({
+          title: 'OPS!',
+          text: `Tivemos um erro, e pedimos para que você tente novamente em alguns intantes.`,
+          btnText: 'ok'
+        });
+
+        this.alert.error();
+      }
+    },
+
+    beforeDestroy() {
+      Event.$off('get_veggies');
+      Event.$off('api_error');
     }
   }
 </script>

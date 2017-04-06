@@ -38,15 +38,11 @@
       this.logged = false;
     }
 
+    Event.$on('auth_error', this.authError);
+    Event.$on('network', this.handleNetwork);
     Event.$on('user_logged', this.loggedUser);
     Event.$on('user_logout', this.logoutUser);
-
-    Event.$on('network', this.handleNetwork);
-
     Event.$on('change_language', this.handleLanguage);
-
-    Event.$on('error', this.handleError);
-    Event.$on('auth_error', this.authError);
    },
 
    methods: {
@@ -89,16 +85,6 @@
 
     handleLanguage(lang) {
       Vue.config.lang = lang;
-    },
-
-    handleError(obj) {
-      this.alert = new Alert({
-        title: 'OPS!',
-        text: `Tivemos um erro, e pedimos para que você tente novamente em alguns intantes.`,
-        btnText: 'ok'
-      });
-
-      this.alert.error();
     },
 
     authError(obj) {
@@ -144,12 +130,11 @@
    },
 
    beforeDestroy() {
+      Event.$off('auth_error');
+      Event.$off('network');
       Event.$off('user_logged');
       Event.$off('user_logout');
-      Event.$off('network');
       Event.$off('change_language');
-      Event.$off('error');
-      Event.$off('auth_error');
    }
   }
 </script>
