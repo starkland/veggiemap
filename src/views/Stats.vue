@@ -5,6 +5,8 @@
   import Alert from '../assets/js/Alert';
   import Event from '../events/all';
 
+  import vgHeader from '../components/Header.vue';
+
   export default {
     name: 'vgChart',
 
@@ -33,11 +35,15 @@
               data: [40, 20]
             }
           ]
-        }
+        },
+
+        logged: false,
+        connected: true
       }
     },
 
     components: {
+      vgHeader,
       StatsChart: Chart.bar,
       StatsLine: Chart.line,
       StatsDoughnut: Chart.doughnut,
@@ -72,6 +78,11 @@
 
 <template>
   <div>
+    <vg-header
+      :logged="logged"
+      :connected="connected">
+    </vg-header>
+
     <stats-chart
       :data="datacollection"
       :options="options"
