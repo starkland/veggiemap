@@ -5,7 +5,8 @@ const entry = {
         tweet: 'Donate a Tweet :)',
         github: 'See this project on Github!',
         home: 'Home',
-        contact: 'Contact'
+        contact: 'Contact',
+        stats: 'Stats'
       }
     },
 
@@ -56,7 +57,8 @@ const entry = {
         tweet: 'Doe um Tweet :)',
         github: 'Veja este projeto no Github!',
         home: 'Início',
-        contact: 'Contato'
+        contact: 'Contato',
+        stats: 'Gráficos'
       }
     },
 
