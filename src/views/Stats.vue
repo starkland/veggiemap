@@ -124,44 +124,60 @@
       :connected="connected">
     </vg-header>
 
-  <div class="card pie" v-if="graphics.byType">
-    <div class="card-image">
-      <div class="image is-4by3">
-        <stats-pie
-          :data="datacollection"
-          :options="options"
-          :width="120"
-          :height="120">
-        </stats-pie>
-      </div>
-    </div>
+    <div class="columns">
+      <div class="column is-half">
+        <div class="card pie" v-if="graphics.byType">
+          <div class="card-image">
+            <div class="image is-4by3">
+              <stats-pie
+                :data="datacollection"
+                :options="options"
+                :width="200"
+                :height="200">
+              </stats-pie>
+            </div>
+          </div>
 
-    <div class="card-content">
-      <div class="media">
-        <div class="media-left">
-          <div class="image is-48x48">
-            <i class="fa fa-pie-chart" aria-hidden="true"></i>
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
+                <div class="image is-48x48">
+                  <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="media-content">
+                <p class="title is-4">Por tipos</p>
+                <p class="subtitle is-6">Atualmente com eventos e fixo.</p>
+              </div>
+            </div>
+
+            <div class="content">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Phasellus nec iaculis mauris..
+            </div>
           </div>
         </div>
-        <div class="media-content">
-          <p class="title is-4">Por tipos</p>
-          <p class="subtitle is-6">Atualmente com eventos e fixo.</p>
+      </div>
+
+      <div class="column is-half">
+        <div class="card pie">
+          <div class="card-image">
+            <div class="image is-4by3">
+              <stats-line
+                :data="datacollection"
+                :options="options"
+                :width="400"
+                :height="200">
+              </stats-line>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Phasellus nec iaculis mauris..
-      </div>
-    </div>
-  </div>
 
-    <!-- <stats-line
-      :data="datacollection"
-      :options="options"
-      :width="400"
-      :height="200">
-    </stats-line> -->
+    </div>
+
+
 
     <!-- <stats-doughnut
       :data="datacollection"
@@ -190,10 +206,6 @@
   .is-4by3 {
     padding: 10px 0;
     background-color: #DEDEDE;
-  }
-
-  .card {
-    &.pie { max-width: 20%; }
   }
 
   .fa {
