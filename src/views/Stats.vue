@@ -37,6 +37,10 @@
           ]
         },
 
+        graphics: {
+          byType: false,
+        },
+
         logged: false,
         connected: true
       }
@@ -90,7 +94,7 @@
           break;
         }
 
-        console.warn(this.datacollection)
+        this.graphics.byType = true;
       },
 
       handleError(obj) {
@@ -120,14 +124,14 @@
       :connected="connected">
     </vg-header>
 
-  <div class="card pie">
+  <div class="card pie" v-if="graphics.byType">
     <div class="card-image">
       <div class="image is-4by3">
         <stats-pie
           :data="datacollection"
           :options="options"
-          :width="200"
-          :height="200">
+          :width="120"
+          :height="120">
         </stats-pie>
       </div>
     </div>
@@ -135,22 +139,19 @@
     <div class="card-content">
       <div class="media">
         <div class="media-left">
-          <figure class="image is-48x48">
-            <img src="http://bulma.io/images/placeholders/96x96.png" alt="Image">
-          </figure>
+          <div class="image is-48x48">
+            <i class="fa fa-pie-chart" aria-hidden="true"></i>
+          </div>
         </div>
         <div class="media-content">
-          <p class="title is-4">John Smith</p>
-          <p class="subtitle is-6">@johnsmith</p>
+          <p class="title is-4">Por tipos</p>
+          <p class="subtitle is-6">Atualmente com eventos e fixo.</p>
         </div>
       </div>
 
       <div class="content">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-        <a>#css</a> <a>#responsive</a>
-        <br>
-        <small>11:09 PM - 1 Jan 2016</small>
+        Phasellus nec iaculis mauris..
       </div>
     </div>
   </div>
@@ -193,5 +194,9 @@
 
   .card {
     &.pie { max-width: 20%; }
+  }
+
+  .fa {
+    font-size: 48px;
   }
 </style>
