@@ -26,7 +26,7 @@
           maintainAspectRatio: false
         },
 
-        datacollection: {
+        byType: {
           labels: ['Event', 'Fixed'],
           datasets: [
             {
@@ -37,8 +37,20 @@
           ]
         },
 
+        byHour: {
+          labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'],
+          datasets: [
+            {
+              label: 'By Hour',
+              backgroundColor: '#F99820',
+              data: []
+            }
+          ]
+        },
+
         graphics: {
           byType: false,
+          byHour: false
         },
 
         logged: false,
@@ -66,6 +78,7 @@
 
         const eventArray = [];
         const fixedArray = [];
+        const hourArray = [];
 
         array.forEach((item) => {
           switch(item.type) {
@@ -77,24 +90,38 @@
               fixedArray.push(item);
             break;
           }
+
+          if (item.created_at) {
+            hourArray.push(new Date(item.created_at));
+
+            console.warn(new Date(item.created_at));
+          }
         });
 
         this.buildGraphic('event', eventArray);
         this.buildGraphic('fixed', fixedArray);
+
+        // this.buildGraphic('hour', hourArray);
       },
 
       buildGraphic(type, array) {
         switch(type) {
           case 'event':
-            this.datacollection.datasets[0].data[0] = array.length;
+            this.byType.datasets[0].data[0] = array.length;
           break;
 
           case 'fixed':
-            this.datacollection.datasets[0].data[1] = array.length;
+            this.byType.datasets[0].data[1] = array.length;
+          break;
+
+          case 'hour':
+            console.warn(array);
+            // this.byHour.datasets[0].data[1] = '';
           break;
         }
 
         this.graphics.byType = true;
+        this.graphics.byHour = true;
       },
 
       handleError(obj) {
@@ -130,7 +157,7 @@
           <div class="card-image">
             <div class="image is-4by3">
               <stats-pie
-                :data="datacollection"
+                :data="byType"
                 :options="options"
                 :width="200"
                 :height="200">
@@ -160,24 +187,39 @@
       </div>
 
       <div class="column is-half">
-        <div class="card pie">
+        <div class="card pie" v-if="graphics.byHour">
           <div class="card-image">
             <div class="image is-4by3">
               <stats-line
-                :data="datacollection"
+                :data="byHour"
                 :options="options"
                 :width="400"
                 :height="200">
               </stats-line>
             </div>
           </div>
+
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
+                <div class="image is-48x48">
+                  <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="media-content">
+                <p class="title is-4">Por tipos</p>
+                <p class="subtitle is-6">Atualmente com eventos e fixo.</p>
+              </div>
+            </div>
+
+            <div class="content">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Phasellus nec iaculis mauris..
+            </div>
+          </div>
         </div>
       </div>
-
-
     </div>
-
-
 
     <!-- <stats-doughnut
       :data="datacollection"
