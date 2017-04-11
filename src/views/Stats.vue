@@ -27,12 +27,12 @@
         },
 
         datacollection: {
-          labels: ['January', 'February'],
+          labels: ['Event', 'Fixed'],
           datasets: [
             {
-              label: 'Data One',
-              backgroundColor: '#f87979',
-              data: [40, 20]
+              label: 'By Type',
+              backgroundColor: '#F87979',
+              data: []
             }
           ]
         },
@@ -53,7 +53,44 @@
 
     methods: {
       handleGetVeggies(obj) {
-        console.warn('A requisição me retornou isso:', obj);
+        let result = Object.keys(obj).map((e) => obj[e]);
+        this.buildData(result);
+      },
+
+      buildData(array) {
+        const total = array.length;
+
+        const eventArray = [];
+        const fixedArray = [];
+
+        array.forEach((item) => {
+          switch(item.type) {
+            case 'evento':
+              eventArray.push(item);
+            break;
+
+            case 'fixo':
+              fixedArray.push(item);
+            break;
+          }
+        });
+
+        this.buildGraphic('event', eventArray);
+        this.buildGraphic('fixed', fixedArray);
+      },
+
+      buildGraphic(type, array) {
+        switch(type) {
+          case 'event':
+            this.datacollection.datasets[0].data[0] = array.length;
+          break;
+
+          case 'fixed':
+            this.datacollection.datasets[0].data[1] = array.length;
+          break;
+        }
+
+        console.warn(this.datacollection)
       },
 
       handleError(obj) {
