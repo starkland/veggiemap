@@ -22,10 +22,14 @@ Este projeto utiliza de algumas novas tecnologias e ferramentas, são elas:
 - [Karma](http://karma-runner.github.io)
 - [Jasmine](https://jasmine.github.io)
 - [PWA](https://developers.google.com/web/progressive-web-apps/)
+- [Chart.js](http://vue-chartjs.org)
+- [Babel](http://babeljs.io/)
 
 ## Setup
 
-Este projeto também possui um [container Docker](https://hub.docker.com/r/thulioph/veggiemap/).
+O setup do projeto pode ser feito de duas maneiras:
+
+### Git
 
 Instale todas as dependências do projeto:
 
@@ -50,6 +54,9 @@ Execute os testes:
 ```bash
 $ npm test
 ```
+
+### Docker
+Este projeto foi disponibilizado no [Docker Hub](https://hub.docker.com/r/thulioph/veggiemap/) possibilitando uma outra maneira de setup.
 
 ## Contribuindo
 

@@ -1,5 +1,7 @@
 import vgApp from '../views/App.vue';
 import vgContact from '../views/Contact.vue';
+import vgStats from '../views/Stats.vue';
+
 import LocalStorage from '../assets/js/LocalStorage';
 
 // ====
@@ -29,6 +31,15 @@ export default [
     path: '/contato',
     component: vgContact,
     beforeEnter: (to, from, next) => {
+      validateRoute(next)
+    }
+  },
+
+  {
+    path: '/stats',
+    component: vgStats,
+    beforeEnter: (to, from, next) => {
+      // next()
       validateRoute(next)
     }
   }
