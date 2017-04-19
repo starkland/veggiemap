@@ -68,7 +68,6 @@
 
       makeGraphic(fixed, event) {
         this.buildPie(fixed, event);
-        this.buildDoughnut(fixed, event);
 
         this.graphicOk = true;
       },
@@ -79,22 +78,6 @@
           label: 'Data One',
           backgroundColor: '#F87979',
           data: [fixed.length, event.length]
-        });
-      },
-
-      buildDoughnut(fixed, event) {
-        // console.warn(fixed);
-        // console.warn(event);
-
-        fixed.forEach((item) => {
-          switch(new Date(item.created_at).getMonth()) {
-            case '1':
-            break;
-          }
-        });
-
-        event.forEach((item) => {
-          console.warn(new Date(item.created_at).getMonth())
         });
       },
 
