@@ -83,11 +83,8 @@
       },
 
       buildDoughnut(fixed, event) {
-        console.warn(fixed);
-        console.warn(event);
-
-        // const fixedArr = [];
-        // const eventArr = [];
+        // console.warn(fixed);
+        // console.warn(event);
 
         fixed.forEach((item) => {
           switch(new Date(item.created_at).getMonth()) {
