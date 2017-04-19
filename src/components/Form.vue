@@ -10,10 +10,10 @@
    mounted() {
     this.firebase = window.vgFirebase;
 
-    let storage = new LocalStorage();
+    let storage = new LocalStorage('userInfo');
 
-    if (storage.get('userInfo')) {
-      this.userInfo = storage.get('userInfo');
+    if (storage.get()) {
+      this.userInfo = storage.get();
     }
    },
 
