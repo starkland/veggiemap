@@ -39,8 +39,8 @@ export default [
     path: '/stats',
     component: vgStats,
     beforeEnter: (to, from, next) => {
-      next()
-      // validateRoute(next)
+      // next()
+      validateRoute(next)
     }
   }
 ];
