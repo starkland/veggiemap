@@ -68,9 +68,7 @@
 
       makeGraphic(fixed, event) {
         this.buildPie(fixed, event);
-
-        console.warn(fixed);
-        console.warn(event);
+        this.buildDoughnut(fixed, event);
 
         this.graphicOk = true;
       },
@@ -81,6 +79,25 @@
           label: 'Data One',
           backgroundColor: '#F87979',
           data: [fixed.length, event.length]
+        });
+      },
+
+      buildDoughnut(fixed, event) {
+        console.warn(fixed);
+        console.warn(event);
+
+        // const fixedArr = [];
+        // const eventArr = [];
+
+        fixed.forEach((item) => {
+          switch(new Date(item.created_at).getMonth()) {
+            case '1':
+            break;
+          }
+        });
+
+        event.forEach((item) => {
+          console.warn(new Date(item.created_at).getMonth())
         });
       },
 
@@ -111,68 +128,52 @@
       :connected="connected">
     </vg-header>
 
-  <div class="card pie" v-if="graphicOk">
-    <div class="card-image">
-      <div class="image is-4by3">
-        <stats-pie
-          :data="datacollection"
-          :options="options"
-          :width="200"
-          :height="200">
-        </stats-pie>
-      </div>
-    </div>
-
-    <div class="card-content">
-      <div class="media">
-        <div class="media-left">
-          <figure class="image is-48x48">
-            <img src="http://bulma.io/images/placeholders/96x96.png" alt="Image">
-          </figure>
-        </div>
-        <div class="media-content">
-          <p class="title is-4">John Smith</p>
-          <p class="subtitle is-6">@johnsmith</p>
+    <section class="columns">
+      <div class="column is-one-third">
+        <div class="card pie" v-if="graphicOk">
+          <div class="card-image">
+            <div class="image is-4by3">
+              <stats-pie
+                :data="datacollection"
+                :options="options"
+                :width="200"
+                :height="200">
+              </stats-pie>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-        <a>#css</a> <a>#responsive</a>
-        <br>
-        <small>11:09 PM - 1 Jan 2016</small>
+      <div class="column is-one-third">
+        <div class="card pie" v-if="graphicOk">
+          <div class="card-image">
+            <div class="image is-4by3">
+              <stats-doughnut
+                :data="datacollection"
+                :options="options"
+                :width="200"
+                :height="200">
+              </stats-doughnut>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-    <!-- <stats-line
-      :data="datacollection"
-      :options="options"
-      :width="400"
-      :height="200">
-    </stats-line> -->
-
-    <!-- <stats-doughnut
-      :data="datacollection"
-      :options="options"
-      :width="400"
-      :height="200">
-    </stats-doughnut> -->
-
-    <!-- <stats-chart
-      :data="datacollection"
-      :options="options"
-      :width="400"
-      :height="200">
-    </stats-chart> -->
-
-    <!-- <stats-bubble
-      :data="datacollection"
-      :options="options"
-      :width="400"
-      :height="200">
-    </stats-bubble> -->
+      <div class="column is-one-third">
+        <div class="card pie" v-if="graphicOk">
+          <div class="card-image">
+            <div class="image is-4by3">
+              <stats-chart
+                :data="datacollection"
+                :options="options"
+                :width="200"
+                :height="200">
+              </stats-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -180,9 +181,5 @@
   .is-4by3 {
     padding: 10px 0;
     background-color: #DEDEDE;
-  }
-
-  .card {
-    &.pie { max-width: 20%; }
   }
 </style>
