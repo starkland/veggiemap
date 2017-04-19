@@ -38,10 +38,11 @@
       this.logged = false;
     }
 
-    Event.$on('auth_error', this.authError);
-    Event.$on('network', this.handleNetwork);
     Event.$on('user_logged', this.loggedUser);
     Event.$on('user_logout', this.logoutUser);
+
+    Event.$on('network', this.handleNetwork);
+
     Event.$on('change_language', this.handleLanguage);
    },
 
@@ -74,7 +75,7 @@
 
     displayAlert() {
       this.alert = new Alert({
-        title: 'Atenção!',
+        title: 'Atençãoooo!',
         text: `Você parece está sem internet,
         verifique sua conexão.`,
         btnText: 'ok'
@@ -85,55 +86,13 @@
 
     handleLanguage(lang) {
       Vue.config.lang = lang;
-    },
-
-    authError(obj) {
-      let { code, message } = obj;
-      let text = '';
-
-      switch(code) {
-        case 'auth/popup-closed-by-user':
-          text = `A janela foi fechada e o login não foi realizado.`
-        break;
-
-        case 'auth/cancelled-popup-request':
-          text = `A janela foi fechada e o login não foi realizado.`
-        break;
-
-        case 'auth/popup-blocked':
-          text = `Seu navegador está bloqueando o pop-up.`
-        break;
-
-        case 'auth/operation-not-allowed':
-          text = `Esta operação não é permitida.`
-        break;
-
-        case 'auth/account-exists-with-different-credential':
-          text = `Por favor, refaça o seu login com a outra rede social.`
-        break;
-
-        default:
-          console.warn(code);
-        break;
-      }
-
-      this.alert = new Alert({
-        title: 'Ops!',
-        text,
-        btnText: 'ok'
-      });
-
-      this.alert.error();
-
-      this.$Progress.finish();
     }
    },
 
    beforeDestroy() {
-      Event.$off('auth_error');
-      Event.$off('network');
       Event.$off('user_logged');
       Event.$off('user_logout');
+      Event.$off('network');
       Event.$off('change_language');
    }
   }
