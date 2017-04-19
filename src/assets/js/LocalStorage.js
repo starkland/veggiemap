@@ -4,15 +4,15 @@ class LocalStorage {
   }
 
   get() {
-    JSON.parse(localStorage.getItem(this.key));
+    return JSON.parse(localStorage.getItem(this.key));
   }
 
   set(value) {
-    localStorage.setItem(this.key, JSON.stringify(value));
+    return localStorage.setItem(this.key, JSON.stringify(value));
   }
 
   clear() {
-    localStorage.removeItem(this.key);
+    return localStorage.removeItem(this.key);
   }
 }
 

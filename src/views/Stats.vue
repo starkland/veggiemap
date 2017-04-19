@@ -2,6 +2,7 @@
   import Api from '../assets/js/Api';
   import Chart from '../assets/js/Chart';
 
+  import LocalStorage from '../assets/js/LocalStorage';
   import Alert from '../assets/js/Alert';
   import Event from '../events/all';
 
@@ -12,6 +13,13 @@
 
     mounted() {
       this.api = new Api();
+      this.storage = new LocalStorage('userInfo');
+
+      if(this.storage.get()) {
+        this.logged = true;
+      } else {
+        this.logged = false;
+      }
 
       this.api.getVeggies();
 

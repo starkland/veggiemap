@@ -6,12 +6,10 @@ import LocalStorage from '../assets/js/LocalStorage';
 
 // ====
 
-const storage = new LocalStorage();
+const storage = new LocalStorage('userInfo');
 
 function validateRoute(next) {
-  let userInfo = storage.get('userInfo');
-
-  if (!userInfo) {
+  if (!storage.get()) {
     // next(false);
     next({ path: '/' });
   } else {

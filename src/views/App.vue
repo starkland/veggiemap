@@ -30,9 +30,9 @@
 
    mounted() {
     this.network = new Network();
-    this.storage = new LocalStorage();
+    this.storage = new LocalStorage('userInfo');
 
-    if(this.storage.get('userInfo')) {
+    if(this.storage.get()) {
       this.logged = true;
     } else {
       this.logged = false;
@@ -49,7 +49,7 @@
     loggedUser(obj) {
       this.logged = true;
 
-      this.storage.set('userInfo', obj);
+      this.storage.set(obj);
 
       this.$Progress.finish();
     },
