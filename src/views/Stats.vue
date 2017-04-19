@@ -27,18 +27,13 @@
         },
 
         datacollection: {
-          labels: ['January', 'February'],
-          datasets: [
-            {
-              label: 'Data One',
-              backgroundColor: '#f87979',
-              data: [40, 20]
-            }
-          ]
+          labels: [],
+          datasets: []
         },
 
         logged: false,
-        connected: true
+        connected: true,
+        graphicOk: false,
       }
     },
 
@@ -53,7 +48,40 @@
 
     methods: {
       handleGetVeggies(obj) {
-        console.warn('A requisição me retornou isso:', obj);
+        const fixedArray = [];
+        const eventsArray = [];
+
+        for (let item in obj) {
+          switch(obj[item].type) {
+            case 'fixo':
+              fixedArray.push(obj[item]);
+            break;
+
+            case 'evento':
+              eventsArray.push(obj[item]);
+            break;
+          }
+        }
+
+        this.makeGraphic(fixedArray, eventsArray);
+      },
+
+      makeGraphic(fixed, event) {
+        this.buildPie(fixed, event);
+
+        console.warn(fixed);
+        console.warn(event);
+
+        this.graphicOk = true;
+      },
+
+      buildPie(fixed, event) {
+        this.datacollection.labels = ['Fixo', 'Eventos'];
+        this.datacollection.datasets.push({
+          label: 'Data One',
+          backgroundColor: '#F87979',
+          data: [fixed.length, event.length]
+        });
       },
 
       handleError(obj) {
@@ -83,7 +111,7 @@
       :connected="connected">
     </vg-header>
 
-  <div class="card pie">
+  <div class="card pie" v-if="graphicOk">
     <div class="card-image">
       <div class="image is-4by3">
         <stats-pie
