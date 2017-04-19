@@ -37,7 +37,7 @@
    },
 
    methods: {
-    loggedUser() {
+    loggedUser(obj) {
       this.logged = true;
     },
 
