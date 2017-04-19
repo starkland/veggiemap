@@ -17,10 +17,17 @@
       vSelect
     },
 
-    props: [
-      'logged',
-      'connected'
-    ],
+    props: {
+      logged: {
+        type: Boolean,
+        require: true
+      },
+
+      connected: {
+        type: Boolean,
+        require: true
+      },
+    },
 
     methods: {
       toggleNavbar() {
@@ -113,6 +120,15 @@
         exact>
 
         {{ $t('header.nav.contact') }}
+      </router-link>
+
+      <router-link
+        class="nav-item"
+        :title="$t('header.nav.stats')"
+        to="/stats"
+        exact>
+
+        {{ $t('header.nav.stats') }}
       </router-link>
     </div>
   </nav>
